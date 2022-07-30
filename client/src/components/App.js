@@ -1,20 +1,29 @@
 import { useState, useEffect } from 'react';
-import {BrowserRouter, Switch, Route} from "react-router-dom"
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+
+
+// <Routes>
+//    <Route path="/" element={<Home />} />
+//    <Route path="/crypto/:coinId" element={<CryptoDetails />} />
+//    <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
+
+//    <Route path="/exchanges" element={<Exchanges />} />
+// </Routes>
 
 const App = () => {
 
 return (
   <BrowserRouter>
-    <Switch>
-      <Route exact path = "/">Welcome Page</Route>
-      <Route exact path = "/shop">Shop Page</Route>
-      <Route exact path = "/item/:itemId">Specific Item Page</Route>
-      <Route exact path = "/checkout">Checkout Page</Route>
-      <Route exact path = "/category/:categoryId">Specific Category Page</Route>
-      <Route exact path = "/company/:companyId">Specific Company Page</Route>
-      <Route exact path = "/previous-purchases">Previous Purchases</Route>
-      <Route exact path = "/about-us">About Us</Route>
-    </Switch>
+    <Routes>
+      <Route path = "/" element={ "Homepage"}/>
+      <Route path = "/shop" element={ "Shop"}/>
+      <Route path = "/item/:itemId" element={ "Item"}/>
+      <Route path = "/checkout" element={ "Checkout"}/>
+      <Route path = "/category/:categoryId" element={ "Category"}/>
+      <Route path = "/company/:companyId" element={ "Company"}/>
+      <Route path = "/previous-purchases" element={ "Previous purchases"}/>
+      <Route path = "/about-us" element={ "About us"}/>
+      </Routes>
   </BrowserRouter>
 );
 };
