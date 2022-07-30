@@ -1,14 +1,6 @@
 import { useState, useEffect } from 'react';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-
-
-// <Routes>
-//    <Route path="/" element={<Home />} />
-//    <Route path="/crypto/:coinId" element={<CryptoDetails />} />
-//    <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
-
-//    <Route path="/exchanges" element={<Exchanges />} />
-// </Routes>
+import AboutUs from './AboutUs';
 
 const App = () => {
 
@@ -22,7 +14,7 @@ return (
       <Route path = "/category/:categoryId" element={ "Category"}/>
       <Route path = "/company/:companyId" element={ "Company"}/>
       <Route path = "/previous-purchases" element={ "Previous purchases"}/>
-      <Route path = "/about-us" element={ "About us"}/>
+      <Route path = "/about-us" element={<AboutUs/>}/>
       </Routes>
   </BrowserRouter>
 );
