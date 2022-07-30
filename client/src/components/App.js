@@ -1,19 +1,36 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import AboutUs from "./AboutUs";
+import WelcomePage from "./WelcomePage";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" element={"Homepage"} />
-        <Route path="/shop" element={"Shop"} />
-        <Route path="/item/:itemId" element={"Item"} />
-        <Route path="/checkout" element={"Checkout"} />
-        <Route path="/category/:categoryId" element={"Category"} />
-        <Route path="/company/:companyId" element={"Company"} />
-        <Route path="/previous-purchases" element={"Previous purchases"} />
-        <Route path="/about-us" element={<AboutUs />} />
+        <Route exact path="/">
+          <WelcomePage />
+        </Route>
+        <Route exact path="/shop">
+          shop
+        </Route>
+        <Route exact path="/item/:itemId">
+          itemid
+        </Route>
+        <Route exact path="/checkout">
+          checkout
+        </Route>
+        <Route exact path="/category/:categoryId">
+          catagiry
+        </Route>
+        <Route exact path="/company/:companyId">
+          company
+        </Route>
+        <Route exact path="/previous-purchases">
+          previous purchases
+        </Route>
+        <Route exact path="/about-us">
+          <AboutUs />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
