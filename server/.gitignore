@@ -8,6 +8,7 @@
 .pnp.js
 
 /node_modules
+# ignore the env file
 .env
 
 # testing
