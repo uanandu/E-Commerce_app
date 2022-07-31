@@ -58,7 +58,6 @@ export default createGlobalStyle`
   body {
     line-height: 1.25;
     background: #222;
-    color: white;
   }
 
 `;
