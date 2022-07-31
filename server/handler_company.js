@@ -25,8 +25,8 @@ const getCompanyById = async (req, res) => {
 
   await client.connect();
   const db = client.db("groupProject");
-  const _id = req.params.companyId;
-  const singleCompany = await db.collection("companies").findOne({ _id });
+  const _id = parseInt(req.params.companyId);
+  const singleCompany = await db.collection("companies").findOne({ _id:_id });
   singleCompany
     ? res
         .status(200)
