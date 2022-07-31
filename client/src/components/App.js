@@ -3,10 +3,13 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import AboutUs from "./AboutUs";
 import ShopPage from "./ShopPage";
 import WelcomePage from "./WelcomePage";
+import GlobalStyles from "../Styles/GlobalStyles";
+
 
 const App = () => {
   return (
     <BrowserRouter>
+    <GlobalStyles/>
       <Switch>
         <Route exact path="/">
           <WelcomePage />
@@ -20,7 +23,7 @@ const App = () => {
         <Route exact path="/checkout">
           checkout
         </Route>
-        <Route exact path="/shop/categories/categoryId">
+        <Route exact path="/shop/categories/:categoryId">
           catagory
         </Route>
         <Route exact path="/company/:companyId">
