@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import AboutUs from "./AboutUs";
+import ShopPage from "./ShopPage";
 import WelcomePage from "./WelcomePage";
 
 const App = () => {
@@ -11,7 +12,7 @@ const App = () => {
           <WelcomePage />
         </Route>
         <Route exact path="/shop">
-          shop
+          <ShopPage />
         </Route>
         <Route exact path="/item/:itemId">
           itemid
