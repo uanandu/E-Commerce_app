@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import picture from "../Styles/images"
+// import picture from "../Styles/images"
 
 const AboutUs = () => {
 
 return(
     <>
-    <img src={picture}/>
+    {/* <img src={picture}/> */}
     </>
 )
 }
