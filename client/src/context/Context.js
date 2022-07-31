@@ -2,12 +2,12 @@ import { createContext, useState, useEffect } from "react"
 
 import axios from "axios"
 
-export const Context = createContext();
+export const ItemContext = createContext();
 
-export const ContextProvider = ({ children }) => {
-  const [items, setItems] = useState(null);
+export const ItemProvider = ({ children }) => {
+  const [items, setItems] = useState([]);
   const [categories, setCategories] = useState(null);
-  const [companies, setCompanies] = useState(null);
+  const [companies, setCompanies] = useState([]);
   const [cart, setCart] = useState(null);
   const [orderHistory, setOrderHistory] = useState(null);
 
@@ -16,7 +16,7 @@ export const ContextProvider = ({ children }) => {
       .get("/api/companies")
       .then((res) => {
         // console.log(res);
-        setCompanies(res.data);
+        setCompanies(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -28,15 +28,20 @@ export const ContextProvider = ({ children }) => {
       .get("/api/items")
       .then((res) => {
         // console.log(res);
-        setItems(res.data);
+        setItems(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  console.log("items here", items);
+  // console.log("items here", items);
   console.log("companies here", companies);
 
-  return <Context.Provider value={{}}>{children}</Context.Provider>;
+  return <ItemContext.Provider value={{
+    items, 
+    companies,
+  }}>
+    {children}
+    </ItemContext.Provider>;
 };
