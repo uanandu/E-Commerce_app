@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { BiHomeAlt } from "react-icons-kit";
+// import { BiHomeAlt } from "react-icons-kit";
 
 //The sidebar will function a bit like a navbar.
 //it will be on the left side with buttons that link to the home.
@@ -12,7 +12,7 @@ const SideBar = () => {
       <ButtonWrapper>
         <StyledNavlink to="/">
           <StyledButton>
-            <BiHomeAlt />
+            {/* <BiHomeAlt /> */}
             Home
           </StyledButton>
         </StyledNavlink>
