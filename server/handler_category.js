@@ -36,8 +36,8 @@ const getCategory = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("groupProject");
-  const _id = req.params.categoryId;
-  const oneCategory = await db.collection("categories").findOne({ _id });
+  const categoryName = req.params.categoryId;
+  const oneCategory = await db.collection("categories").findOne({ category:categoryName });
   oneCategory
     ? res
         .status(200)

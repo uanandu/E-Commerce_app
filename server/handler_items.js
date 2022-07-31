@@ -27,10 +27,11 @@ const getItemById = async (req, res) => {
 
   await client.connect();
   const db = client.db("groupProject");
-  const _id = req.params.itemId;
+  const _id = parseInt(req.params.itemId);
+
   const singleItem = await db
     .collection("all_items")
-    .findOne({ _id });
+    .findOne({ _id:_id });
   singleItem
     ? res
         .status(200)
