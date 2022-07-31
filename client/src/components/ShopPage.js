@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import SideBar from "./SideBar"
 
 const ShopPage = () => {
   return (
     <>
+      <SideBar/>
       <GridContainer>
         <GridItem>items</GridItem>
       </GridContainer>

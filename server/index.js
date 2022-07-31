@@ -3,6 +3,12 @@
 const express = require('express');
 const morgan = require('morgan');
 
+const {getItems,getItemById}=require('./handler_items')
+const {getCategories,getCategory} = require('./handler_category')
+const {getCart, postCart,deleteCart} = require('./handler_cart')
+const {getCompanies,getCompanyById} = require('./handler_company')
+const {getOrderHistory,postOrderHistory} = require('./handler_history')
+
 const PORT = 4000;
 
 express()
@@ -25,5 +31,20 @@ express()
 
   // REST endpoints?
   .get('/bacon', (req, res) => res.status(200).json('🥓'))
+
+  .get('/api/items',getItems)
+  .get('/api/items/:itemId',getItemById)
+  .get('/api/items/categories',getCategories)
+  .get('/api/items/categories/:category',getCategory)
+
+  .get('/api/cart',getCart)
+  .post('/api/cart',postCart)
+  .delete('/api/cart/:itemId',deleteCart)
+
+  .get('/api/orderHistory',getOrderHistory)
+  .post('/api/orderHistory',postOrderHistory)
+
+  .get('/api/companies',getCompanies)
+  .get('/api/companies/:companyId',getCompanyById)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
