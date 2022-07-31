@@ -4,12 +4,16 @@ import AboutUs from "./AboutUs";
 import ShopPage from "./ShopPage";
 import WelcomePage from "./WelcomePage";
 import GlobalStyles from "../styles/GlobalStyles";
+import NavBar from "./NavBar";
+import AllCompanies from "./AllCompanies";
+import AllCategories from "./AllCategories";
 
 
 const App = () => {
   return (
     <BrowserRouter>
     <GlobalStyles/>
+    <NavBar/>
       <Switch>
         <Route exact path="/">
           <WelcomePage />
@@ -34,6 +38,12 @@ const App = () => {
         </Route>
         <Route exact path="/about-us">
           <AboutUs />
+        </Route>
+        <Route exact path ="/all-companies">
+          <AllCompanies/>
+        </Route>
+        <Route exact path="/all-categories">
+          <AllCategories/>
         </Route>
       </Switch>
     </BrowserRouter>
