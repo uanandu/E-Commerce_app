@@ -1,5 +1,7 @@
 import lauraPic from "../styles/images/IMG_4614.jpeg";
-import ryanPic from "../styles/images/Ryan.jpeg"
+import ryanPic from "../styles/images/Ryan.jpeg";
+import anandaPic from "../styles/images/anandu.jpeg";
+import jingwenPic from "../styles/images/jingwen.jpeg";
 
 export const aboutUs = 
     [{Info: [
@@ -15,15 +17,15 @@ export const aboutUs =
         {gitHub: "http://github.com/RyanBajzath"}
     ]},
     {Info: [
-        {fullName: "Laura Kekesi" },
-        {imgSrc: lauraPic},
-        {linkedIn: "http://linkedin.com/in/laurakekesi"},
-        {gitHub: "http://github.com/laurakekesi"}
+        {fullName: "Ananda Narayanan Udayakumar" },
+        {imgSrc: anandaPic},
+        {linkedIn: "http://linkedin.com/in/uanandu/"},
+        {gitHub: "http://github.com/uanandu"}
     ]},
     {Info: [
-        {fullName: "Laura Kekesi" },
-        {imgSrc: lauraPic},
-        {linkedIn: "http://linkedin.com/in/laurakekesi"},
-        {gitHub: "http://github.com/laurakekesi"}
+        {fullName: "Jingwen Xia" },
+        {imgSrc: jingwenPic},
+        {linkedIn: "http://linkedin.com/in/jingwen-xia/"},
+        {gitHub: "http://github.com/JaneWenX"}
     ]}
 ]
