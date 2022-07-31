@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { aboutUs } from "../data/aboutUsData";
+import { Icon } from "react-icons-kit";
+import {linkedinSquare} from 'react-icons-kit/fa/linkedinSquare';
+import {githubSquare} from 'react-icons-kit/fa/githubSquare';
 
 const AboutUs = () => {
 
@@ -15,8 +18,8 @@ return(
                 <Overlay>
                     <Text>
                         <Name>{person.Info[0].fullName}</Name>
-                        <A href = {person.Info[2].linkedIn} target="_blank">LinkedIn</A>
-                    <A href = {person.Info[3].gitHub} target="_blank">Github</A>
+                        <A href = {person.Info[2].linkedIn} target="_blank"><Icon size={32} icon={linkedinSquare}/></A>
+                    <A href = {person.Info[3].gitHub} target="_blank"><Icon size={32} icon={githubSquare}/></A>
                     </Text>
                 </Overlay>
                 </Container>
@@ -57,7 +60,7 @@ const Overlay = styled.div`
   opacity: 0;
   transition: .5s ease;
   background-color: white;
- 
+ border-radius: 5%;
 
 
   &:hover{
@@ -83,7 +86,10 @@ const Container = styled.div`
 position: relative;
 `
 const Img = styled.img`
-width: 200px;
+max-width: 200px;
+height: 300px;
+object-fit: cover;
+border-radius: 5%;
 `
 const Wrapper = styled.div`
 display: flex;
