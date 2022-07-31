@@ -14,14 +14,14 @@ const App = () => {
         <Route exact path="/shop">
           <ShopPage />
         </Route>
-        <Route exact path="/item/:itemId">
+        <Route exact path="/shop/items/:itemId">
           itemid
         </Route>
         <Route exact path="/checkout">
           checkout
         </Route>
-        <Route exact path="/category/:categoryId">
-          catagiry
+        <Route exact path="/shop/categories/categoryId">
+          catagory
         </Route>
         <Route exact path="/company/:companyId">
           company
