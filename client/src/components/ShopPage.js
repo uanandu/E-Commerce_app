@@ -19,38 +19,44 @@ const ShopPage = () => {
   console.log("items here", items);
 
   return (
-    <Wrapper>
-      <SideBar />
-      {/* The grid container houses all the items (GridItem) */}
-      <GridContainer>
-        {items.map((item) => {
-          return (
-            <>
-              <GridItem to={`/shop/items/${item._id}`}>
-                {/* ItemHead is the top half of the item.  */}
-                <ItemHead>
-                  <ItemImage src={item.imageSrc} />
-                </ItemHead>
-                {/* ItemBody contains the Items information */}
-                <ItemBody>
-                <ItemName>{item.name}</ItemName>
-                <ItemLocation>{item.body_location}</ItemLocation>
-                <ItemCategory>{item.category}</ItemCategory>
-                </ItemBody>
-                {/* ButtonSideDiv is where the cart and price are */}
-                <ButtonSideDiv>
-                  <ItemPrice>{item.price}</ItemPrice>
-                  <AddToCartButton>
-                    +
-                    <Icon size={25} icon={shoppingCart} />
-                  </AddToCartButton>
-                </ButtonSideDiv>
-              </GridItem>
-            </>
-          );
-        })}
-      </GridContainer>
-    </Wrapper>
+    <>
+      {items ? (
+        <Wrapper>
+          <SideBar />
+          {/* The grid container houses all the items (GridItem) */}
+          <GridContainer>
+            {items.map((item) => {
+              return (
+                <>
+                  <GridItem to={`/shop/items/${item._id}`}>
+                    {/* ItemHead is the top half of the item.  */}
+                    <ItemHead>
+                      <ItemImage src={item.imageSrc} />
+                    </ItemHead>
+                    {/* ItemBody contains the Items information */}
+                    <ItemBody>
+                      <ItemName>{item.name}</ItemName>
+                      <ItemLocation>{item.body_location}</ItemLocation>
+                      <ItemCategory>{item.category}</ItemCategory>
+                    </ItemBody>
+                    {/* ButtonSideDiv is where the cart and price are */}
+                    <ButtonSideDiv>
+                      <ItemPrice>{item.price}</ItemPrice>
+                      <AddToCartButton>
+                        +
+                        <Icon size={25} icon={shoppingCart} />
+                      </AddToCartButton>
+                    </ButtonSideDiv>
+                  </GridItem>
+                </>
+              );
+            })}
+          </GridContainer>
+        </Wrapper>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </>
   );
 };
 
