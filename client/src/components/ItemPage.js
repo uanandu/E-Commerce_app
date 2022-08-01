@@ -1,7 +1,7 @@
 // this page will show the indivdual items information after being clicked on/
 import styled from "styled-components";
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
@@ -10,10 +10,10 @@ import { ItemContext } from "../context/Context";
 const ItemPage = () => {
 
   const {singleItem, setSingleItem} = useContext(ItemContext);
-
+  const [company, setCompany] = useState(null);
   const {itemId} = useParams();
-  console.log("itemId", itemId);
-
+  // console.log("itemId", itemId);
+  console.log(company);
   useEffect(()=> {
     axios.get(`/api/shop/items/${itemId}`)
     .then(res => {
@@ -23,11 +23,26 @@ const ItemPage = () => {
     .catch(err => {
       console.log(err);
     })
-  }, [])
+  }, []);
+
+  useEffect(()=> {
+    axios.get(`/api/companies/${singleItem.companyId}`)
+    .then(res => {
+      setCompany(res.data.data)
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }, []);
+  
+  if (!singleItem || !company) {
+    return(<div>Loading</div>)
+  }
 
   return (
     //1st step fetch the data of the item based on the :param (item id)
     //2nd step is to render it.
+
     <MainWrapper>
       <LeftDiv>
         <ItemImage src={singleItem.imageSrc}/>
@@ -37,9 +52,9 @@ const ItemPage = () => {
         <ItemName>{singleItem.name}</ItemName>
         <ItemCategory>{singleItem.category}</ItemCategory>
         <ItemLocation>{singleItem.body_location}</ItemLocation>
-        <ItemCompanyName>Made by {singleItem.company}</ItemCompanyName>
+        <ItemCompanyName>Made by {company.name} in {company.country}</ItemCompanyName>
       </RightDiv>
-    </MainWrapper>
+    </MainWrapper> 
   );
 };
 
@@ -77,7 +92,9 @@ const RightDiv = styled.div`
 
 `
 
-const ItemName = styled.h2``
+const ItemName = styled.h2`
+font-family: var(--secondary-font-family);
+`
 const ItemLocation = styled.p``
 const ItemCategory = styled.p``
 const ItemCompanyName = styled.p``
