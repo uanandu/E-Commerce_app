@@ -17,7 +17,7 @@ const ItemPage = () => {
   useEffect(()=> {
     axios.get(`/api/shop/items/${itemId}`)
     .then(res => {
-      console.log("inside single item",res);
+      // console.log("inside single item",res);
       setSingleItem(res.data.data);
     })
     .catch(err => {
@@ -28,45 +28,20 @@ const ItemPage = () => {
   useEffect(()=> {
     axios.get(`/api/companies/${singleItem.companyId}`)
     .then(res => {
-      setCompany(res.data.data)
+      console.log("inside single item",res.data.companyInfo);
+      setCompany(res.data.companyInfo);
     })
     .catch(err => {
       console.log(err);
     })
   }, []);
   
-  const addToCart = (ev) => {
-    ev.preventDefault();
-
-    axios({
-      method: 'post',
-      url: '/api/cart',
-      data: {
-      _id: itemId,
-      name: singleItem.name,
-      price: singleItem.price,
-      body_location: singleItem.body_location,
-      category: singleItem.category,
-      imageSrc: singleItem.imageSrc,
-    }
-    })
-    .catch(err => {
-      console.log(err);
-    })  
-
-    setButtonPhrase("Added to cart!")
-  }
-
-
-  if (!singleItem || !company) {
-    return(<div>Loading</div>)
-  }
-
   return (
     //1st step fetch the data of the item based on the :param (item id)
-    //2nd step is to render it. sjdklasjklddas
-<Wrapper>
-    <MainWrapper>
+    //2nd step is to render it.
+    <>
+      {singleItem && company ? (
+        <MainWrapper>
       <LeftDiv>
         <ItemImage src={singleItem.imageSrc}/>
       </LeftDiv>
@@ -81,6 +56,10 @@ const ItemPage = () => {
       </RightDiv>
     </MainWrapper> 
     </Wrapper>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </>
   );
 };
 

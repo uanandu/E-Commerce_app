@@ -37,13 +37,13 @@ const deleteCart = async (req, res) => {
     await client.connect();
     const db = client.db("groupProject");
     //this part needs connect item added in cart writes _id in cart collection
-    const _id = req.body.itemId;
+    
+    const _id = parseInt(req.params.itemId);
     //delete item based on _id in cart collection
-    const itemToDelete = await db.collection("cart").findOne({ _id });
+    const itemToDelete = await db.collection("cart").findOneAndDelete({ _id: _id });
     !itemToDelete
-      ? res.status(404).json({ status: 404, message: "deleteCart fail,item not in cart" }):
-      await db.collection("cart").deleteOne({_id})
-      res.status(200).json({status: 200,data: _id,message: "deleteCart success!"})
+      ? res.status(404).json({ status: 404, message: "deleteCart fail!" })
+      : res.status(200).json({ status: 200, data: itemToDelete, message: "deleteCart success!" });
   client.close();
   };
 
