@@ -1,32 +1,33 @@
 import styled from "styled-components";
 import { NavLink, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect,useContext } from "react";
 import { ItemContext } from "../context/Context";
 import axios from "axios";
-
+ 
 export const CompanyPage = () => {
-
-    const { companyId } = useParams();
-
-    useEffect(() => {
-        axios
-            .get(`/api/companies/products/${companyId}`)
-            .then((res) => {
-                console.log(res);
-            }
-            )
-            .catch((err) => {
-                console.log(err);
-            }
-            );
-    }
-    , []);
-
-  return (
-    <div>
-    </div>
-  );
+ 
+   const { companyId } = useParams();
+   const {companyProduct,setCompanyProduct} = useContext(ItemContext)
+   useEffect(() => {
+       axios
+           .get(`/api/companies/products/${companyId}`)
+           .then((res) => {
+               console.log(res);
+           }
+           )
+           .catch((err) => {
+               console.log(err);
+           }
+           );
+   }
+   , []);
+ 
+ return (
+   <div>
+   </div>
+ );
 };
+
 
 const Wrapper = styled.div``
 
