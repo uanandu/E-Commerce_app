@@ -64,7 +64,7 @@ const ItemPage = () => {
 
   return (
     //1st step fetch the data of the item based on the :param (item id)
-    //2nd step is to render it.
+    //2nd step is to render it. sjdklasjklddas
 <Wrapper>
     <MainWrapper>
       <LeftDiv>
