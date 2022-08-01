@@ -9,6 +9,7 @@ import AllCompanies from "./AllCompanies";
 import AllCategories from "./AllCategories";
 import {CompanyPage} from "./CompanyPage"; 
 import ItemPage from "./ItemPage";
+import Checkout from "./Checkout";
 
 const App = () => {
  return (
@@ -26,7 +27,7 @@ const App = () => {
          <ItemPage />
        </Route>
        <Route exact path="/checkout">
-         checkout
+         <Checkout/>
        </Route>
        <Route exact path="/shop/categories/:categoryId">
          catagory
