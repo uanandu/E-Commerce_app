@@ -26,7 +26,7 @@ const ShopPage = () => {
                 <ItemName>{item.name}</ItemName>
                 <ItemLocation>{item.body_location}</ItemLocation>
                 <ItemCategory>{item.category}</ItemCategory>
-                <ItemPrice>${item.price}</ItemPrice>
+                <ItemPrice>{item.price}</ItemPrice>
                 </ItemBody>
                 <ButtonSideDiv>
                   <AddToCartButton>Add to Cart</AddToCartButton>
