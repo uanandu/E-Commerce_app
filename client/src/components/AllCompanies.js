@@ -1,41 +1,78 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useEffect, useContext } from "react";
+
+import { ItemContext } from "../context/Context";
+
 import background from "../styles/images/companiesBackground.jpeg";
 
 const AllCompanies = () => {
-    const companies = ["company1", "company2", "company3", "company4", "company5"]
-    return(
-        <Wrapper>
-            {companies.map((company) => {
-                return (
-                    <Links to="/company/:companyId">
-                    <Div>{company}</Div>
-                    </Links>
-                )
-                
-            })}
-        </Wrapper>
-    )
-}
+  const { companies } = useContext(ItemContext);
+
+  return (
+    <Wrapper>
+        <GridContainer>
+      {companies.map((company) => {
+        return (
+          <Links to={`/company/:${company._id}`}>
+            <CompanyDiv>
+                <CompanyName>{company.name}</CompanyName>
+              <CompanyCountry>{company.country}</CompanyCountry>
+              <CompanyUrl>{company.url}</CompanyUrl>
+            </CompanyDiv>
+          </Links>
+        );
+      })}
+        </GridContainer>
+    </Wrapper>
+  );
+};
+
+
+const Wrapper = styled.div`
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+`;
 
 const Links = styled(NavLink)`
-text-decoration: none;
-color: black;
-`
-const Wrapper = styled.div`
-display: flex;
-height: 100vh;
-align-items: center;
-justify-content: center;
-gap: 15px;
-background-image: url(${background});
-background-size: cover;
+  text-decoration: none;
+  color: black;
+  width: 300px;
+  height: 90px;
+  margin: 15px auto;
+  border-radius: 25px;
+  border: 1px solid black;
+  /* box-shadow: 2px 4px 2px 2px rgba(0, 0, 0, 0.1); */
+  transition: 0.5s ease-in-out;
+  background-color: whitesmoke;
+
+  &:hover {
+    box-shadow: 2px 6px 2px 2px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+`;
+
+const GridContainer = styled.div`
+display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+  background-color: transparent;
 `
 
-const Div = styled.div`
-border-radius: 5%;
-background-color: rgba(255, 255, 255, 0.5);
-font-size: 40px;
-padding: 10px;
+const CompanyDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
 `
+
+const CompanyName = styled.h2``
+const CompanyCountry = styled.h3``
+const CompanyUrl = styled.p``
+
+
 export default AllCompanies;
