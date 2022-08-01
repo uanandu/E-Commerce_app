@@ -33,9 +33,10 @@ const ShopPage = () => {
                 </ItemHead>
                 {/* ItemBody contains the Items information */}
                 <ItemBody>
-                  <ItemName>{item.name}</ItemName>
-                  <ItemLocation>{item.body_location}</ItemLocation>
-                  <ItemCategory>{item.category}</ItemCategory>
+                <ItemName>{item.name}</ItemName>
+                <ItemLocation>{item.body_location}</ItemLocation>
+                <ItemCategory>{item.category}</ItemCategory>
+                <ItemPrice>{item.price}</ItemPrice>
                 </ItemBody>
                 {/* ButtonSideDiv is where the cart and price are */}
                 <ButtonSideDiv>
