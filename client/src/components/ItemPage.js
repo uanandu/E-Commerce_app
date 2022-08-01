@@ -9,15 +9,15 @@ import { ItemContext } from "../context/Context";
 
 const ItemPage = () => {
 
-  const {singleItem, setSingleItem} = useContext(ItemContext);
-  const [company, setCompany] = useState(null);
+  const {singleItem, setSingleItem, error, setError} = useContext(ItemContext);
+  const [company, setCompany] = useState([]);
   const {itemId} = useParams();
   // console.log("itemId", itemId);
   console.log(company);
   useEffect(()=> {
     axios.get(`/api/shop/items/${itemId}`)
     .then(res => {
-      console.log("inside single item",res);
+      // console.log("inside single item",res);
       setSingleItem(res.data.data);
     })
     .catch(err => {
@@ -28,22 +28,20 @@ const ItemPage = () => {
   useEffect(()=> {
     axios.get(`/api/companies/${singleItem.companyId}`)
     .then(res => {
-      setCompany(res.data.data)
+      console.log("inside single item",res.data.companyInfo);
+      setCompany(res.data.companyInfo);
     })
     .catch(err => {
       console.log(err);
     })
   }, []);
   
-  if (!singleItem || !company) {
-    return(<div>Loading</div>)
-  }
-
   return (
     //1st step fetch the data of the item based on the :param (item id)
     //2nd step is to render it.
-
-    <MainWrapper>
+    <>
+      {singleItem && company ? (
+        <MainWrapper>
       <LeftDiv>
         <ItemImage src={singleItem.imageSrc}/>
         <ItemPrice>{singleItem.price}</ItemPrice>
@@ -55,6 +53,11 @@ const ItemPage = () => {
         <ItemCompanyName>Made by {company.name} in {company.country}</ItemCompanyName>
       </RightDiv>
     </MainWrapper> 
+      ) : (
+        <div>Loading...</div>
+      )}
+    </>
+    
   );
 };
 

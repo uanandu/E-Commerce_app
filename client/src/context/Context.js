@@ -15,6 +15,9 @@ export const ItemProvider = ({ children }) => {
   const [cart, setCart] = useState(null);
   const [orderHistory, setOrderHistory] = useState(null);
 
+  const [error, setError] = useState(false);
+
+
   useEffect(() => {
     axios
       .get("/api/companies")
@@ -56,8 +59,12 @@ export const ItemProvider = ({ children }) => {
     setCompanyInfo,
     companyProducts,
     setCompanyProducts,
-    cart, 
-    setCart
+    cart,
+    setCart,
+    orderHistory,
+    setOrderHistory,
+    error,
+    setError
   }}>
     {children}
     </ItemContext.Provider>;
