@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const {getItems,getItemById}=require('./handler_items')
 const {getCategories,getCategory} = require('./handler_category')
 const {getCart, postCart,deleteCart} = require('./handler_cart')
-const {getCompanies,getCompanyById} = require('./handler_company')
+const {getCompanies,getCompanyById, getProductsByCompany} = require('./handler_company')
 const {getOrderHistory,postOrderHistory} = require('./handler_history')
 
 const PORT = 4000;
@@ -33,7 +33,7 @@ express()
   .get('/bacon', (req, res) => res.status(200).json('🥓'))
 
   .get('/api/items',getItems)
-  .get('/api/items/:itemId',getItemById)
+  .get('/api/shop/items/:itemId',getItemById)
   .get('/api/items/categories',getCategories)
   .get('/api/items/categories/:category',getCategory)
 
@@ -46,5 +46,6 @@ express()
 
   .get('/api/companies',getCompanies)
   .get('/api/companies/:companyId',getCompanyById)
+  .get('/api/company/products/:companyId',getProductsByCompany)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

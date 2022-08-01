@@ -6,8 +6,10 @@ export const ItemContext = createContext();
 
 export const ItemProvider = ({ children }) => {
   const [items, setItems] = useState([]);
-  const [categories, setCategories] = useState(null);
   const [companies, setCompanies] = useState([]);
+
+  const [singleItem, setSingleItem] = useState([]);
+
   const [cart, setCart] = useState(null);
   const [orderHistory, setOrderHistory] = useState(null);
 
@@ -46,6 +48,8 @@ export const ItemProvider = ({ children }) => {
   return <ItemContext.Provider value={{
     items, 
     companies,
+    singleItem,
+    setSingleItem,
   }}>
     {children}
     </ItemContext.Provider>;

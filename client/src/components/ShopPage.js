@@ -4,9 +4,10 @@ import { ItemContext } from "../context/Context";
 
 import styled from "styled-components";
 import SideBar from "./SideBar";
+import { NavLink } from "react-router-dom";
 
 const ShopPage = () => {
-  const { items, categories, companies } = useContext(ItemContext);
+  const { items} = useContext(ItemContext);
 
   console.log("items here", items);
 
@@ -17,7 +18,7 @@ const ShopPage = () => {
         {items.map((item) => {
           return (
             <>
-              <GridItem>
+              <GridItem to={`/shop/items/${item._id}`}>
                 <ItemHead>
                   <ItemImage src={item.imageSrc} />
                 </ItemHead>
@@ -53,13 +54,15 @@ const GridContainer = styled.div`
   padding: 10px;
   background-color: whitesmoke;
 `;
-const GridItem = styled.div`
+const GridItem = styled(NavLink)`
+  color: black;
+  text-decoration: none;
   width: 300px;
   height: 500px;
   margin: 15px auto;
   border-radius: 25px;
-  box-shadow: 2px 4px 2px 2px rgba(0, 0, 0, 0.1);
   transition: 0.5s ease-in-out;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 
   &:hover {
     box-shadow: 2px 6px 2px 2px rgba(0, 0, 0, 0.3);
@@ -69,6 +72,9 @@ const GridItem = styled.div`
 `;
 
 const ItemHead = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   height: 252px;
   background: #fa782e;
@@ -78,6 +84,7 @@ const ItemHead = styled.div`
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#fa782e', endColorstr='#c82930', GradientType=1);
   /* IE6-9 fallback on horizontal gradient */
   border-radius: 25px 25px 0 0;
+  overflow: hidden;
 `;
 
 const ItemImage = styled.img`
@@ -90,25 +97,37 @@ const ItemImage = styled.img`
 const ItemBody = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   width: 100%;
-  padding: 10px;
+  height: auto;
+  padding: 15px;
 `
 
-const ItemName = styled.h3``;
-const ItemCategory = styled.h4``;
-const ItemLocation = styled.h5``;
-const ItemPrice = styled.h4``;
+const ItemName = styled.h3`
+  padding: 10px;
+`;
+const ItemCategory = styled.h4`
+  padding: 5px;
+`;
+const ItemLocation = styled.h5`
+  padding: 5px;
+`;
+const ItemPrice = styled.h4`
+  padding: 5px;
+`;
 
 const ButtonSideDiv = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   height: 50px;
 `
 
-const AddToCartButton = styled.button``
+const AddToCartButton = styled.button`
+  margin: 5px;
+  padding: 5px;
+`
 
 
 export default ShopPage;
