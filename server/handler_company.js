@@ -27,12 +27,15 @@ const getCompanyById = async (req, res) => {
   const db = client.db("groupProject");
   const _id = parseInt(req.params.companyId);
   const singleCompany = await db.collection("companies").findOne({ _id:_id });
-  singleCompany
+  const products = await db.collection("all_items").find({ companyId:_id }).toArray();
+
+  singleCompany && products
     ? res
         .status(200)
         .json({
           status: 200,
-          data: singleCompany,
+          companyInfo: singleCompany,
+          companyProducts:products,
           message: "getCompanyById success!",
         })
     : res.status(404).json({ status: 404, message: "getCompanyById fail!" });
@@ -40,27 +43,8 @@ client.close();
 };
 
 
-const getProductsByCompany = async (req, res) => {
-  const client = new MongoClient(MONGO_URI, options);
-
-  await client.connect();
-  const db = client.db("groupProject");
-  const _id = parseInt(req.params.companyId);
-  const products = await db.collection("products").find({ companyId:_id }).toArray();
-  products
-    ? res
-        .status(200)
-        .json({
-          status: 200,
-          data: products,
-          message: "getProductsByCompany success!",
-        })
-    : res.status(404).json({ status: 404, message: "getProductsByCompany fail!" });
-client.close();
-}
 
 module.exports = {
   getCompanies,
   getCompanyById,
-  getProductsByCompany
 };

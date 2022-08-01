@@ -7,47 +7,47 @@ import GlobalStyles from "../styles/GlobalStyles";
 import NavBar from "./NavBar";
 import AllCompanies from "./AllCompanies";
 import AllCategories from "./AllCategories";
-
-
+import {CompanyPage} from "./CompanyPage";
+ 
 const App = () => {
-  return (
-    <BrowserRouter>
-    <GlobalStyles/>
-    <NavBar/>
-      <Switch>
-        <Route exact path="/">
-          <WelcomePage />
-        </Route>
-        <Route exact path="/shop">
-          <ShopPage />
-        </Route>
-        <Route exact path="/shop/items/:itemId">
-          itemid
-        </Route>
-        <Route exact path="/checkout">
-          checkout
-        </Route>
-        <Route exact path="/shop/categories/:categoryId">
-          catagory
-        </Route>
-        <Route exact path="/company/:companyId">
-          company
-        </Route>
-        <Route exact path="/previous-purchases">
-          previous purchases
-        </Route>
-        <Route exact path="/about-us">
-          <AboutUs />
-        </Route>
-        <Route exact path ="/companies">
-          <AllCompanies/>
-        </Route>
-        <Route exact path="/all-categories">
-          <AllCategories/>
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
+ return (
+   <BrowserRouter>
+   <GlobalStyles/>
+   <NavBar/>
+     <Switch>
+       <Route exact path="/">
+         <WelcomePage />
+       </Route>
+       <Route exact path="/shop">
+         <ShopPage />
+       </Route>
+       <Route exact path="/shop/items/:itemId">
+         itemid
+       </Route>
+       <Route exact path="/checkout">
+         checkout
+       </Route>
+       <Route exact path="/shop/categories/:categoryId">
+         catagory
+       </Route>
+       <Route exact path="/companies/:companyId">
+         <CompanyPage/>
+       </Route>
+       <Route exact path="/previous-purchases">
+         previous purchases
+       </Route>
+       <Route exact path="/about-us">
+         <AboutUs />
+       </Route>
+       <Route exact path ="/companies">
+         <AllCompanies/>
+       </Route>
+       <Route exact path="/all-categories">
+         <AllCategories/>
+       </Route>
+     </Switch>
+   </BrowserRouter>
+ );
 };
-
+ 
 export default App;
