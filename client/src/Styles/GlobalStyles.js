@@ -12,7 +12,10 @@ export default createGlobalStyle`
   html, body {
     max-width: 100vw;
   }
-
+   :root{
+    --primary-font-family: 'Josefin Sans', sans-serif;
+    --secondary-font-family: 'Crimson Text', serif;
+   }
 
   /* http://meyerweb.com/eric/tools/css/reset/
     v2.0 | 20110126
