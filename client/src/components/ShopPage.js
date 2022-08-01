@@ -1,35 +1,50 @@
+//Importing everything from package.json
 import { useContext } from "react";
-
-import { ItemContext } from "../context/Context";
-
 import styled from "styled-components";
-import SideBar from "./SideBar";
 import { NavLink } from "react-router-dom";
 
+//Importing all useContexts
+import { ItemContext } from "../context/Context";
+
+//importing other components
+import SideBar from "./SideBar";
+
+//importing icons
+import { Icon } from "react-icons-kit";
+import { shoppingCart } from "react-icons-kit/feather/shoppingCart";
+
 const ShopPage = () => {
-  const { items} = useContext(ItemContext);
+  const { items } = useContext(ItemContext);
 
   console.log("items here", items);
 
   return (
     <Wrapper>
       <SideBar />
+      {/* The grid container houses all the items (GridItem) */}
       <GridContainer>
         {items.map((item) => {
           return (
             <>
               <GridItem to={`/shop/items/${item._id}`}>
+                {/* ItemHead is the top half of the item.  */}
                 <ItemHead>
                   <ItemImage src={item.imageSrc} />
                 </ItemHead>
+                {/* ItemBody contains the Items information */}
                 <ItemBody>
                 <ItemName>{item.name}</ItemName>
                 <ItemLocation>{item.body_location}</ItemLocation>
                 <ItemCategory>{item.category}</ItemCategory>
                 <ItemPrice>{item.price}</ItemPrice>
                 </ItemBody>
+                {/* ButtonSideDiv is where the cart and price are */}
                 <ButtonSideDiv>
-                  <AddToCartButton>Add to Cart</AddToCartButton>
+                  <ItemPrice>{item.price}</ItemPrice>
+                  <AddToCartButton>
+                    +
+                    <Icon size={25} icon={shoppingCart} />
+                  </AddToCartButton>
                 </ButtonSideDiv>
               </GridItem>
             </>
@@ -57,7 +72,7 @@ const GridContainer = styled.div`
 const GridItem = styled(NavLink)`
   color: black;
   text-decoration: none;
-  width: 300px;
+  width: 320px;
   height: 500px;
   margin: 15px auto;
   border-radius: 25px;
@@ -70,7 +85,7 @@ const GridItem = styled(NavLink)`
     cursor: pointer;
   }
 `;
-
+/* comment here */
 const ItemHead = styled.div`
   display: flex;
   justify-content: center;
@@ -101,7 +116,7 @@ const ItemBody = styled.div`
   width: 100%;
   height: auto;
   padding: 15px;
-`
+`;
 
 const ItemName = styled.h3`
   padding: 10px;
@@ -119,15 +134,27 @@ const ItemPrice = styled.h4`
 const ButtonSideDiv = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  margin-top: -20px;
+  /* align-items: flex-start; */
   width: 100%;
-  height: 50px;
-`
+  /* height: 50px; */
+  /* padding-left: 50px; */
+
+  align-items: center;
+`;
 
 const AddToCartButton = styled.button`
-  margin: 5px;
+  /* margin: 10px; */
   padding: 5px;
-`
-
+  border-radius: 25px;
+  margin-left: 25%;
+  font-size: 20px;
+  font-weight: bold;
+  &:hover {
+    box-shadow: 2px 6px 2px 2px rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+    cursor: copy;
+  }
+`;
 
 export default ShopPage;
