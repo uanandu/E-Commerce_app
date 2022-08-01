@@ -56,6 +56,8 @@ export const ItemProvider = ({ children }) => {
     setCompanyInfo,
     companyProducts,
     setCompanyProducts,
+    cart, 
+    setCart
   }}>
     {children}
     </ItemContext.Provider>;
