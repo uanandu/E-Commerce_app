@@ -14,7 +14,6 @@ const SideBar = () => {
         <StyledNavlink to="/">
           <StyledButton>
             <Icon size={35} icon={home} />
-            Home
           </StyledButton>
         </StyledNavlink>
       </ButtonWrapper>
@@ -26,20 +25,24 @@ const SideBarContainer = styled.div`
   display: flex;
   flex-direction: row;
   background: #ff9966;
-  height: 100vh;
+  height: 100%;
   width: 10vw;
+  align-content: center;
+  justify-content: center;
 `;
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  width: 60vw;
-  margin-bottom: 5vh;
+  /* justify-content: space-evenly; */
+  /* width: 60vw; */
+  /* margin-bottom: 5vh; */
 `;
 const StyledButton = styled.button`
   background-color: black;
   border: none;
-  padding: 10px 50px;
+  padding: 20px;
   color: white;
+  border-radius: 50%;
+  margin: 20px;
 `;
 const StyledNavlink = styled(NavLink)``;
 export default SideBar;
