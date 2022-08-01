@@ -1,32 +1,33 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useEffect, useContext } from "react";
-
+ 
 import { ItemContext } from "../context/Context";
-
+ 
 import background from "../styles/images/companiesBackground.jpeg";
-
+ 
 const AllCompanies = () => {
-  const { companies } = useContext(ItemContext);
-
-  return (
-    <Wrapper>
-        <GridContainer>
-      {companies.map((company) => {
-        return (
-          <Links to={`/company/:${company._id}`}>
-            <CompanyDiv>
-                <CompanyName>{company.name}</CompanyName>
-              <CompanyCountry>{company.country}</CompanyCountry>
-              <CompanyUrl>{company.url}</CompanyUrl>
-            </CompanyDiv>
-          </Links>
-        );
-      })}
-        </GridContainer>
-    </Wrapper>
-  );
+ const { companies } = useContext(ItemContext);
+ 
+ return (
+   <Wrapper>
+       <GridContainer>
+     {companies.map((company) => {
+       return (
+         <Links to={`/companies/:${company._id}`}>
+           <CompanyDiv>
+               <CompanyName>{company.name}</CompanyName>
+             <CompanyCountry>{company.country}</CompanyCountry>
+             <CompanyUrl>{company.url}</CompanyUrl>
+           </CompanyDiv>
+         </Links>
+       );
+     })}
+       </GridContainer>
+   </Wrapper>
+ );
 };
+
 
 
 const Wrapper = styled.div`
