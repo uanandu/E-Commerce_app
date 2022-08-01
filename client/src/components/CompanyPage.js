@@ -1,8 +1,15 @@
+//Importing everything from package.json
 import styled from "styled-components";
+import axios from "axios";
 import { NavLink, useParams } from "react-router-dom";
 import { useEffect, useContext } from "react";
+
+//Importing all useContexts
 import { ItemContext } from "../context/Context";
-import axios from "axios";
+
+//importing icons
+import { Icon } from "react-icons-kit";
+import { shoppingCart } from "react-icons-kit/feather/shoppingCart";
 
 export const CompanyPage = () => {
   const { companyId } = useParams();
@@ -30,32 +37,33 @@ export const CompanyPage = () => {
 
   return (
     <Wrapper>
-        <GridContainer>
-          {companyProducts.map((product) => {
-            return (
-              <>
-                <GridItem to={`/shop/items/${product._id}`}>
+      <GridContainer>
+        {companyProducts.map((product) => {
+          return (
+            <>
+              <GridItem to={`/shop/items/${product._id}`}>
                 <ItemHead>
                   <ItemImage src={product.imageSrc} />
                 </ItemHead>
                 <ItemBody>
-                <ItemName>{product.name}</ItemName>
-                <ItemLocation>{product.body_location}</ItemLocation>
-                <ItemCategory>{product.category}</ItemCategory>
-                <ItemPrice>{product.price}</ItemPrice>
+                  <ItemName>{product.name}</ItemName>
+                  <ItemLocation>{product.body_location}</ItemLocation>
+                  <ItemCategory>{product.category}</ItemCategory>
                 </ItemBody>
                 <ButtonSideDiv>
-                  <AddToCartButton>Add to Cart</AddToCartButton>
+                  <ItemPrice>{product.price}</ItemPrice>
+                  <AddToCartButton>
+                    +
+                    <Icon size={25} icon={shoppingCart} />
+                  </AddToCartButton>
                 </ButtonSideDiv>
               </GridItem>
-              </>
-            )
-          }
-          )}
-        </GridContainer>
-         
+            </>
+          );
+        })}
+      </GridContainer>
     </Wrapper>
-  )
+  );
 };
 
 const Wrapper = styled.div`
@@ -75,7 +83,7 @@ const GridContainer = styled.div`
 const GridItem = styled(NavLink)`
   color: black;
   text-decoration: none;
-  width: 300px;
+  width: 320px;
   height: 500px;
   margin: 15px auto;
   border-radius: 25px;
@@ -119,7 +127,7 @@ const ItemBody = styled.div`
   width: 100%;
   height: auto;
   padding: 15px;
-`
+`;
 
 const ItemName = styled.h3`
   padding: 10px;
@@ -137,12 +145,25 @@ const ItemPrice = styled.h4`
 const ButtonSideDiv = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  margin-top: -20px;
+  /* align-items: flex-start; */
   width: 100%;
-  height: 50px;
-`
+  /* height: 50px; */
+  /* padding-left: 50px; */
+
+  align-items: center;
+`;
 
 const AddToCartButton = styled.button`
-  margin: 5px;
+  /* margin: 10px; */
   padding: 5px;
-`
+  border-radius: 25px;
+  margin-left: 25%;
+  font-size: 20px;
+  font-weight: bold;
+  &:hover {
+    box-shadow: 2px 6px 2px 2px rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+    cursor: copy;
+  }
+`;
