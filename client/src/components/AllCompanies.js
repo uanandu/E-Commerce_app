@@ -14,7 +14,7 @@ const AllCompanies = () => {
        <GridContainer>
      {companies.map((company) => {
        return (
-         <Links to={`/companies/:${company._id}`}>
+         <Links to={`/companies/${company._id}`}>
            <CompanyDiv>
                <CompanyName>{company.name}</CompanyName>
              <CompanyCountry>{company.country}</CompanyCountry>

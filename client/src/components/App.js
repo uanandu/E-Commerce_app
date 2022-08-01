@@ -7,8 +7,9 @@ import GlobalStyles from "../styles/GlobalStyles";
 import NavBar from "./NavBar";
 import AllCompanies from "./AllCompanies";
 import AllCategories from "./AllCategories";
-import {CompanyPage} from "./CompanyPage";
- 
+import {CompanyPage} from "./CompanyPage"; 
+import ItemPage from "./ItemPage";
+
 const App = () => {
  return (
    <BrowserRouter>
@@ -22,7 +23,7 @@ const App = () => {
          <ShopPage />
        </Route>
        <Route exact path="/shop/items/:itemId">
-         itemid
+         <ItemPage />
        </Route>
        <Route exact path="/checkout">
          checkout
