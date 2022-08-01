@@ -35,8 +35,13 @@ export const ItemProvider = ({ children }) => {
       });
   }, []);
 
+
+
+
+
+  
   // console.log("items here", items);
-  console.log("companies here", companies);
+  // console.log("companies here", companies);
 
   return <ItemContext.Provider value={{
     items, 
