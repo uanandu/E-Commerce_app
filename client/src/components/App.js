@@ -37,7 +37,7 @@ const App = () => {
        <Route exact path="/previous-purchases">
          previous purchases
        </Route>
-       <Route exact path="/about-us">
+       <Route exact path="/about">
          <AboutUs />
        </Route>
        <Route exact path ="/companies">
