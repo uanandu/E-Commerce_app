@@ -39,7 +39,7 @@ export default createGlobalStyle`
     padding: 0;
     border: 0;
     vertical-align: baseline;
-    font-family: var(--primary-font-family);
+    /* font-family: var(--primary-font-family); */
 
   }
   /* HTML5 display-role reset for older browsers */

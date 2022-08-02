@@ -14,8 +14,10 @@ const WelcomePage = () => {
 };
 
 const Wrapper = styled.div`
+position: relative;
   width: 100vw;
   height: 100vh;
+  top: 7.79vh;
   background: #ff9966;
   display: flex;
   flex-direction: column;

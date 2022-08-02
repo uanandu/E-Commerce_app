@@ -5,13 +5,14 @@ import axios from "axios"
 export const ItemContext = createContext();
 
 export const ItemProvider = ({ children }) => {
-  const [items, setItems] = useState([]);
+  const [Items, setItems] = useState([]);
   const [singleItem, setSingleItem] = useState([]);
 
   const [companies, setCompanies] = useState([]);
   const [companyInfo, setCompanyInfo] = useState([]);
   const [companyProducts, setCompanyProducts] = useState([]);
 
+  const [ItemNumber, setItemNumber] = useState(0);
   const [cart, setCart] = useState(null);
   const [orderHistory, setOrderHistory] = useState(null);
 
@@ -42,7 +43,10 @@ export const ItemProvider = ({ children }) => {
       });
   }, []);
 
-
+  const addItemNumber = (e) => {
+    e.preventDefault();
+    setItemNumber(ItemNumber + 1);
+  }
 
 
 
@@ -51,7 +55,7 @@ export const ItemProvider = ({ children }) => {
   // console.log("companies here", companies);
 
   return <ItemContext.Provider value={{
-    items, 
+    Items, 
     companies,
     singleItem,
     setSingleItem,
@@ -59,12 +63,15 @@ export const ItemProvider = ({ children }) => {
     setCompanyInfo,
     companyProducts,
     setCompanyProducts,
+    ItemNumber,
+    addItemNumber,
     cart,
     setCart,
     orderHistory,
     setOrderHistory,
     error,
     setError
+
   }}>
     {children}
     </ItemContext.Provider>;

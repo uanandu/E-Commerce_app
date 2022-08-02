@@ -9,18 +9,12 @@ import { ItemContext } from "../context/Context";
 
 //importing icons
 import { Icon } from "react-icons-kit";
-import { shoppingCart } from "react-icons-kit/feather/shoppingCart";
+import { ic_add_shopping_cart } from "react-icons-kit/md/ic_add_shopping_cart";
 
 export const CompanyPage = () => {
   const { companyId } = useParams();
-  const {
-    companyProduct,
-    setCompanyProduct,
-    companyInfo,
-    setCompanyInfo,
-    companyProducts,
-    setCompanyProducts,
-  } = useContext(ItemContext);
+  const { addItemNumber, setCompanyInfo, companyProducts, setCompanyProducts } =
+    useContext(ItemContext);
 
   useEffect(() => {
     axios
@@ -36,40 +30,47 @@ export const CompanyPage = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <GridContainer>
-        {companyProducts.map((product) => {
-          return (
-            <>
-              <GridItem to={`/shop/items/${product._id}`}>
-                <ItemHead>
-                  <ItemImage src={product.imageSrc} />
-                </ItemHead>
-                <ItemBody>
-                  <ItemName>{product.name}</ItemName>
-                  <ItemLocation>{product.body_location}</ItemLocation>
-                  <ItemCategory>{product.category}</ItemCategory>
-                </ItemBody>
-                <ButtonSideDiv>
-                  <ItemPrice>{product.price}</ItemPrice>
-                  <AddToCartButton>
-                    +
-                    <Icon size={25} icon={shoppingCart} />
-                  </AddToCartButton>
-                </ButtonSideDiv>
-              </GridItem>
-            </>
-          );
-        })}
-      </GridContainer>
-    </Wrapper>
+    <>
+      {companyProducts ? (
+        <Wrapper>
+          <GridContainer>
+            {companyProducts.map((product) => {
+              return (
+                <>
+                  <GridItem to={`/shop/items/${product._id}`}>
+                    <ItemHead>
+                      <ItemImage src={product.imageSrc} />
+                    </ItemHead>
+                    <ItemBody>
+                      <ItemName>{product.name}</ItemName>
+                      <ItemLocation>{product.body_location}</ItemLocation>
+                      <ItemCategory>{product.category}</ItemCategory>
+                      <ButtonSideDiv>
+                        <ItemPrice>{product.price}</ItemPrice>
+                        <AddToCartButton onClick={(e) => addItemNumber(e)}>
+                          <Icon size={25} icon={ic_add_shopping_cart} />
+                        </AddToCartButton>
+                      </ButtonSideDiv>
+                    </ItemBody>
+                  </GridItem>
+                </>
+              );
+            })}
+          </GridContainer>
+        </Wrapper>
+      ) : (
+        <AlternateDiv>Loading.....</AlternateDiv>
+      )}
+    </>
   );
 };
 
 const Wrapper = styled.div`
-  position: fixed;
+  position: relative;
   width: 90vw;
   height: 100%;
+  left: 10vw;
+  top: 8vh;
   display: flex;
   justify-content: space-between;
 `;
@@ -126,8 +127,9 @@ const ItemBody = styled.div`
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
-  height: auto;
+  height: 50%;
   padding: 15px;
+  overflow: hidden;
 `;
 
 const ItemName = styled.h3`
@@ -140,13 +142,61 @@ const ItemLocation = styled.h5`
   padding: 5px;
 `;
 const ItemPrice = styled.h4`
-  padding: 5px;
+  padding: 0 5px;
+  display: inline-block;
+
+  width: auto;
+  height: 38px;
+
+  background-color: #6ab070;
+  -webkit-border-radius: 3px 4px 4px 3px;
+  -moz-border-radius: 3px 4px 4px 3px;
+  border-radius: 3px 4px 4px 3px;
+
+  border-left: 1px solid #6ab070;
+
+  /* This makes room for the triangle */
+  margin-left: 19px;
+
+  position: relative;
+
+  color: white;
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 38px;
+
+  padding: 0 10px 0 10px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    display: block;
+    left: -19px;
+    width: 0;
+    height: 0;
+    border-top: 19px solid transparent;
+    border-bottom: 19px solid transparent;
+    border-right: 19px solid #6ab070;
+  }
+
+  &:after {
+    content: "";
+    background-color: white;
+    border-radius: 50%;
+    width: 4px;
+    height: 4px;
+    display: block;
+    position: absolute;
+    left: -9px;
+    top: 17px;
+  }
 `;
 
 const ButtonSideDiv = styled.div`
+  position: relative;
   display: flex;
-  justify-content: center;
-  margin-top: -20px;
+  justify-content: space-between;
+  margin-top: 20px;
   /* align-items: flex-start; */
   width: 100%;
   /* height: 50px; */
@@ -157,14 +207,27 @@ const ButtonSideDiv = styled.div`
 
 const AddToCartButton = styled.button`
   /* margin: 10px; */
+  background-color: red;
+  color: white;
+  width: 50px;
+  border: none;
   padding: 5px;
-  border-radius: 25px;
   margin-left: 25%;
+  border-radius: 5px;
   font-size: 20px;
   font-weight: bold;
   &:hover {
-    box-shadow: 2px 6px 2px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
     transform: scale(1.1);
-    cursor: copy;
+    cursor: pointer;
   }
+`;
+
+const AlternateDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  z-index: 2;
 `;

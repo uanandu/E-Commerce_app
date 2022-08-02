@@ -47,7 +47,8 @@ const MainContainer = styled.div`
     text-align: center;
     flex-direction: column;
     width: 10vw;
-    height: 100vh;
+    height: 100%;
+    top: 6vh;
     margin-top: 20px;
     border-right: 1px solid lightgray;
     z-index: 1;
@@ -85,6 +86,8 @@ const SideBarNavLinks = styled(NavLink)`
 const IconHere = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `
 
 export default SideBar;
