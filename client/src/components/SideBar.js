@@ -6,6 +6,7 @@ import { Icon } from "react-icons-kit";
 import { home } from "react-icons-kit/icomoon/home";
 import { briefcase } from "react-icons-kit/icomoon/briefcase";
 import {phone} from 'react-icons-kit/icomoon/phone'
+import {shopping_bag} from 'react-icons-kit/ikons/shopping_bag'
 //The sidebar will function a bit like a navbar.
 //it will be on the left side with buttons that link to the home.
 
@@ -31,6 +32,12 @@ const SideBar = () => {
             <Icon size={35} icon={phone} />
           </SideBarNavLinks>
           <h3>About</h3>
+        </IconHere>
+        <IconHere>
+          <SideBarNavLinks to={`/previous-purchases`}>
+            <Icon size={35} icon={shopping_bag} />
+          </SideBarNavLinks>
+          <h3>Orders</h3>
         </IconHere>
       </SidebarContainer>
     </MainContainer>
