@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import axios from "axios";
 import { NavLink, useParams } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 
 //Importing all useContexts
 import { ItemContext } from "../context/Context";
@@ -10,6 +10,7 @@ import { ItemContext } from "../context/Context";
 //importing icons
 import { Icon } from "react-icons-kit";
 import { ic_add_shopping_cart } from "react-icons-kit/md/ic_add_shopping_cart";
+import { checkmark } from "react-icons-kit/icomoon/checkmark";
 
 export const CompanyPage = () => {
   const { companyId } = useParams();
@@ -42,12 +43,25 @@ export const CompanyPage = () => {
                       <ItemImage src={product.imageSrc} />
                     </ItemHead>
                     <ItemBody>
-                      <ItemName>{product.name}</ItemName>
-                      <ItemLocation>{product.body_location}</ItemLocation>
-                      <ItemCategory>{product.category}</ItemCategory>
+                      <ItemDescription>
+                        <ItemCaption>Product: </ItemCaption>
+                        <ItemName>{product.name}</ItemName>
+                      </ItemDescription>
+                      <ItemDescription>
+                        <ItemCaption>Body Location: </ItemCaption>
+                        <ItemLocation>{product.body_location}</ItemLocation>
+                      </ItemDescription>
+                      <ItemDescription>
+                        <ItemCaption>Category: </ItemCaption>
+                        <ItemCategory>{product.category}</ItemCategory>
+                      </ItemDescription>
                       <ButtonSideDiv>
                         <ItemPrice>{product.price}</ItemPrice>
-                        <AddToCartButton onClick={(e) => addToCart(e, product)}>
+                        <AddToCartButton
+                          onClick={(e) => {
+                            addToCart(e, product);
+                          }}
+                        >
                           <Icon size={25} icon={ic_add_shopping_cart} />
                         </AddToCartButton>
                       </ButtonSideDiv>
@@ -85,8 +99,8 @@ const GridContainer = styled.div`
 const GridItem = styled(NavLink)`
   color: black;
   text-decoration: none;
-  width: 320px;
-  height: 500px;
+  width: 450px;
+  height: 550px;
   margin: 15px auto;
   border-radius: 25px;
   transition: 0.5s ease-in-out;
@@ -116,10 +130,11 @@ const ItemHead = styled.div`
 `;
 
 const ItemImage = styled.img`
-  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   left: 0;
   margin-top: 5px;
-  margin-left: 50px;
 `;
 
 const ItemBody = styled.div`
@@ -128,18 +143,38 @@ const ItemBody = styled.div`
   justify-content: space-around;
   width: 100%;
   height: 50%;
-  padding: 15px;
+  padding: 25px;
   overflow: hidden;
+  border-top: 1px solid lightgray;
+`;
+
+const ItemDescription = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+const ItemCaption = styled.div`
+  font-size: 1.2rem;
+  display: inline-block;
+  text-align: right;
 `;
 
 const ItemName = styled.h3`
   padding: 10px;
+  display: inline-block;
+  text-align: left;
+  margin-left: 50px;
 `;
-const ItemCategory = styled.h4`
+const ItemCategory = styled.h3`
   padding: 5px;
+  display: inline-block;
+  text-align: left;
+  margin-left: 45px;
 `;
-const ItemLocation = styled.h5`
+const ItemLocation = styled.h3`
   padding: 5px;
+  display: inline-block;
+  text-align: left;
 `;
 const ItemPrice = styled.h4`
   padding: 0 5px;
