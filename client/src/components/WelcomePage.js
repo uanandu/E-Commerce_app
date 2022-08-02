@@ -18,7 +18,7 @@ const WelcomePage = () => {
             <StyledNavlink to="/shop">
               <StyledButton>Shop</StyledButton>
             </StyledNavlink>
-            <StyledNavlink to="/about-us">
+            <StyledNavlink to="/about">
               <StyledButton>About</StyledButton>
             </StyledNavlink>
           </ButtonWrapper>
