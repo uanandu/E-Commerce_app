@@ -9,7 +9,9 @@ import {shoppingCart} from 'react-icons-kit/feather/shoppingCart';
 
 const NavBar = () => {
 
-    const {ItemNumber} = useContext(ItemContext);
+    const {cart} = useContext(ItemContext);
+
+    let numberInCart = cart.length;
 
 return (
     <>
@@ -22,7 +24,7 @@ return (
         <RightDiv>
             <Links to="/checkout">
             <Icon size={50} icon={shoppingCart}/>
-            <NumberDiv>{ItemNumber}</NumberDiv>
+            <NumberDiv>{numberInCart}</NumberDiv>
             </Links>
         </RightDiv>
     </MainDiv>

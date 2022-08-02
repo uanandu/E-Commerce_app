@@ -11,9 +11,7 @@ import { Icon } from "react-icons-kit";
 import { ic_add_shopping_cart } from "react-icons-kit/md/ic_add_shopping_cart";
 
 const ShopPage = () => {
-  const { Items, addItemNumber } = useContext(ItemContext);
-
-  console.log("items here", Items);
+  const { Items, addToCart } = useContext(ItemContext);
 
   return (
     <>
@@ -47,7 +45,7 @@ const ShopPage = () => {
                       {/* ButtonSideDiv is where the cart and price are */}
                       <ButtonSideDiv>
                         <ItemPrice>{item.price}</ItemPrice>
-                        <AddToCartButton onClick={(e) => addItemNumber(e)}>
+                        <AddToCartButton onClick={(e) => addToCart(e, item)}>
                           <Icon size={25} icon={ic_add_shopping_cart} />
                         </AddToCartButton>
                       </ButtonSideDiv>

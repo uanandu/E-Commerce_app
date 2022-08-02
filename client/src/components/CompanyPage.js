@@ -13,7 +13,7 @@ import { ic_add_shopping_cart } from "react-icons-kit/md/ic_add_shopping_cart";
 
 export const CompanyPage = () => {
   const { companyId } = useParams();
-  const { addItemNumber, setCompanyInfo, companyProducts, setCompanyProducts } =
+  const { addToCart, setCompanyInfo, companyProducts, setCompanyProducts } =
     useContext(ItemContext);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export const CompanyPage = () => {
                       <ItemCategory>{product.category}</ItemCategory>
                       <ButtonSideDiv>
                         <ItemPrice>{product.price}</ItemPrice>
-                        <AddToCartButton onClick={(e) => addItemNumber(e)}>
+                        <AddToCartButton onClick={(e) => addToCart(e, product)}>
                           <Icon size={25} icon={ic_add_shopping_cart} />
                         </AddToCartButton>
                       </ButtonSideDiv>
