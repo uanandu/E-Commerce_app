@@ -23,7 +23,7 @@ const ItemPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [itemId]);
 
   useEffect(() => {
     axios
@@ -35,7 +35,7 @@ const ItemPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [singleItem.companyId]);
 
   const addToCart = (e) => {
     e.preventDefault();
