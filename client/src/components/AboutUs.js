@@ -18,8 +18,8 @@ return(
                 <Overlay>
                     <Text>
                         <Name>{person.Info[0].fullName}</Name>
-                        <A href = {person.Info[2].linkedIn} target="_blank"><Icon size={32} icon={linkedinSquare}/></A>
-                    <A href = {person.Info[3].gitHub} target="_blank"><Icon size={32} icon={githubSquare}/></A>
+                        <ContactLinks href = {person.Info[2].linkedIn} target="_blank"><Icon size={32} icon={linkedinSquare}/></ContactLinks>
+                    <ContactLinks href = {person.Info[3].gitHub} target="_blank"><Icon size={32} icon={githubSquare}/></ContactLinks>
                     </Text>
                 </Overlay>
                 </Container>
@@ -45,7 +45,7 @@ min-height: 100vh;
 const ContactUs = styled.h1`
 margin-bottom: 30px;
 `
-const A = styled.a`
+const ContactLinks = styled.a`
 text-decoration: none;
 color: black;
 `

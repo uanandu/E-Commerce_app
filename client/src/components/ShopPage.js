@@ -22,7 +22,7 @@ const ShopPage = () => {
     <>
       {items ? (
         <Wrapper>
-          <SideBar />
+          {/* <SideBar /> */}
           {/* The grid container houses all the items (GridItem) */}
           <GridContainer>
             {items.map((item) => {
@@ -61,7 +61,9 @@ const ShopPage = () => {
 };
 
 const Wrapper = styled.div`
-  width: 100vw;
+position: fixed;
+  left: 10vw;
+  width: 90vw;
   height: 100%;
   display: flex;
   justify-content: space-between;

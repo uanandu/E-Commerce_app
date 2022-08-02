@@ -1,29 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const WelcomePage = () => {
   return (
     <>
       {/* <div>placeholder Navbar component</div> */}
       <Wrapper>
-        <TopDiv>
-          <P>The long wait is over</P>
-          <H1> New Collection </H1>
-          <Img src="https://cdn.discordapp.com/attachments/1002641115519909989/1003339376941596833/Red_and_Orange_Hand_Drawn_Supplies_Back_to_School_Welcome_Banner.png" />
-          <H2>A thoughtfull combination of design and function</H2>
-        </TopDiv>
-        <BottomDiv>
-          <ButtonWrapper>
-            <StyledNavlink to="/shop">
-              <StyledButton>Shop</StyledButton>
-            </StyledNavlink>
-            <StyledNavlink to="/about">
-              <StyledButton>About</StyledButton>
-            </StyledNavlink>
-          </ButtonWrapper>
-          <Img2 src="https://images-ext-1.discordapp.net/external/RxpCPyZiOfEw9uHAdV_XYAj2sQDzu9xC4QrQbymSzGA/https/42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/v2/undraw_social_20.png?width=1080&height=540" />
-        </BottomDiv>
+          Here we will be putting stuff...
       </Wrapper>
     </>
   );

@@ -14,28 +14,44 @@ const SideBar = () => {
   return (
     <MainContainer>
       <SidebarContainer>
-        <SideBarNavLinks to="/">
-          <Icon size={35} icon={home} />
-        </SideBarNavLinks>
-        <SideBarNavLinks to={`/companies`}>
-          <Icon size={35} icon={briefcase} />
-        </SideBarNavLinks>
-        <SideBarNavLinks to={`/about`}>
-          <Icon size={35} icon={phone} />
-        </SideBarNavLinks>
+        <IconHere>        
+          <SideBarNavLinks to="/shop">
+            <Icon size={35} icon={home} />
+          </SideBarNavLinks>
+          <h3>Shop</h3>
+        </IconHere>
+        <IconHere>
+          <SideBarNavLinks to={`/companies`}>
+            <Icon size={35} icon={briefcase} />
+          </SideBarNavLinks>
+          <h3>Companies</h3>
+        </IconHere>
+        <IconHere>
+          <SideBarNavLinks to={`/about`}>
+            <Icon size={35} icon={phone} />
+          </SideBarNavLinks>
+          <h3>About</h3>
+        </IconHere>
       </SidebarContainer>
     </MainContainer>
   );
 };
 
 const MainContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  background: white;
-  height: 100%;
-  width: 10vw;
-  align-content: center;
-  justify-content: center;
+   position: fixed;
+   background-color: #ff9966;
+    padding: 0 25px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    width: 10vw;
+    height: 100vh;
+    margin-top: 20px;
+    border-right: 1px solid lightgray;
+    z-index: 1;
+
 `;
 
 const SidebarContainer = styled.div`
@@ -65,5 +81,10 @@ const SideBarNavLinks = styled(NavLink)`
     cursor: pointer;
   }
 `;
+
+const IconHere = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 export default SideBar;
