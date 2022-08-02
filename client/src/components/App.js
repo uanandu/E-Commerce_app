@@ -10,12 +10,14 @@ import AllCategories from "./AllCategories";
 import {CompanyPage} from "./CompanyPage"; 
 import ItemPage from "./ItemPage";
 import Checkout from "./Checkout";
+import SideBar from "./SideBar";
 
 const App = () => {
  return (
    <BrowserRouter>
    <GlobalStyles/>
    <NavBar/>
+   <SideBar/>
      <Switch>
        <Route exact path="/">
          <WelcomePage />

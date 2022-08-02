@@ -61,7 +61,7 @@ const ItemPage = () => {
   return (
     //1st step fetch the data of the item based on the :param (item id)
     //2nd step is to render it.
-    <>
+    <Wrapper>
       {singleItem && company ? (
         <MainWrapper>
           <LeftDiv>
@@ -69,11 +69,11 @@ const ItemPage = () => {
           </LeftDiv>
           <RightDiv>
             <ItemName>{singleItem.name}</ItemName>
-            <A href={company.url} target="_blank">
+            <CompanyUrl href={company.url} target="_blank">
               <ItemCompanyName>
                 {company.name}, {company.country}
               </ItemCompanyName>
-            </A>
+            </CompanyUrl>
             <ItemCategory>
               {singleItem.category}/{singleItem.body_location}
             </ItemCategory>
@@ -82,13 +82,21 @@ const ItemPage = () => {
           </RightDiv>
         </MainWrapper>
       ) : (
-        <div>Loading...</div>
+        <AlternateDiv>Loading.....</AlternateDiv>
       )}
-    </>
+    </Wrapper>
   );
 };
 
-const A = styled.a`
+const Wrapper = styled.div`
+  position: relative;
+  width: 65vw;
+  left: 20vw;
+  height: 30vh;
+`
+
+
+const CompanyUrl = styled.a`
   text-decoration: none;
   color: black;
 `;
@@ -104,7 +112,7 @@ const AddToCart = styled.button`
 `;
 
 const MainWrapper = styled.div`
-  height: 500px;
+  height: 50vh;
   display: flex;
   margin-top: 50px;
   border-radius: 10px;
@@ -153,5 +161,13 @@ const ItemCompanyName = styled.p`
     cursor: pointer;
   }
 `;
+
+const AlternateDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+`
 
 export default ItemPage;
