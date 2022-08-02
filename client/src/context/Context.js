@@ -54,7 +54,7 @@ export const ItemProvider = ({ children }) => {
     e.preventDefault();
     addItemNumber(e);
 
-    console.log("inside cart",cart);
+    // console.log("inside cart",cart);
     setCart([...cart, items]);
     setButtonPhrase("Added to Cart");
 
@@ -72,11 +72,11 @@ export const ItemProvider = ({ children }) => {
       },
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   };
 
   // const removeFromCart = (e, item) => {
