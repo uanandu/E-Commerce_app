@@ -5,17 +5,16 @@ import styled from "styled-components";
 import { Icon } from "react-icons-kit";
 import { home } from "react-icons-kit/icomoon/home";
 import { briefcase } from "react-icons-kit/icomoon/briefcase";
-import {phone} from 'react-icons-kit/icomoon/phone'
-import {shopping_bag} from 'react-icons-kit/ikons/shopping_bag'
+import { phone } from "react-icons-kit/icomoon/phone";
+import { shopping_bag } from "react-icons-kit/ikons/shopping_bag";
 //The sidebar will function a bit like a navbar.
 //it will be on the left side with buttons that link to the home.
 
 const SideBar = () => {
-
   return (
     <MainContainer>
       <SidebarContainer>
-        <IconHere>        
+        <IconHere>
           <SideBarNavLinks to="/shop">
             <Icon size={35} icon={home} />
           </SideBarNavLinks>
@@ -45,21 +44,20 @@ const SideBar = () => {
 };
 
 const MainContainer = styled.div`
-   position: fixed;
-   background-color: #ff9966;
-    padding: 0 25px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-    width: 10vw;
-    height: 100%;
-    top: 6vh;
-    margin-top: 20px;
-    border-right: 1px solid lightgray;
-    z-index: 1;
-
+  position: fixed;
+  padding: 0 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 10vw;
+  height: 100%;
+  top: 4vh;
+  margin-top: 20px;
+  border-right: 1px solid lightgray;
+  border-right: 1px solid black;
+  z-index: 1;
 `;
 
 const SidebarContainer = styled.div`
@@ -70,12 +68,10 @@ const SidebarContainer = styled.div`
 `;
 
 const SideBarNavLinks = styled(NavLink)`
-  background-color: gold;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
   color: black;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 4px 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,6 +91,16 @@ const IconHere = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`
+  animation: slide-in 1s ease-in-out;
+
+  @keyframes slide-in {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
+`;
 
 export default SideBar;
