@@ -1,40 +1,38 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useEffect, useContext } from "react";
- 
+
 import { ItemContext } from "../context/Context";
- 
+
 import background from "../styles/images/companiesBackground.jpeg";
- 
+
 const AllCompanies = () => {
- const { companies } = useContext(ItemContext);
- 
- return (
-   <Wrapper>
-       <GridContainer>
-     {companies.map((company) => {
-       return (
-         <Links to={`/companies/${company._id}`}>
-           <CompanyDiv>
-               <CompanyName>{company.name}</CompanyName>
-             <CompanyCountry>{company.country}</CompanyCountry>
-             <CompanyUrl>{company.url}</CompanyUrl>
-           </CompanyDiv>
-         </Links>
-       );
-     })}
-       </GridContainer>
-   </Wrapper>
- );
+  const { companies } = useContext(ItemContext);
+
+  return (
+    <Wrapper>
+      <GridContainer>
+        {companies.map((company) => {
+          return (
+            <Links to={`/companies/${company._id}`}>
+              <CompanyDiv>
+                <CompanyName>{company.name}</CompanyName>
+                <CompanyCountry>{company.country}</CompanyCountry>
+                <CompanyUrl>{company.url}</CompanyUrl>
+              </CompanyDiv>
+            </Links>
+          );
+        })}
+      </GridContainer>
+    </Wrapper>
+  );
 };
 
-
-
 const Wrapper = styled.div`
-  position: fixed;
+  position: relative;
   width: 70vw;
   left: 15vw;
-  top: 8vh;
+  top: 15vh;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -60,25 +58,24 @@ const Links = styled(NavLink)`
 `;
 
 const GridContainer = styled.div`
-display: grid;
+  display: grid;
   grid-template-columns: auto auto auto;
   padding: 10px;
   background-color: transparent;
-`
+`;
 
 const CompanyDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 300px;
-    height: 100px;
-    padding: 10px;
-`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  height: 100px;
+  padding: 10px;
+`;
 
-const CompanyName = styled.h2``
-const CompanyCountry = styled.h3``
-const CompanyUrl = styled.p``
-
+const CompanyName = styled.h2``;
+const CompanyCountry = styled.h3``;
+const CompanyUrl = styled.p``;
 
 export default AllCompanies;
