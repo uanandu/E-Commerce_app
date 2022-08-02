@@ -1,3 +1,4 @@
+
 import styled from "styled-components";
 import { aboutUs } from "../data/aboutUsData";
 import { Icon } from "react-icons-kit";
@@ -94,6 +95,16 @@ border-radius: 5%;
 const Wrapper = styled.div`
 display: flex;
 gap: 30px;
+animation: fadeIn 2s ease-in-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 export default AboutUs;

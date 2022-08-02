@@ -1,4 +1,3 @@
-//Importing everything from package.json
 import { useContext } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
@@ -17,6 +16,7 @@ const ShopPage = () => {
     <>
       {Items ? (
         <Wrapper>
+          <BackgroundImage>
           {/* <SideBar /> */}
           {/* The grid container houses all the items (GridItem) */}
           <GridContainer>
@@ -55,6 +55,7 @@ const ShopPage = () => {
               );
             })}
           </GridContainer>
+          </BackgroundImage>
         </Wrapper>
       ) : (
         <AlternateDiv>Loading.....</AlternateDiv>
@@ -66,11 +67,28 @@ const ShopPage = () => {
 const Wrapper = styled.div`
   position: relative;
   left: 10vw;
-  top: 7.79vh;
+  top: 6vh;
   width: 90vw;
   height: 100%;
   display: flex;
   justify-content: space-between;
+`;
+
+const BackgroundImage = styled.div`
+  /* z-index: -10;
+  position: absolute;
+  opacity: 50%;
+  height: 100%; */
+  /* width: 100%;
+  height: 100%; */
+  background-image: url("https://i.pinimg.com/736x/82/6a/95/826a95fde43be06c60b5c1f5349587c3.jpg");
+  background-repeat: repeat;
+  /* background-position: center; */
+  /* background-size: cover; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: fixed; */
 `;
 
 const GridContainer = styled.div`
@@ -78,14 +96,16 @@ const GridContainer = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 10px;
-  background-color: whitesmoke;
+  background-color: transparent;
 `;
 const GridItem = styled(NavLink)`
   color: black;
   text-decoration: none;
+  background-color: white;
   width: 320px;
   height: 500px;
   margin: 15px auto;
+  border: 1px solid black;
   border-radius: 25px;
   transition: 0.5s ease-in-out;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
@@ -124,12 +144,15 @@ const ItemBody = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  background-color: black;
+  border-radius: 0 0 25px 25px;
   width: 100%;
   height: 50%;
   padding: 15px;
   overflow: hidden;
+  color: white;
+  
 `;
-
 
 const ItemDescription = styled.div`
   display: flex;
