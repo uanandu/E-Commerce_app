@@ -8,9 +8,8 @@ import { Redirect, useParams } from "react-router-dom";
 import { ItemContext } from "../context/Context";
 
 const ItemPage = () => {
-  const { singleItem, setSingleItem } = useContext(ItemContext);
-  const [company, setCompany] = useState(null);
-  const [buttonPhrase, setButtonPhrase] = useState("Add to Cart");
+  const { singleItem, setSingleItem, company, setCompany, buttonPhrase, addToCart } = useContext(ItemContext);
+
   const { itemId } = useParams();
 
   useEffect(() => {
@@ -36,27 +35,6 @@ const ItemPage = () => {
         console.log(err);
       });
   }, [singleItem.companyId]);
-
-  const addToCart = (e) => {
-    e.preventDefault();
-
-    axios({
-      method: "post",
-      url: "/api/cart",
-      data: {
-        _id: itemId,
-        name: singleItem.name,
-        price: singleItem.price,
-        body_location: singleItem.body_location,
-        category: singleItem.category,
-        imageSrc: singleItem.imageSrc,
-      },
-    }).catch((err) => {
-      console.log(err);
-    });
-
-    setButtonPhrase("Added to cart!");
-  };
 
   return (
     //1st step fetch the data of the item based on the :param (item id)
