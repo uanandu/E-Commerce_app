@@ -26,9 +26,7 @@ const postOrderHistory = async (req, res) => {
   await client.connect();
   const db = client.db("groupProject");
 
-  //to define how to get new added item info in cart
-  //eg. console.log(req.body)
-  const newInHis = await db.collection("purchasedItems").insertone(req.body);
+  const newInHis = await db.collection("purchasedItems").insertOne(req.body);
   newInHis
     ? res
         .status(200)
