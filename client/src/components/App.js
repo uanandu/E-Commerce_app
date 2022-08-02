@@ -28,26 +28,29 @@ const App = () => {
        <Route exact path="/shop/items/:itemId">
          <ItemPage />
        </Route>
-       <Route exact path="/checkout">
-         <Checkout/>
-       </Route>
-       <Route exact path="/shop/categories/:categoryId">
-         catagory
+       <Route exact path ="/companies">
+         <AllCompanies/>
        </Route>
        <Route exact path="/companies/:companyId">
          <CompanyPage/>
        </Route>
-       <Route exact path="/previous-purchases">
+       <Route exact path="/all-categories">
+         <AllCategories/>
+       </Route>
+       <Route exact path="/shop/categories/:categoryId">
+         catagory
+       </Route>
+       <Route exact path="/checkout">
+         <Checkout/>
+       </Route>
+       <Route exact path="/confirmation">
+          confirmation page
+        </Route>
+        <Route exact path="/previous-purchases">
          previous purchases
        </Route>
        <Route exact path="/about">
          <AboutUs />
-       </Route>
-       <Route exact path ="/companies">
-         <AllCompanies/>
-       </Route>
-       <Route exact path="/all-categories">
-         <AllCategories/>
        </Route>
      </Switch>
    </BrowserRouter>

@@ -1,9 +1,16 @@
 import styled from "styled-components";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+
+import { ItemContext } from "../context/Context";
+
 import { Icon } from "react-icons-kit";
 import {shoppingCart} from 'react-icons-kit/feather/shoppingCart';
 
 const NavBar = () => {
+
+    const {ItemNumber} = useContext(ItemContext);
+
 return (
     <>
     <MainDiv>
@@ -14,8 +21,8 @@ return (
         </LeftDiv>
         <RightDiv>
             <Links to="/checkout">
-            <Icon size={32} icon={shoppingCart}/>
-            <NumberDiv>10</NumberDiv>
+            <Icon size={50} icon={shoppingCart}/>
+            <NumberDiv>{ItemNumber}</NumberDiv>
             </Links>
         </RightDiv>
     </MainDiv>
@@ -23,21 +30,21 @@ return (
 )
 }
 const NumberDiv = styled.div`
-background: red;
+background: black;
 color: white;
 display: flex;
 justify-content: center;
 align-items: center;
 font-size:10px;
 border-radius:50%;
-width: 20px;
-height: 20px;
+width: 25px;
+height: 25px;
 position:absolute;
 top: 15px;
 right: 70px;
 `
 const Home = styled.h1`
-font-style: oblique;
+font-style: italic;
 
 &:hover{
     color: #ffb346;
@@ -59,13 +66,16 @@ display: flex;
 align-items: center;
 `
 const MainDiv = styled.div`
+position: fixed;
 background: white;
 height: 70px;
+width: 100%;
 color: black;
 display: flex;
 align-items: center;
 padding-left: 50px;
 padding-right: 50px;
 justify-content: space-between;
+z-index: 5;
 `
 export default NavBar;

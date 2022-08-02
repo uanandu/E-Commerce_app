@@ -89,10 +89,11 @@ const ItemPage = () => {
 };
 
 const Wrapper = styled.div`
-  position: relative;
+  position: absolute;
   width: 65vw;
   left: 20vw;
   height: 30vh;
+  top: 20vh;
 `
 
 
