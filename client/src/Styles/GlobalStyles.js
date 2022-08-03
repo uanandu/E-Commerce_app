@@ -16,6 +16,7 @@ export default createGlobalStyle`
     --primary-font-family: 'Josefin Sans', sans-serif;
     --secondary-font-family: 'Crimson Text', serif;
     --tertiary-font-family: 'Cormorant Garamond', sans-serif;
+    --quaternary-font-family: 'Special Elite', monospace;
    }
 
   /* http://meyerweb.com/eric/tools/css/reset/

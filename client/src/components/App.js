@@ -13,6 +13,7 @@ import Checkout from "./Checkout";
 import SideBar from "./SideBar";
 import OrderHistory from "./OrderHistory";
 import Confirmation from "./Confirmation";
+import { ErrorPage } from "./ErrorPage";
 
 const App = () => {
  return (
@@ -54,6 +55,9 @@ const App = () => {
        <Route exact path="/about">
          <AboutUs />
        </Route>
+       <Route exact path="*">
+          <ErrorPage />
+        </Route>
      </Switch>
    </BrowserRouter>
  );

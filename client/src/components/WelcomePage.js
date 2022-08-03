@@ -6,10 +6,9 @@ const WelcomePage = () => {
   const [joke, setJoke] = useState("");
 
   useEffect(() => {
-
     axios
       .get(
-        "https://v2.jokeapi.dev/joke/Programming,Dark,Pun?blacklistFlags=religious,racist,sexist&type=single"
+        "https://v2.jokeapi.dev/joke/Programming,Pun?blacklistFlags=racist,sexist&type=single"
       )
       .then((res) => {
         setJoke(res.data.joke);
@@ -93,7 +92,7 @@ const JokeDiv = styled.div`
   top: -5vh;
   left: 15vw;
   width: 30vw;
-  height: 30vh;
+  height: 20vh;
   animation: fadeIn 2s ease-in-out;
 
   @keyframes fadeIn {
@@ -105,9 +104,31 @@ const JokeDiv = styled.div`
     }
   }
 `;
-const JokeText = styled.h4`
+const JokeText = styled.blockquote`
+  font-family: var(--quaternary-font-family);
   font-style: italic;
   font-size: 25px;
+
+  &:before,
+  &:after {
+    position: absolute;
+    color: #f1efe6;
+    font-size: 8rem;
+    width: 4rem;
+    height: 4rem;
+  }
+
+  &:before {
+    content: "“";
+    left: -5rem;
+    top: -2rem;
+  }
+
+  &:after {
+    content: "”";
+    right: -5rem;
+    bottom: 1rem;
+  }
 `;
 
 const InsideRightDiv = styled.div`

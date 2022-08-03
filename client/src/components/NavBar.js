@@ -17,7 +17,12 @@ const NavBar = () => {
       <MainDiv>
         <LeftDiv>
           <Links to="/" exact>
-            <Home>R*A*L*J</Home>
+            <LogoDiv>
+              <NameLetters style={{backgroundColor: "white", color: "black"}}>R</NameLetters>
+              <NameLetters style={{backgroundColor: "black", color: "white"}}>A</NameLetters>
+              <NameLetters style={{backgroundColor: "white", color: "black"}}>L</NameLetters>
+              <NameLetters style={{backgroundColor: "black", color: "white"}}>J</NameLetters>
+            </LogoDiv>
           </Links>
         </LeftDiv>
         <RightDiv>
@@ -45,7 +50,7 @@ const NumberDiv = styled.div`
   top: 15px;
   right: 70px;
 `;
-const Home = styled.h1`
+const LogoDiv = styled.div`
   border: 1px solid black;
   width: 150px;
   height: 50px;
@@ -56,29 +61,21 @@ const Home = styled.h1`
   box-shadow: 2px 4px 4px 4px rgba(0, 0, 0, 0.2);
   transition: 1s ease-in-out;
 
-  animation: background infinite 10s ease-in-out;
-
-  @keyframes background {
-    0% {
-      background: white;
-    }
-    25% {
-      background: lightgrey;
-    }
-    50% {
-      background: white;
-    }
-    75% {
-      background: lightgrey;
-    }
-    100% {
-      background: white;
-    }
-  }
   &:hover {
     box-shadow: 2px 6px 4px 4px rgba(0, 0, 0, 0.3);
   }
 `;
+
+const NameLetters = styled.div`
+  font-size: 2.5rem;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  padding: 0px 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 37.5px;
+`
 
 const Links = styled(NavLink)`
   text-decoration: none;
@@ -92,8 +89,11 @@ const LeftDiv = styled.div`
 const RightDiv = styled.div`
   color: black;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  width: 40vw;
 `;
+
 const MainDiv = styled.div`
   position: fixed;
   background: white;
@@ -111,6 +111,7 @@ const MainDiv = styled.div`
 
 const ImageHere = styled.img`
 margin-top: 45px;
+left: -20vw;
   width: 50px;
   height: auto;
   object-fit: contain;

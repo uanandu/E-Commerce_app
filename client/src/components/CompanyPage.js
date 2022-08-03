@@ -9,8 +9,8 @@ import { ItemContext } from "../context/Context";
 
 //importing icons
 import { Icon } from "react-icons-kit";
-import { ic_add_shopping_cart } from "react-icons-kit/md/ic_add_shopping_cart";
-import { checkmark } from "react-icons-kit/icomoon/checkmark";
+import {chevronCircleRight} from 'react-icons-kit/fa/chevronCircleRight'
+
 
 export const CompanyPage = () => {
   const { companyId } = useParams();
@@ -64,7 +64,7 @@ export const CompanyPage = () => {
                             addToCart(e, product);
                           }}
                         >
-                          <Icon size={25} icon={ic_add_shopping_cart} />
+                         <Icon size={25} icon={chevronCircleRight} style={{color: "black"}}/>
                         </AddToCartButton>
                       </ButtonSideDiv>
                     </ItemBody>
@@ -101,11 +101,8 @@ const BackgroundImage = styled.div`
   z-index: -5;
   width: 100%;
   height: 2000px;
+  top: -5vh;
   /* left: 10vw; */
-`;
-
-const BackroundContainer = styled.div`
-  height: 100%;
 `;
 
 const GridContainer = styled.div`
@@ -279,7 +276,7 @@ const ButtonSideDiv = styled.div`
 
 const AddToCartButton = styled.button`
   /* margin: 10px; */
-  background-color: red;
+  background-color: white;
   color: white;
   width: 50px;
   border: none;
