@@ -104,7 +104,7 @@ const ImageHere = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-  margin-top: 300px;
+  margin-top: 15vh;
 `
 
 export default SideBar;

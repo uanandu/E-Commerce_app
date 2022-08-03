@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import axios from "axios";
 import { NavLink, useParams } from "react-router-dom";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 
 //Importing all useContexts
 import { ItemContext } from "../context/Context";
@@ -11,10 +11,11 @@ import { ItemContext } from "../context/Context";
 import { Icon } from "react-icons-kit";
 import {chevronCircleRight} from 'react-icons-kit/fa/chevronCircleRight'
 
+import { ErrorPage } from "./ErrorPage";
 
 export const CompanyPage = () => {
   const { companyId } = useParams();
-  const { addToCart, setCompanyInfo, companyProducts, setCompanyProducts } =
+  const { setCompanyInfo, companyProducts, setCompanyProducts, error, setError } =
     useContext(ItemContext);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export const CompanyPage = () => {
         setCompanyProducts(res.data.companyProducts);
       })
       .catch((err) => {
-        console.log(err);
+        setError(err);
       });
   }, []);
 
@@ -73,6 +74,7 @@ export const CompanyPage = () => {
       ) : (
         <AlternateDiv>Loading.....</AlternateDiv>
       )}
+      {error && <ErrorPage/>}
     </>
   );
 };
