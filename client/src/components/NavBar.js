@@ -21,6 +21,7 @@ const NavBar = () => {
           </Links>
         </LeftDiv>
         <RightDiv>
+          <ImageHere src="https://assets.website-files.com/5e51c674258ffe10d286d30a/5e535eb7550b76782df9e820_peep-sitting-7.svg" />
           <Links to="/checkout">
             <Icon size={50} icon={shoppingCart} />
             <NumberDiv>{numberInCart}</NumberDiv>
@@ -106,5 +107,12 @@ const MainDiv = styled.div`
   justify-content: space-between;
   z-index: 5;
   border-bottom: 1px solid black;
+`;
+
+const ImageHere = styled.img`
+margin-top: 45px;
+  width: 50px;
+  height: auto;
+  object-fit: contain;
 `;
 export default NavBar;

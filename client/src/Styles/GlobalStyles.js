@@ -15,6 +15,7 @@ export default createGlobalStyle`
    :root{
     --primary-font-family: 'Josefin Sans', sans-serif;
     --secondary-font-family: 'Crimson Text', serif;
+    --tertiary-font-family: 'Cormorant Garamond', sans-serif;
    }
 
   /* http://meyerweb.com/eric/tools/css/reset/

@@ -40,6 +40,7 @@ const ItemPage = () => {
     //1st step fetch the data of the item based on the :param (item id)
     //2nd step is to render it.
     <Wrapper>
+      <BackgroundImage>
       {singleItem && company ? (
         <MainWrapper>
           <LeftDiv>
@@ -62,18 +63,28 @@ const ItemPage = () => {
       ) : (
         <AlternateDiv>Loading.....</AlternateDiv>
       )}
+      </BackgroundImage>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  position: absolute;
-  width: 65vw;
-  left: 20vw;
+  position: relative;
+  width: 100%;
+  left: 10vw;
   height: 30vh;
-  top: 20vh;
+
 `
 
+const BackgroundImage = styled.div`
+  background-image: url("https://i.pinimg.com/736x/82/6a/95/826a95fde43be06c60b5c1f5349587c3.jpg");
+  background-repeat: repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1200px;
+  width: 1500px;
+`;
 
 const CompanyUrl = styled.a`
   text-decoration: none;
@@ -83,30 +94,32 @@ const AddToCart = styled.button`
   border: none;
   width: 300px;
   height: 40px;
-  background: #ffab44;
-  color: white;
+  background: white;
   font-size: 25px;
   border-radius: 5px;
   cursor: pointer;
 `;
 
 const MainWrapper = styled.div`
-  height: 50vh;
+  height: 30vh;
   display: flex;
   margin-top: 50px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
 `;
 const LeftDiv = styled.div`
-  width: 390px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: white;
+  border-radius: 10px 0 10px 10px;
+  border-left: 4px solid black;
+  border-top: 4px solid black;
+  border-bottom: 4px solid black;
 `;
 
 const ItemImage = styled.img`
-  width: 320px;
+  width: 200px;
 `;
 const ItemPrice = styled.h4`
   font-size: 30px;
@@ -118,10 +131,12 @@ const ItemPrice = styled.h4`
 const RightDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  background-color: #fff3e1;
-  width: 650px;
-  padding-left: 20px;
+  justify-content: space-around;
+  background-color: black;
+  color: white;
+  width: 30vw;
+  padding: 20px;
+  border-radius: 10px 10px 10px 0;
 `;
 
 const ItemName = styled.h2`
