@@ -5,10 +5,6 @@ import { useContext } from "react"; // useContext
 
 import { ItemContext } from "../context/Context"; // for item context
 
-// icons are from react-icons-kit
-import Icon from "react-icons-kit";
-import { userTie } from "react-icons-kit/icomoon/userTie";
-
 // show all companies with basic information as a business card
 const AllCompanies = () => {
   // getting all companies from context

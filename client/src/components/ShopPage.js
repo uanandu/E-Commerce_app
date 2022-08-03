@@ -9,12 +9,10 @@ import { ItemContext } from "../context/Context";
 import { Icon } from "react-icons-kit";
 import { chevronCircleRight } from "react-icons-kit/fa/chevronCircleRight";
 
-import { ErrorPage } from "./ErrorPage";
-
 // shop page for all items
 const ShopPage = () => {
   // getting all items from context
-  const { Items, error } = useContext(ItemContext);
+  const { Items } = useContext(ItemContext);
 
   return (
     <>
@@ -66,7 +64,9 @@ const ShopPage = () => {
           </BackgroundImage>
         </Wrapper>
       ) : (
-        <AlternateDiv>Loading.....</AlternateDiv>
+        <AlternateDiv>
+        <ImageHere src="https://media.giphy.com/media/JF70qeolvPS0ph52ZY/giphy.gif" />
+      </AlternateDiv>
       )}
     </>
   );
@@ -288,7 +288,11 @@ const AlternateDiv = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 50px;
-  z-index: 5;
 `;
+
+const ImageHere = styled.img`
+  width: 50vw;
+  height: auto;
+`
 
 export default ShopPage;

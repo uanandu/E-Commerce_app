@@ -1,9 +1,14 @@
 import styled from "styled-components"; // styled components
-import { useEffect, useState } from "react"; // useEffect, useState
+import { useEffect, useState, useContext } from "react"; // useEffect, useState
 import axios from "axios"; // axios
+
+import { ItemContext } from "../context/Context";
+import { ErrorPage } from "./ErrorPage";
 
 // show previous orders of the user
 const OrderHistory = () => {
+
+  const {error, setError} = useContext(ItemContext);
 
   // state to capture the orders of the user
   const [history, setHistory] = useState([]);
@@ -16,11 +21,12 @@ const OrderHistory = () => {
         // console.log("orders information",res.data.data)
         setHistory(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setError(err));
   }, []);
 
   return (
     <>
+    {!error ? (
       <ContentWrapper>
         <BackgroundImage>
           <GridContainer>
@@ -47,6 +53,10 @@ const OrderHistory = () => {
           </GridContainer>
         </BackgroundImage>
       </ContentWrapper>
+    ):(
+        <ErrorPage />
+    )}
+      
     </>
   );
 };

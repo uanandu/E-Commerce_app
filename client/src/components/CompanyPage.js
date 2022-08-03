@@ -72,7 +72,9 @@ export const CompanyPage = () => {
           </GridContainer>
         </Wrapper>
       ) : (
-        <AlternateDiv>Loading.....</AlternateDiv>
+        <AlternateDiv>
+        <ImageHere src="https://media.giphy.com/media/JF70qeolvPS0ph52ZY/giphy.gif" />
+      </AlternateDiv>
       )}
     </>
   );
@@ -297,3 +299,8 @@ const AlternateDiv = styled.div`
   font-size: 50px;
   z-index: 2;
 `;
+
+const ImageHere = styled.img`
+  width: 50vw;
+  height: auto;
+`
