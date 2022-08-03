@@ -10,21 +10,16 @@ import { v4 as uuidv4 } from 'uuid';
 const Checkout = () => {
   const { cart, setCart, Items} = useContext(ItemContext);
   const myCart = cart.data;
-  console.log(myCart);
-  // let quantity;
   let subtotal = 0;
   let total = 0;
   const history = useHistory();
+  let quantityArray = [];
 
-
-  
+  //fetches cart from Mongo, and makes it accessible via "cart"
   useEffect(() => {
     axios
       .get("/api/cart")
       .then((res) => {
-        // console.log(res)
-        //res.data will display all item info in cart collection
-        //we can decide what to display according to frontend design
         setCart(res.data);
       })
       .catch((err) => {
@@ -32,6 +27,7 @@ const Checkout = () => {
       });
   }, []);
 
+  //deletes an item from the cart based on its' _id.
   const deleteItem = (ev) => {
     const _id = ev.target.id;
     axios
@@ -44,8 +40,6 @@ const Checkout = () => {
         console.log(err);
       });
   };
-
- 
 
   //onSubmit, this function first posts everything into orderHistory, and then deletes them
   //all from cart. Then pushes to orderHistory page.
@@ -60,24 +54,19 @@ const handleSubmit = (ev) => {
         },
       });
 
-      //updates items, so that numInStock is reduced by however many of the particular item is in the cart
+      //sends the quantityArray to the server. Server will iterate over each object in the a array,
+      //and modify the numInStock of each item depending on the quantity purchased.
+        axios({
+        method: 'patch',
+        url: '/api/shop/items',
+        data: {
+          body: quantityArray,
+        }
+      })
+
+      //removes each item from the cart, so that when the purchase is made, you can have a fresh cart.
       myCart.map((item) => {
         const _id = item._id;
-      // axios({
-      //   method: 'patch',
-      //   url: 'get patch endpoint',
-      //   data: {
-      //     _id: item._id,
-      //     name: item.name,
-      //     price: item.price,
-      //     imageSrc: item.imageSrc,
-      //     body_location: item.body_location,
-      //     category: item.category,
-      //     companyId: item.companyId,
-      //     quantity: "figure this out",
-      //   }
-      // })
-
       //empties the cart after the order is made
       axios
         .delete(`/api/cart/${_id}`)
@@ -99,6 +88,12 @@ const handleSubmit = (ev) => {
   } else {
     const priceArray = [];
 
+    //pushes each item id in the cart with its' corresponding quantity to the quantityArray,
+    //which will be updated in the cart and used in post to update item stock
+    myCart.map((item) => {
+      quantityArray.push({ _id : item._id, quantity: 1})
+    });
+
     return (
       <Wrapper>
         <LeftDiv>
@@ -112,25 +107,16 @@ const handleSubmit = (ev) => {
             <Price>Price</Price>
           </CategoryDiv>
           {myCart.map((item) => {
-            let quantity = 1;
-            let disabled = false; 
+            //maps over all Items, finding the _id of the specific cart item, changes stock to 
+            //the quantity that are actually in stock of that item.
             let stock = 0;
-
             Items.map((item2)=>{
               if (item2._id === item._id){
                 stock = item2.numInStock;
               } 
             })
 
-            const increaseHandler = () => {
-              quantity = quantity + 1;
-              console.log(quantity);
-              if (quantity === stock){
-                disabled = true;
-                console.log(disabled);
-              }
-            }
-            
+
             //removes $ from each of the prices, turns them into a Number, and pushes to an array.
             const itemPriceNoSymbol = item.price.replace(/\$/g, "");
             const itemPrice = parseInt(itemPriceNoSymbol);
@@ -138,13 +124,22 @@ const handleSubmit = (ev) => {
             //checks that we're getting the correct total, then adds all of prices together, creating a subtotal
             if (priceArray.length === myCart.length) {
               const reducer = (accumulator, curr) => accumulator + curr;
-              subtotal = priceArray.reduce(reducer);
+              subtotal = priceArray.reduce(reducer).toFixed(2);
               //adds tax
               total = (subtotal * 1.15).toFixed(2);
             }
 
-            
 
+            //onChange of quantity of item in the cart, updates the quantity in the quantityArray,
+            //this will be used in the patch to determine how much of each item will be removed from stock.
+            const quantityHandler = (e) => {
+              quantityArray.map((object) => {
+                if (object._id === item._id) {
+                  object.quantity = parseInt(e.target.value);
+                }
+              })
+            }
+            
             return (
               <ItemDiv>
                 <DescriptionDiv>
@@ -157,9 +152,10 @@ const handleSubmit = (ev) => {
                   </SubDescripion>
                 </DescriptionDiv>
                 <QuantityDiv>
-                  <QuantityButton id={item._id}>-</QuantityButton>
-                  <ItemQuantity>{quantity}</ItemQuantity>
-                  <QuantityButton onClick={increaseHandler} disabled = {disabled}>+</QuantityButton>
+                  <Form onChange = {quantityHandler}>
+                  <Input type="number" id="quantity" name="quantity" min="1" max={stock}/>
+                  <Label for="quantity">Max {stock === 0? 1:stock}</Label>
+                  </Form>
                 </QuantityDiv>
                 <PriceDiv>
                   <ItemPrice>{item.price}</ItemPrice>
@@ -188,6 +184,13 @@ const handleSubmit = (ev) => {
     );
   }
 };
+const Label = styled.label`
+font-family: var(--primary-font-family);
+color: grey;
+`
+const Input = styled.input`
+margin-bottom: 3px;
+`
 const Bold = styled.span`
   font-weight: bold;
   margin-right: 15px;
@@ -221,8 +224,12 @@ const TextArea = styled.textarea`
   resize: none;
   font-family: var(--secondary-font-family);
   font-size: 17px;
+  margin-bottom: 10px;
 `;
-const Form = styled.form``;
+const Form = styled.form`
+display: flex;
+flex-direction: column;
+`;
 const SubDescripion = styled.div`
   display: flex;
   flex-direction: column;
@@ -266,18 +273,11 @@ const CartQuantity = styled.div`
   font-family: var(--primary-font-family);
   font-size: 40px;
 `;
-const QuantityButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 17px;
-  cursor: pointer;
-`;
-const ItemQuantity = styled.div``;
 const QuantityDiv = styled.div`
   display: flex;
   width: 20%;
   align-items: center;
-  padding-left: 7px;
+  padding-left: 15px;
 `;
 const Price = styled.div`
   width: 20%;
