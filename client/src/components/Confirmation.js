@@ -1,30 +1,38 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
-import styled from "styled-components";
+import { useState, useEffect, useContext } from "react"; // importing from react
+import styled from "styled-components"; // importing from styled-components
+import axios from "axios"; // importing from axios
 
+import { ItemContext } from "../context/Context"; // importing from ItemContext
+import { ErrorPage } from "./ErrorPage";
+
+// Confirmation page
 const Confirmation = () => {
+  const {error, setError} = useContext(ItemContext);
+
   const [confirmation, setConfirmation] = useState(null);
   useEffect(() => {
     axios("/api/orderHistory")
       .then((res) => {
         const newOrder = res.data.data[res.data.data.length - 1];
-        console.log(newOrder);
         setConfirmation(newOrder);
       })
       .catch((err) => {
-        console.log(err);
+        setError(err);
       });
   }, []);
 
   return (
-    <Wrapper>
+    <>
+      {!error ? (
+       <Wrapper>
       <BackgroundImage></BackgroundImage>
       {confirmation ? (
         <ProductWrapper>
           <Message>
             <MessageText>Your order has been placed successfully!</MessageText>
-            <MessageText>The order number is {confirmation.orderId}!</MessageText>
+            <MessageText>
+              The order number is {confirmation.orderId}!
+            </MessageText>
             <GiftImage src="https://media.giphy.com/media/3o7WICvWEiTBSP3U8o/giphy.gif" />
           </Message>
           <ProductContainer>
@@ -55,9 +63,19 @@ const Confirmation = () => {
           </ProductContainer>
         </ProductWrapper>
       ) : (
-        <div>loading</div>
+        <AlternateDiv>
+          <ImageHere src="https://media.giphy.com/media/JF70qeolvPS0ph52ZY/giphy.gif" />
+        </AlternateDiv>
       )}
-    </Wrapper>
+    </Wrapper> 
+      ) : (
+        <ErrorPage />
+      )}
+
+    </>
+
+
+    
   );
 };
 
@@ -248,5 +266,18 @@ const ItemPrice = styled.h4`
     top: 17px;
   }
 `;
+
+const AlternateDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+`;
+
+const ImageHere = styled.img`
+  width: 50vw;
+  height: auto;
+`
 
 export default Confirmation;

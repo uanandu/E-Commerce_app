@@ -1,16 +1,8 @@
 import styled from "styled-components"; // styled-components
-import { useContext } from "react"; // useContext
 import { NavLink } from "react-router-dom"; // for nav links
 
-import { ItemContext } from "../context/Context"; // for item context
-
-import { Icon } from "react-icons-kit"; // for icons
-import { shoppingCart } from "react-icons-kit/feather/shoppingCart"; // for shopping cart icon
-
+// NavBar for the top of the page
 const NavBar = () => {
-  const { cart } = useContext(ItemContext); // for cart from context
-
-  let numberInCart = cart.length; // for number in cart
 
   return (
     <>

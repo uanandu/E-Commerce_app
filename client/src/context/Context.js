@@ -1,71 +1,63 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react"; // import from react
+import axios from "axios"; // import from axios
 
-import axios from "axios";
+export const ItemContext = createContext(); // creating a context
 
-export const ItemContext = createContext();
-
+// creating a provider
 export const ItemProvider = ({ children }) => {
-  const [Items, setItems] = useState([]);
-  const [singleItem, setSingleItem] = useState([]);
 
-  const [companies, setCompanies] = useState([]);
-  const [companyInfo, setCompanyInfo] = useState([]);
-  const [companyProducts, setCompanyProducts] = useState([]);
+  // states here:
+  const [Items, setItems] = useState([]); // state to capture the all items
+  const [singleItem, setSingleItem] = useState([]); // state to capture the single item
 
-  const [ItemNumber, setItemNumber] = useState(0);
-  const [cart, setCart] = useState([]);
-  const [orderHistory, setOrderHistory] = useState(null);
+  const [companies, setCompanies] = useState([]); // state to capture the all companies
+  const [companyInfo, setCompanyInfo] = useState([]); // state to capture the single company
+  const [companyProducts, setCompanyProducts] = useState([]); // state to capture the all products of the company
 
-  const [company, setCompany] = useState(null);
+  const [ItemNumber, setItemNumber] = useState(0); // state to capture the number of items in the cart
+  const [cart, setCart] = useState([]); // state to capture the items in the cart
+  const [orderHistory, setOrderHistory] = useState(null); // state to capture the orders of the user
 
-  const [error, setError] = useState(false);
+  const [company, setCompany] = useState(null); // state to capture the company of the item
 
+  const [error, setError] = useState(false); // state to capture the error
 
+  // getting the all companies from the database
   useEffect(() => {
     axios
       .get("/api/companies")
       .then((res) => {
-        // console.log(res);
         setCompanies(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        setError(err);
       });
   }, []);
 
+  // getting the all items from the database
   useEffect(() => {
     axios
       .get("/api/items")
       .then((res) => {
-        // console.log(res);
         setItems(res.data.data);
       })
       .catch((err) => {
         setError(err);
       });
   }, []);
-  
-  // useEffect(() => {
-  //   axios
-  //     .get("/api/cart")
-  //     .then((res) => {
-  //       console.log("inside context- cart",res)
-  //       setCart(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [Items]);
 
-  let temporaryArray = [];
+  let temporaryArray = []; // temporary array to store the items in the cart
 
-
+  // for the post method to add the item to the cart in mongodb
   const addToCart = (e, items) => {
+
     e.preventDefault();
     e.stopPropagation();
+
     temporaryArray.push(items);
     setCart(temporaryArray);
 
+    // sending the item to the database
       axios({
         method: "POST",
         url: "/api/cart",
@@ -80,7 +72,7 @@ export const ItemProvider = ({ children }) => {
         },
       })
         .then((res) => {
-          console.log("this is inside post",res);
+          return;
         })
         .catch((err) => {
           setError(err);   
