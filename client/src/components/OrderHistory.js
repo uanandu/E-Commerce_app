@@ -7,8 +7,7 @@ import { ErrorPage } from "./ErrorPage";
 
 // show previous orders of the user
 const OrderHistory = () => {
-
-  const {error, setError} = useContext(ItemContext);
+  const { error, setError } = useContext(ItemContext);
 
   // state to capture the orders of the user
   const [history, setHistory] = useState([]);
@@ -26,7 +25,6 @@ const OrderHistory = () => {
 
   return (
     <>
-    {!error ? (
       <ContentWrapper>
         <BackgroundImage>
           <GridContainer>
@@ -53,10 +51,6 @@ const OrderHistory = () => {
           </GridContainer>
         </BackgroundImage>
       </ContentWrapper>
-    ):(
-        <ErrorPage />
-    )}
-      
     </>
   );
 };
@@ -145,7 +139,7 @@ const PriceSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`
+`;
 
 const PriceColumn = styled.div`
   padding: 0 5px;
@@ -163,7 +157,7 @@ const PriceColumn = styled.div`
 
   /* This makes room for the triangle */
   margin-left: 19px;
-  
+
   position: relative;
   color: white;
   font-weight: 300;
