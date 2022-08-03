@@ -17,9 +17,9 @@ export const ItemProvider = ({ children }) => {
   const [orderHistory, setOrderHistory] = useState(null);
 
   const [company, setCompany] = useState(null);
-  const [buttonPhrase, setButtonPhrase] = useState("Add to Cart");
 
   const [error, setError] = useState(false);
+
 
   useEffect(() => {
     axios
@@ -41,61 +41,52 @@ export const ItemProvider = ({ children }) => {
         setItems(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        setError(err);
       });
   }, []);
+  
+  // useEffect(() => {
+  //   axios
+  //     .get("/api/cart")
+  //     .then((res) => {
+  //       console.log("inside context- cart",res)
+  //       setCart(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [Items]);
 
-  const addItemNumber = (e) => {
-    e.preventDefault();
-    setItemNumber(ItemNumber + 1);
-  };
+  let temporaryArray = [];
+
 
   const addToCart = (e, items) => {
     e.preventDefault();
-    addItemNumber(e);
+    e.stopPropagation();
+    temporaryArray.push(items);
+    setCart(temporaryArray);
 
-    // console.log("inside cart",cart);
-    setCart([...cart, items]);
-    setButtonPhrase("Added to Cart");
-
-    axios({
-      method: "POST",
-      url: "/api/cart",
-      data: {
-        _id: items._id,
-        name: items.name,
-        price: items.price,
-        imageSrc: items.imageSrc,
-        body_location: items.body_location,
-        category: items.category,
-        companyId: items.companyId,
-      },
-    })
-      .then((res) => {
-        // console.log(res);
+      axios({
+        method: "POST",
+        url: "/api/cart",
+        data: {
+          _id: items._id,
+          name: items.name,
+          price: items.price,
+          imageSrc: items.imageSrc,
+          body_location: items.body_location,
+          category: items.category,
+          companyId: items.companyId,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          console.log("this is inside post",res);
+        })
+        .catch((err) => {
+          setError(err);   
+        });
   };
 
-  // const removeFromCart = (e, item) => {
-  //   e.preventDefault();
-  //   setCart(cart.filter((cartItem) => cartItem._id !== item._id));
-  //   axios({
-  //     method: "delete",
-  //     url: `/api/cart/${item._id}`,
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })
-  //   .then((res) => {
-  //     console.log(res);
-  // })
-  // }
-
-  // console.log("items here", items);
-  // console.log("companies here", companies);
 
   return (
     <ItemContext.Provider
@@ -109,14 +100,11 @@ export const ItemProvider = ({ children }) => {
         companyProducts,
         setCompanyProducts,
         ItemNumber,
-        addItemNumber,
         addToCart,
         cart,
         setCart,
         company,
         setCompany,
-        buttonPhrase,
-        setButtonPhrase,
         orderHistory,
         setOrderHistory,
         error,
