@@ -68,7 +68,6 @@ const ShopPage = () => {
       ) : (
         <AlternateDiv>Loading.....</AlternateDiv>
       )}
-      {error && <ErrorPage />}
     </>
   );
 };
