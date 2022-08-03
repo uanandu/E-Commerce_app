@@ -1,15 +1,22 @@
-import styled from "styled-components";
-import { aboutUs } from "../data/aboutUsData";
+import styled from "styled-components"; // styled components
+
+import { aboutUs } from "../data/aboutUsData"; // aboutUsData imported
+
+// all icons imported from react-icons-kit
 import { Icon } from "react-icons-kit";
 import { linkedinSquare } from "react-icons-kit/fa/linkedinSquare";
 import { githubSquare } from "react-icons-kit/fa/githubSquare";
 
+// AboutUs component for displaying our information
 const AboutUs = () => {
   return (
     <>
       <BackgroundImage></BackgroundImage>
       <MainDiv>
-        <ContactUs>Contact Us!</ContactUs>
+        <ContactUs>
+          <h1>Let's get in touch!</h1>
+        <ImageContact src="https://media.giphy.com/media/1dMKKHdu90OYcOQxMv/giphy.gif" />
+        </ContactUs>
         <Wrapper>
           {aboutUs.map((person) => {
             return (
@@ -18,7 +25,6 @@ const AboutUs = () => {
                   <ImageBox>
                     <Img src={person.Info[1].imgSrc} />
                   </ImageBox>
-                  <Overlay>
                     <Text>
                       <Name>{person.Info[0].fullName}</Name>
                       <ContactLinks
@@ -34,7 +40,6 @@ const AboutUs = () => {
                         <Icon size={32} icon={githubSquare} />
                       </ContactLinks>
                     </Text>
-                  </Overlay>
                 </Container>
               </>
             );
@@ -45,6 +50,8 @@ const AboutUs = () => {
   );
 };
 
+
+// styled components
 const BackgroundImage = styled.div`
   background-image: url("https://i.pinimg.com/736x/82/6a/95/826a95fde43be06c60b5c1f5349587c3.jpg");
   background-repeat: repeat;
@@ -58,11 +65,7 @@ const BackgroundImage = styled.div`
   height: 100%;
   left: 10vw;
 `;
-const Name = styled.p`
-  color: white;
-  margin-right: 50px;
-  font-weight: 600;
-`;
+
 const MainDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -70,11 +73,7 @@ const MainDiv = styled.div`
   align-items: center;
   min-height: 100vh;
   animation: fadeIn 1s ease-in-out;
-
-  /* justify-content: space-between; */
-
   padding: 25px;
-  /* background-color: white; */
 
   @keyframes fadeIn {
     from {
@@ -85,45 +84,61 @@ const MainDiv = styled.div`
     }
   }
 
-  /* width: 100%;
-  height: 100%; */
 `;
-const ContactUs = styled.h1`
+const ContactUs = styled.div`
+position: absolute;
   margin-bottom: 30px;
-  background: white;
-  /* border: 4px solid black; */
   padding: 10px 40px;
   background-color: black;
   color: white;
-  border-radius: 16px;
   font-size: 50px;
+  width: 89.3vw;
+  height: 50vh;
+  left: 10vw;
+  top: 6vh;
+  text-align: center;
 `;
-const ContactLinks = styled.a`
-  text-decoration: none;
-  color: white;
-  margin-left: 35px;
+
+const ImageContact = styled.img``
+
+const Wrapper = styled.div`
+  display: flex;
+  gap: 45px;
+  padding: 25px;
 `;
-const Overlay = styled.div`
-  /* position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  transition: 0.5s ease; */
-  /* background-color: white; */
-  /* border-radius: 5%;
+
+const Container = styled.div`
+  position: relative;
+  transition: 1s;
+  background-color: black;
+  top: 15vh;
+  border: 2px solid white;
+  border-radius: 10px;
+`;
+
+const ImageBox = styled.div`
+  max-width: 250px;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+`;
+
+const Img = styled.img`
+  margin-top: 50px;
+
+  height: 250px;
+  transition: 1s ease-in-out;
 
   &:hover {
-    opacity: 1;
-    background-color: rgba(255, 255, 255, 0.1);
-    font-weight: bold;
-  } */
+    transform: scale(1.5);
+    margin-top: 50px;
+  }
 `;
+
 const Text = styled.div`
-  /* color: white; */
   color: white;
   font-size: 20px;
   position: absolute;
@@ -137,48 +152,17 @@ const Text = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Container = styled.div`
-  position: relative;
-  transition: 1s;
-  background-color: black;
 
-  /* border: 4px solid black; */
+const Name = styled.p`
+  color: white;
+  margin-right: 50px;
+  font-weight: 600;
 `;
 
-const ImageBox = styled.div`
-  max-width: 250px;
-  height: 300px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* border: lightgrey solid 6px; */
-  margin-top: 10px;
-`;
-
-const Img = styled.img`
-  /* border-radius: 5%; */
-  margin-top: 50px;
-
-  height: 250px;
-  transition: 1s ease-in-out;
-
-  &:hover {
-    transform: scale(1.5);
-    margin-top: 50px;
-    /* border: 1px solid white; */
-  }
-
-  /* border: 4px solid black; */
-`;
-const Wrapper = styled.div`
-  display: flex;
-  gap: 45px;
-
-  /* justify-content: space-between; */
-
-  padding: 25px;
-  /* background-color: white; */
+const ContactLinks = styled.a`
+  text-decoration: none;
+  color: white;
+  margin-left: 35px;
 `;
 
 export default AboutUs;

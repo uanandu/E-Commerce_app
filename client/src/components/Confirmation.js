@@ -1,63 +1,65 @@
-import axios from 'axios'
-import React, { useEffect } from 'react'
-import { useState } from 'react'
-import styled from 'styled-components'
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import styled from "styled-components";
 
 const Confirmation = () => {
-  const [confirmation,setConfirmation] = useState(null)
-  useEffect(()=>{
-    axios('/api/orderHistory')
-    .then((res)=>{
-      const newOrder = res.data.data[res.data.data.length-1]
-      console.log(newOrder)
-      setConfirmation(newOrder)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  },[])
+  const [confirmation, setConfirmation] = useState(null);
+  useEffect(() => {
+    axios("/api/orderHistory")
+      .then((res) => {
+        const newOrder = res.data.data[res.data.data.length - 1];
+        console.log(newOrder);
+        setConfirmation(newOrder);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-  
   return (
     <Wrapper>
-    {confirmation?(
-      <div>
-        <h1>Your order has been placed successfully!</h1>
-        <h1>The order number is {confirmation.orderId}!</h1>
-        {confirmation.data.map((el)=>{
-          return (
-            <>
-            <ItemHead>
-                      <ItemImage src={el.imageSrc} />
-                    </ItemHead>
-                    <ItemBody>
-                      <ItemDescription>
-                        <ItemCaption>Product: </ItemCaption>
-                        <ItemName>{el.name}</ItemName>
-                      </ItemDescription>
-                      <ItemDescription>
-                        <ItemCaption>Body Location: </ItemCaption>
-                        <ItemLocation>{el.body_location}</ItemLocation>
-                      </ItemDescription>
-                      <ItemDescription>
-                        <ItemCaption>Category: </ItemCaption>
-                        <ItemCategory>{el.category}</ItemCategory>
-                      </ItemDescription>
-                      <ItemPrice>{el.price}</ItemPrice>
-                      </ItemBody>
-            </>
-          )
-        })}
-      </div>
-    ):(
-      <div>
-        loading
-      </div>
-    )}
+      <BackgroundImage></BackgroundImage>
+      {confirmation ? (
+        <ProductWrapper>
+          <Message>
+            <MessageText>Your order has been placed successfully!</MessageText>
+            <MessageText>The order number is {confirmation.orderId}!</MessageText>
+            <GiftImage src="https://media.giphy.com/media/3o7WICvWEiTBSP3U8o/giphy.gif" />
+          </Message>
+          <ProductContainer>
+            {confirmation.data.map((el) => {
+              return (
+                <ProductDetails>
+                  <ItemHead>
+                    <ItemImage src={el.imageSrc} />
+                  </ItemHead>
+                  <ItemBody>
+                    <ItemDescription>
+                      <ItemCaption>Product: </ItemCaption>
+                      <ItemName>{el.name}</ItemName>
+                    </ItemDescription>
+                    <ItemDescription>
+                      <ItemCaption>Body Location: </ItemCaption>
+                      <ItemLocation>{el.body_location}</ItemLocation>
+                    </ItemDescription>
+                    <ItemDescription>
+                      <ItemCaption>Category: </ItemCaption>
+                      <ItemCategory>{el.category}</ItemCategory>
+                    </ItemDescription>
+                    <ItemPrice>{el.price}</ItemPrice>
+                  </ItemBody>
+                </ProductDetails>
+              );
+            })}
+          </ProductContainer>
+        </ProductWrapper>
+      ) : (
+        <div>loading</div>
+      )}
     </Wrapper>
-  )
-}
-
+  );
+};
 
 const Wrapper = styled.div`
   position: relative;
@@ -69,12 +71,73 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
+const ProductWrapper = styled.div`
+  position: relative;
+  width: 90vw;
+  height: 100%;
+  display: flex;
+`;
+
+const Message = styled.div`
+  position: relative;
+  width: 50vw;
+  height: 100%;
+  top: 30vh;
+  border: 1px solid black;
+  border-radius: 25px;
+  background-color: black;
+  color: white;
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  font-family: var(--quaternary-font-family);
+`;
+
+const MessageText = styled.h1`
+  font-family: var(--quaternary-font-family);
+`;
+
+const GiftImage = styled.img``;
+
+const ProductContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+`;
+
+const BackgroundImage = styled.div`
+  background-image: url("https://i.pinimg.com/736x/82/6a/95/826a95fde43be06c60b5c1f5349587c3.jpg");
+  background-repeat: repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: -5;
+  width: 100%;
+  height: 2000px;
+  top: -5vh;
+  /* left: 10vw; */
+`;
+
+const ProductDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20vw;
+  height: 50vh;
+`;
+
 const ItemHead = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   height: 252px;
+  width: 400px;
   background: #fa782e;
   /* Old browsers */
   background: white;
@@ -100,8 +163,8 @@ const ItemBody = styled.div`
   justify-content: space-around;
   background-color: black;
   border-radius: 0 0 25px 25px;
-  width: 100%;
-  height: 50%;
+  height: 252px;
+  width: 400px;
   padding: 15px;
   overflow: hidden;
   color: white;
@@ -139,7 +202,7 @@ const ItemPrice = styled.h4`
   padding: 0 5px;
   display: inline-block;
 
-  width: auto;
+  width: 100px;
   height: 38px;
 
   background-color: #6ab070;
@@ -185,6 +248,5 @@ const ItemPrice = styled.h4`
     top: 17px;
   }
 `;
-
 
 export default Confirmation;

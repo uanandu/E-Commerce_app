@@ -1,14 +1,12 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import styled from "styled-components"; // styled components
+import { NavLink } from "react-router-dom"; // for nav links
 
+// All icons shown here are from react-icons-kit
 import { Icon } from "react-icons-kit";
 import { home } from "react-icons-kit/icomoon/home";
 import { briefcase } from "react-icons-kit/icomoon/briefcase";
 import { phone } from "react-icons-kit/icomoon/phone";
 import { shopping_bag } from "react-icons-kit/ikons/shopping_bag";
-//The sidebar will function a bit like a navbar.
-//it will be on the left side with buttons that link to the home.
 
 const SideBar = () => {
   return (
@@ -66,6 +64,23 @@ const SidebarContainer = styled.div`
   justify-content: space-around;
 `;
 
+const IconHere = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: slide-in 1s ease-in-out;
+
+  @keyframes slide-in {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
+`;
+
 const SideBarNavLinks = styled(NavLink)`
   width: 60px;
   height: 60px;
@@ -82,23 +97,6 @@ const SideBarNavLinks = styled(NavLink)`
     box-shadow: 2px 6px 2px 2px rgba(0, 0, 0, 0.3);
     transform: scale(1.05);
     cursor: pointer;
-  }
-`;
-
-const IconHere = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  animation: slide-in 1s ease-in-out;
-
-  @keyframes slide-in {
-    from {
-      transform: translateX(-100%);
-    }
-    to {
-      transform: translateX(0%);
-    }
   }
 `;
 

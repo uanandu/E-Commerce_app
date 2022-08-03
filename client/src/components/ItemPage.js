@@ -1,17 +1,22 @@
 // this page will show the indivdual items information after being clicked on/
-import styled from "styled-components";
+import styled from "styled-components"; // styled-components
+import { useEffect, useContext } from "react"; // useEffect, useContext
+import { useParams } from "react-router-dom"; // useParams
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useContext } from "react";
-import { Redirect, useParams } from "react-router-dom";
 
+  // Importing all useContexts
 import { ItemContext } from "../context/Context";
 
+// Individual item page
 const ItemPage = () => {
+
+  // getting all items from context
   const { singleItem, setSingleItem, company, setCompany, buttonPhrase, addToCart } = useContext(ItemContext);
 
+  // getting the item id from the url
   const { itemId } = useParams();
 
+  // getting the item from the database based on the ItemId clicked on
   useEffect(() => {
     axios
       .get(`/api/shop/items/${itemId}`)
@@ -24,6 +29,7 @@ const ItemPage = () => {
       });
   }, [itemId]);
 
+  // getting the company from the database based on the ItemId clicked on
   useEffect(() => {
     axios
       .get(`/api/companies/${singleItem.companyId}`)
@@ -73,8 +79,7 @@ const Wrapper = styled.div`
   width: 100%;
   left: 10vw;
   height: 30vh;
-
-`
+`;
 
 const BackgroundImage = styled.div`
   background-image: url("https://i.pinimg.com/736x/82/6a/95/826a95fde43be06c60b5c1f5349587c3.jpg");
@@ -83,21 +88,7 @@ const BackgroundImage = styled.div`
   align-items: center;
   justify-content: center;
   height: 1200px;
-  width: 1500px;
-`;
-
-const CompanyUrl = styled.a`
-  text-decoration: none;
-  color: black;
-`;
-const AddToCart = styled.button`
-  border: none;
-  width: 300px;
-  height: 40px;
-  background: white;
-  font-size: 25px;
-  border-radius: 5px;
-  cursor: pointer;
+  width: 2000px;
 `;
 
 const MainWrapper = styled.div`
@@ -121,12 +112,8 @@ const LeftDiv = styled.div`
 const ItemImage = styled.img`
   width: 200px;
 `;
-const ItemPrice = styled.h4`
-  font-size: 30px;
-  font-weight: 400;
-  font-style: italic;
-  margin-bottom: 5px;
-`;
+
+
 
 const RightDiv = styled.div`
   display: flex;
@@ -144,9 +131,23 @@ const ItemName = styled.h2`
   font-weight: 300;
   font-size: 30px;
 `;
+
+const CompanyUrl = styled.a`
+  text-decoration: none;
+  color: white;
+`;
+
+const ItemPrice = styled.h4`
+  font-size: 30px;
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 5px;
+`;
+
 const ItemCategory = styled.p`
   margin-bottom: 50px;
 `;
+
 const ItemCompanyName = styled.p`
   font-size: 20px;
 
@@ -154,6 +155,16 @@ const ItemCompanyName = styled.p`
     color: #ffab44;
     cursor: pointer;
   }
+`;
+
+const AddToCart = styled.button`
+  border: none;
+  width: 300px;
+  height: 40px;
+  background: white;
+  font-size: 25px;
+  border-radius: 5px;
+  cursor: pointer;
 `;
 
 const AlternateDiv = styled.div`

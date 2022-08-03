@@ -1,16 +1,16 @@
-import styled from "styled-components";
-import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import styled from "styled-components"; // styled-components
+import { useContext } from "react"; // useContext
+import { NavLink } from "react-router-dom"; // for nav links
 
-import { ItemContext } from "../context/Context";
+import { ItemContext } from "../context/Context"; // for item context
 
-import { Icon } from "react-icons-kit";
-import { shoppingCart } from "react-icons-kit/feather/shoppingCart";
+import { Icon } from "react-icons-kit"; // for icons
+import { shoppingCart } from "react-icons-kit/feather/shoppingCart"; // for shopping cart icon
 
 const NavBar = () => {
-  const { cart } = useContext(ItemContext);
+  const { cart } = useContext(ItemContext); // for cart from context
 
-  let numberInCart = cart.length;
+  let numberInCart = cart.length; // for number in cart
 
   return (
     <>
@@ -36,20 +36,35 @@ const NavBar = () => {
     </>
   );
 };
-const NumberDiv = styled.div`
-  background: black;
-  color: white;
+
+// styled components
+
+const MainDiv = styled.div`
+  position: fixed;
+  background: white;
+  height: 70px;
+  width: 100%;
+  color: black;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 10px;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  top: 15px;
-  right: 70px;
+  padding-left: 20px;
+  padding-right: 50px;
+  justify-content: space-between;
+  z-index: 5;
+  border-bottom: 1px solid black;
 `;
+
+const LeftDiv = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Links = styled(NavLink)`
+  text-decoration: none;
+  color: black;
+  margin-right: 30px;
+`;
+
 const LogoDiv = styled.div`
   border: 1px solid black;
   width: 150px;
@@ -76,37 +91,12 @@ const NameLetters = styled.div`
   align-items: center;
   width: 37.5px;
 `
-
-const Links = styled(NavLink)`
-  text-decoration: none;
-  color: black;
-  margin-right: 30px;
-`;
-const LeftDiv = styled.div`
-  display: flex;
-  align-items: center;
-`;
 const RightDiv = styled.div`
   color: black;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 40vw;
-`;
-
-const MainDiv = styled.div`
-  position: fixed;
-  background: white;
-  height: 70px;
-  width: 100%;
-  color: black;
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-  padding-right: 50px;
-  justify-content: space-between;
-  z-index: 5;
-  border-bottom: 1px solid black;
 `;
 
 const ImageHere = styled.img`
@@ -116,4 +106,20 @@ left: -20vw;
   height: auto;
   object-fit: contain;
 `;
+
+const NumberDiv = styled.div`
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 15px;
+  right: 70px;
+`;
+
 export default NavBar;
