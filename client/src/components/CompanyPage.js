@@ -74,7 +74,6 @@ export const CompanyPage = () => {
       ) : (
         <AlternateDiv>Loading.....</AlternateDiv>
       )}
-      {error && <ErrorPage/>}
     </>
   );
 };

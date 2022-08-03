@@ -72,7 +72,6 @@ const ItemPage = () => {
       ) : (
         <AlternateDiv>Loading.....</AlternateDiv>
       )}
-      {error && <ErrorPage/>}
       </BackgroundImage>
     </Wrapper>
   );
