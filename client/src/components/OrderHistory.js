@@ -32,10 +32,12 @@ const OrderHistory = () => {
                     <Name>
                       <p>{el.name}</p>
                     </Name>
-                    <PriceColumn>
-                      <p>{el.price}</p>
-
-                    </PriceColumn>
+                    <PriceSection>
+                      <PriceColumn>
+                        <p>{el.price}</p>
+                      </PriceColumn>
+                      <PurchasedSeal src="https://media.giphy.com/media/oS9gvPTg8i9VYfIohK/giphy.gif" />
+                    </PriceSection>
                   </RightDiv>
                 </GridItem>
               );
@@ -63,7 +65,7 @@ const BackgroundImage = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 1800px;
+  width: 2000px;
 `;
 
 const GridContainer = styled.div`
@@ -102,14 +104,14 @@ const GridItem = styled.div`
 `;
 
 const LeftDiv = styled.div`
-    border-right: 1px solid black;
-    padding: 10px;
+  border-right: 1px solid black;
+  padding: 10px;
 `;
 const RightDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10px;
 `;
 
 const Image = styled.img`
@@ -126,6 +128,13 @@ const Name = styled.h3`
   flex-direction: column;
   justify-content: flex-start;
 `;
+
+const PriceSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
 const PriceColumn = styled.div`
   padding: 0 5px;
   display: inline-block;
@@ -142,9 +151,8 @@ const PriceColumn = styled.div`
 
   /* This makes room for the triangle */
   margin-left: 19px;
-
+  
   position: relative;
-
   color: white;
   font-weight: 300;
   font-size: 22px;
@@ -176,4 +184,10 @@ const PriceColumn = styled.div`
     top: 17px;
   }
 `;
+
+const PurchasedSeal = styled.img`
+  width: 60px;
+  height: auto;
+`;
+
 export default OrderHistory;
