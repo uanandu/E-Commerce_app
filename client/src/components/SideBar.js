@@ -38,6 +38,7 @@ const SideBar = () => {
           </SideBarNavLinks>
           <h3>Orders</h3>
         </IconHere>
+        <ImageHere src="https://assets.website-files.com/5e51c674258ffe10d286d30a/5e535e872b568af61d1d1e65_peep-sitting-5.png" />
       </SidebarContainer>
     </MainContainer>
   );
@@ -47,15 +48,13 @@ const MainContainer = styled.div`
   position: fixed;
   padding: 0 25px;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
   align-items: center;
   text-align: center;
-  flex-direction: column;
   width: 10vw;
   height: 100%;
   top: 4vh;
   margin-top: 20px;
-  border-right: 1px solid lightgray;
   border-right: 1px solid black;
   z-index: 1;
 `;
@@ -102,5 +101,12 @@ const IconHere = styled.div`
     }
   }
 `;
+
+const ImageHere = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin-top: 300px;
+`
 
 export default SideBar;

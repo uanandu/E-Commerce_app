@@ -44,7 +44,6 @@ const getItemById = async (req, res) => {
 client.close();
 };
 
-
 module.exports = {
   getItems,
   getItemById,

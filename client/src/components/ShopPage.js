@@ -7,54 +7,54 @@ import { ItemContext } from "../context/Context";
 
 //importing icons
 import { Icon } from "react-icons-kit";
-import { ic_add_shopping_cart } from "react-icons-kit/md/ic_add_shopping_cart";
+import {chevronCircleRight} from 'react-icons-kit/fa/chevronCircleRight'
 
 const ShopPage = () => {
-  const { Items, addToCart } = useContext(ItemContext);
+  const { Items } = useContext(ItemContext);
 
   return (
     <>
       {Items ? (
         <Wrapper>
           <BackgroundImage>
-          {/* <SideBar /> */}
-          {/* The grid container houses all the items (GridItem) */}
-          <GridContainer>
-            {Items.map((item) => {
-              return (
-                <>
-                  <GridItem to={`/shop/items/${item._id}`}>
-                    {/* ItemHead is the top half of the item.  */}
-                    <ItemHead>
-                      <ItemImage src={item.imageSrc} />
-                    </ItemHead>
-                    {/* ItemBody contains the Items information */}
-                    <ItemBody>
-                      <ItemDescription>
-                        <ItemCaption>Product: </ItemCaption>
-                        <ItemName>{item.name}</ItemName>
-                      </ItemDescription>
-                      <ItemDescription>
-                        <ItemCaption>Body Location: </ItemCaption>
-                        <ItemLocation>{item.body_location}</ItemLocation>
-                      </ItemDescription>
-                      <ItemDescription>
-                        <ItemCaption>Category: </ItemCaption>
-                        <ItemCategory>{item.category}</ItemCategory>
-                      </ItemDescription>
-                      {/* ButtonSideDiv is where the cart and price are */}
-                      <ButtonSideDiv>
-                        <ItemPrice>{item.price}</ItemPrice>
-                        <AddToCartButton onClick={(e) => addToCart(e, item)}>
-                          <Icon size={25} icon={ic_add_shopping_cart} />
-                        </AddToCartButton>
-                      </ButtonSideDiv>
-                    </ItemBody>
-                  </GridItem>
-                </>
-              );
-            })}
-          </GridContainer>
+            {/* <SideBar /> */}
+            {/* The grid container houses all the items (GridItem) */}
+            <GridContainer>
+              {Items.map((item) => {
+                return (
+                  <>
+                    <GridItem to={`/shop/items/${item._id}`}>
+                      {/* ItemHead is the top half of the item.  */}
+                      <ItemHead>
+                        <ItemImage src={item.imageSrc} />
+                      </ItemHead>
+                      {/* ItemBody contains the Items information */}
+                      <ItemBody>
+                        <ItemDescription>
+                          <ItemCaption>Product: </ItemCaption>
+                          <ItemName>{item.name}</ItemName>
+                        </ItemDescription>
+                        <ItemDescription>
+                          <ItemCaption>Body Location: </ItemCaption>
+                          <ItemLocation>{item.body_location}</ItemLocation>
+                        </ItemDescription>
+                        <ItemDescription>
+                          <ItemCaption>Category: </ItemCaption>
+                          <ItemCategory>{item.category}</ItemCategory>
+                        </ItemDescription>
+                        {/* ButtonSideDiv is where the cart and price are */}
+                        <ButtonSideDiv>
+                          <ItemPrice>{item.price}</ItemPrice>
+                          <AddToCartButton>
+                            <Icon size={25} icon={chevronCircleRight} style={{color: "black"}}/>
+                          </AddToCartButton>
+                        </ButtonSideDiv>
+                      </ItemBody>
+                    </GridItem>
+                  </>
+                );
+              })}
+            </GridContainer>
           </BackgroundImage>
         </Wrapper>
       ) : (
@@ -67,28 +67,21 @@ const ShopPage = () => {
 const Wrapper = styled.div`
   position: relative;
   left: 10vw;
-  top: 6vh;
+  top: 5vh;
   width: 90vw;
   height: 100%;
   display: flex;
   justify-content: space-between;
+  background-color: transparent;
 `;
 
 const BackgroundImage = styled.div`
-  /* z-index: -10;
-  position: absolute;
-  opacity: 50%;
-  height: 100%; */
-  /* width: 100%;
-  height: 100%; */
   background-image: url("https://i.pinimg.com/736x/82/6a/95/826a95fde43be06c60b5c1f5349587c3.jpg");
   background-repeat: repeat;
-  /* background-position: center; */
-  /* background-size: cover; */
   display: flex;
   align-items: center;
   justify-content: center;
-  /* position: fixed; */
+  height: 100%;
 `;
 
 const GridContainer = styled.div`
@@ -97,23 +90,32 @@ const GridContainer = styled.div`
   grid-template-columns: auto auto auto;
   padding: 10px;
   background-color: transparent;
+  height: 100%;
 `;
 const GridItem = styled(NavLink)`
   color: black;
   text-decoration: none;
   background-color: white;
-  width: 320px;
-  height: 500px;
+  width: 400px;
+  height: 550px;
   margin: 15px auto;
   border: 1px solid black;
   border-radius: 25px;
   transition: 0.5s ease-in-out;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+  animation: scaleIn 1s ease-in-out;
+
+  @keyframes scaleIn {
+    from {
+      transform: translateY(200%)
+    }
+    to {
+      transform: translateY(0%)
+    }
+  }
 
   &:hover {
-    box-shadow: 2px 6px 2px 2px rgba(0, 0, 0, 0.3);
     transform: scale(1.05);
-    cursor: pointer;
   }
 `;
 /* comment here */
@@ -129,15 +131,18 @@ const ItemHead = styled.div`
   /* FF3.6-15 */
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#fa782e', endColorstr='#c82930', GradientType=1);
   /* IE6-9 fallback on horizontal gradient */
+  border: 4px solid black;
   border-radius: 25px 25px 0 0;
   overflow: hidden;
 `;
 
 const ItemImage = styled.img`
-  position: absolute;
+  position: relative;
   left: 0;
   margin-top: 5px;
-  margin-left: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ItemBody = styled.div`
@@ -147,11 +152,11 @@ const ItemBody = styled.div`
   background-color: black;
   border-radius: 0 0 25px 25px;
   width: 100%;
-  height: 50%;
+  height: 55%;
   padding: 15px;
   overflow: hidden;
   color: white;
-  
+  margin-bottom: 20px;
 `;
 
 const ItemDescription = styled.div`
@@ -160,16 +165,24 @@ const ItemDescription = styled.div`
   justify-content: flex-start;
 `;
 const ItemCaption = styled.div`
+  display: inline-block;
+
   font-size: 1.2rem;
 `;
 
 const ItemName = styled.h3`
+  display: inline-block;
+  margin-left: 50px;
   padding: 10px;
 `;
 const ItemCategory = styled.h3`
+  display: inline-block;
+  margin-left: 45px;
   padding: 5px;
 `;
 const ItemLocation = styled.h3`
+  display: inline-block;
+
   padding: 5px;
 `;
 const ItemPrice = styled.h4`
@@ -195,7 +208,7 @@ const ItemPrice = styled.h4`
   font-weight: 300;
   font-size: 22px;
   line-height: 38px;
-
+  transition: 0.5s ease-in-out;
   padding: 0 10px 0 10px;
 
   &:before {
@@ -221,6 +234,14 @@ const ItemPrice = styled.h4`
     left: -9px;
     top: 17px;
   }
+
+  &:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+
 `;
 
 const ButtonSideDiv = styled.div`
@@ -237,8 +258,6 @@ const ButtonSideDiv = styled.div`
 `;
 
 const AddToCartButton = styled.button`
-  /* margin: 10px; */
-  background-color: red;
   color: white;
   width: 50px;
   border: none;
@@ -247,9 +266,10 @@ const AddToCartButton = styled.button`
   border-radius: 5px;
   font-size: 20px;
   font-weight: bold;
+  transition: 0.5s ease-in-out;
   &:hover {
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
-    transform: scale(1.1);
+    transform: scale(1.3);
     cursor: pointer;
   }
 `;
@@ -260,7 +280,7 @@ const AlternateDiv = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 50px;
-  z-index: 2;
+  z-index: 5;
 `;
 
 export default ShopPage;
