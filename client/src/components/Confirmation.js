@@ -7,7 +7,7 @@ import { ErrorPage } from "./ErrorPage";
 
 // Confirmation page
 const Confirmation = () => {
-  const {error, setError} = useContext(ItemContext);
+  const { error, setError } = useContext(ItemContext);
 
   const [confirmation, setConfirmation] = useState(null);
   useEffect(() => {
@@ -23,59 +23,53 @@ const Confirmation = () => {
 
   return (
     <>
-      {!error ? (
-       <Wrapper>
-      <BackgroundImage></BackgroundImage>
-      {confirmation ? (
-        <ProductWrapper>
-          <Message>
-            <MessageText>Your order has been placed successfully!</MessageText>
-            <MessageText>
-              The order number is {confirmation.orderId}!
-            </MessageText>
-            <GiftImage src="https://media.giphy.com/media/3o7WICvWEiTBSP3U8o/giphy.gif" />
-          </Message>
-          <ProductContainer>
-            {confirmation.data.map((el) => {
-              return (
-                <ProductDetails>
-                  <ItemHead>
-                    <ItemImage src={el.imageSrc} />
-                  </ItemHead>
-                  <ItemBody>
-                    <ItemDescription>
-                      <ItemCaption>Product: </ItemCaption>
-                      <ItemName>{el.name}</ItemName>
-                    </ItemDescription>
-                    <ItemDescription>
-                      <ItemCaption>Body Location: </ItemCaption>
-                      <ItemLocation>{el.body_location}</ItemLocation>
-                    </ItemDescription>
-                    <ItemDescription>
-                      <ItemCaption>Category: </ItemCaption>
-                      <ItemCategory>{el.category}</ItemCategory>
-                    </ItemDescription>
-                    <ItemPrice>{el.price}</ItemPrice>
-                  </ItemBody>
-                </ProductDetails>
-              );
-            })}
-          </ProductContainer>
-        </ProductWrapper>
-      ) : (
-        <AlternateDiv>
-          <ImageHere src="https://media.giphy.com/media/JF70qeolvPS0ph52ZY/giphy.gif" />
-        </AlternateDiv>
-      )}
-    </Wrapper> 
-      ) : (
-        <ErrorPage />
-      )}
-
+      <Wrapper>
+        <BackgroundImage></BackgroundImage>
+        {confirmation ? (
+          <ProductWrapper>
+            <Message>
+              <MessageText>
+                Your order has been placed successfully!
+              </MessageText>
+              <MessageText>
+                The order number is {confirmation.orderId}!
+              </MessageText>
+              <GiftImage src="https://media.giphy.com/media/3o7WICvWEiTBSP3U8o/giphy.gif" />
+            </Message>
+            <ProductContainer>
+              {confirmation.data.map((el) => {
+                return (
+                  <ProductDetails>
+                    <ItemHead>
+                      <ItemImage src={el.imageSrc} />
+                    </ItemHead>
+                    <ItemBody>
+                      <ItemDescription>
+                        <ItemCaption>Product: </ItemCaption>
+                        <ItemName>{el.name}</ItemName>
+                      </ItemDescription>
+                      <ItemDescription>
+                        <ItemCaption>Body Location: </ItemCaption>
+                        <ItemLocation>{el.body_location}</ItemLocation>
+                      </ItemDescription>
+                      <ItemDescription>
+                        <ItemCaption>Category: </ItemCaption>
+                        <ItemCategory>{el.category}</ItemCategory>
+                      </ItemDescription>
+                      <ItemPrice>{el.price}</ItemPrice>
+                    </ItemBody>
+                  </ProductDetails>
+                );
+              })}
+            </ProductContainer>
+          </ProductWrapper>
+        ) : (
+          <AlternateDiv>
+            <ImageHere src="https://media.giphy.com/media/JF70qeolvPS0ph52ZY/giphy.gif" />
+          </AlternateDiv>
+        )}
+      </Wrapper>
     </>
-
-
-    
   );
 };
 
@@ -278,6 +272,6 @@ const AlternateDiv = styled.div`
 const ImageHere = styled.img`
   width: 50vw;
   height: auto;
-`
+`;
 
 export default Confirmation;

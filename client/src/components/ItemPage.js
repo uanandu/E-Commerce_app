@@ -55,40 +55,35 @@ const ItemPage = () => {
     //2nd step is to render it.
 
     <>
-      {!error ? (
-        <Wrapper>
-      <BackgroundImage>
-        {singleItem && company ? (
-          <MainWrapper>
-            <LeftDiv onClick={(e) => addToCart(e, singleItem)}>
-              <InstructionImage src="https://media.giphy.com/media/PbnHWUeWBb2QNqFAoA/giphy.gif" />
-              <ItemImage src={singleItem.imageSrc} />
-            </LeftDiv>
-            <RightDiv>
-              <ItemName>{singleItem.name}</ItemName>
-              <CompanyUrl href={company.url} target="_blank">
-                <ItemCompanyName>
-                  {company.name}, {company.country}
-                </ItemCompanyName>
-              </CompanyUrl>
-              <ItemCategory>
-                {singleItem.category}/{singleItem.body_location}
-              </ItemCategory>
-              <ItemPrice>{singleItem.price}</ItemPrice>
-            </RightDiv>
-          </MainWrapper>
-        ) : (
-          <AlternateDiv>
-            <ImageHere src="https://media.giphy.com/media/JF70qeolvPS0ph52ZY/giphy.gif" />
-          </AlternateDiv>
-        )}
-      </BackgroundImage>
-    </Wrapper>
-      ): (
-        <ErrorPage />
-      )}
+      <Wrapper>
+        <BackgroundImage>
+          {singleItem && company ? (
+            <MainWrapper>
+              <LeftDiv onClick={(e) => addToCart(e, singleItem)}>
+                <InstructionImage src="https://media.giphy.com/media/PbnHWUeWBb2QNqFAoA/giphy.gif" />
+                <ItemImage src={singleItem.imageSrc} />
+              </LeftDiv>
+              <RightDiv>
+                <ItemName>{singleItem.name}</ItemName>
+                <CompanyUrl href={company.url} target="_blank">
+                  <ItemCompanyName>
+                    {company.name}, {company.country}
+                  </ItemCompanyName>
+                </CompanyUrl>
+                <ItemCategory>
+                  {singleItem.category}/{singleItem.body_location}
+                </ItemCategory>
+                <ItemPrice>{singleItem.price}</ItemPrice>
+              </RightDiv>
+            </MainWrapper>
+          ) : (
+            <AlternateDiv>
+              <ImageHere src="https://media.giphy.com/media/JF70qeolvPS0ph52ZY/giphy.gif" />
+            </AlternateDiv>
+          )}
+        </BackgroundImage>
+      </Wrapper>
     </>
-    
   );
 };
 
@@ -211,6 +206,6 @@ const ImageHere = styled.img`
   margin-top: 40vh;
   width: 50vw;
   height: auto;
-`
+`;
 
 export default ItemPage;
