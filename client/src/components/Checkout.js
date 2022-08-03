@@ -5,14 +5,19 @@ import { useEffect } from "react";
 import { ItemContext } from "../context/Context";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 const Checkout = () => {
-  const { cart, setCart } = useContext(ItemContext);
+  const { cart, setCart, Items} = useContext(ItemContext);
   const myCart = cart.data;
+  console.log(myCart);
+  // let quantity;
   let subtotal = 0;
   let total = 0;
   const history = useHistory();
 
+
+  
   useEffect(() => {
     axios
       .get("/api/cart")
@@ -40,28 +45,40 @@ const Checkout = () => {
       });
   };
 
-  //check stock
-  //update stock
+ 
 
   //onSubmit, this function first posts everything into orderHistory, and then deletes them
   //all from cart. Then pushes to orderHistory page.
-  const handleSubmit = (ev) => {
-    myCart.map((item) => {
-      const _id = item._id;
-      axios({
+const handleSubmit = (ev) => {
+  //posts the order with an id to the orderHistory 
+        axios({
         method: "POST",
         url: "/api/orderHistory",
         data: {
-          _id: item._id,
-          name: item.name,
-          price: item.price,
-          imageSrc: item.imageSrc,
-          body_location: item.body_location,
-          category: item.category,
-          companyId: item.companyId,
+          data: myCart,
+          orderId : uuidv4(),
         },
       });
 
+      //updates items, so that numInStock is reduced by however many of the particular item is in the cart
+      myCart.map((item) => {
+        const _id = item._id;
+      // axios({
+      //   method: 'patch',
+      //   url: 'get patch endpoint',
+      //   data: {
+      //     _id: item._id,
+      //     name: item.name,
+      //     price: item.price,
+      //     imageSrc: item.imageSrc,
+      //     body_location: item.body_location,
+      //     category: item.category,
+      //     companyId: item.companyId,
+      //     quantity: "figure this out",
+      //   }
+      // })
+
+      //empties the cart after the order is made
       axios
         .delete(`/api/cart/${_id}`)
         .then((res) => {
@@ -71,8 +88,11 @@ const Checkout = () => {
         .catch((err) => {
           console.log(err);
         });
-    });
-  };
+
+      })
+
+    };
+
 
   if (!cart || !myCart) {
     return <div>Loading</div>;
@@ -93,7 +113,24 @@ const Checkout = () => {
           </CategoryDiv>
           {myCart.map((item) => {
             let quantity = 1;
+            let disabled = false; 
+            let stock = 0;
 
+            Items.map((item2)=>{
+              if (item2._id === item._id){
+                stock = item2.numInStock;
+              } 
+            })
+
+            const increaseHandler = () => {
+              quantity = quantity + 1;
+              console.log(quantity);
+              if (quantity === stock){
+                disabled = true;
+                console.log(disabled);
+              }
+            }
+            
             //removes $ from each of the prices, turns them into a Number, and pushes to an array.
             const itemPriceNoSymbol = item.price.replace(/\$/g, "");
             const itemPrice = parseInt(itemPriceNoSymbol);
@@ -105,6 +142,8 @@ const Checkout = () => {
               //adds tax
               total = (subtotal * 1.15).toFixed(2);
             }
+
+            
 
             return (
               <ItemDiv>
@@ -120,7 +159,7 @@ const Checkout = () => {
                 <QuantityDiv>
                   <QuantityButton id={item._id}>-</QuantityButton>
                   <ItemQuantity>{quantity}</ItemQuantity>
-                  <QuantityButton>+</QuantityButton>
+                  <QuantityButton onClick={increaseHandler} disabled = {disabled}>+</QuantityButton>
                 </QuantityDiv>
                 <PriceDiv>
                   <ItemPrice>{item.price}</ItemPrice>
