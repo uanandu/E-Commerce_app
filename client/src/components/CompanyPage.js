@@ -34,6 +34,8 @@ export const CompanyPage = () => {
     <>
       {companyProducts ? (
         <Wrapper>
+          <BackgroundImage></BackgroundImage>
+
           <GridContainer>
             {companyProducts.map((product) => {
               return (
@@ -88,23 +90,55 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+const BackgroundImage = styled.div`
+  background-image: url("https://i.pinimg.com/736x/82/6a/95/826a95fde43be06c60b5c1f5349587c3.jpg");
+  background-repeat: repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: -5;
+  width: 100%;
+  height: 2000px;
+  /* left: 10vw; */
+`;
+
+const BackroundContainer = styled.div`
+  height: 100%;
+`;
 
 const GridContainer = styled.div`
   width: 90vw;
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 10px;
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
+  background-color: transparent;
+  /* height: 100%; */
 `;
 const GridItem = styled(NavLink)`
   color: black;
   text-decoration: none;
+  background-color: white;
   width: 450px;
-  height: 550px;
+  height: 500px;
   margin: 15px auto;
+  /* border: 4px solid black; */
   border-radius: 25px;
   transition: 0.5s ease-in-out;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+
+  animation: scaleIn 1s ease-in-out;
+
+  @keyframes scaleIn {
+    from {
+      transform: translateY(200%);
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
 
   &:hover {
     box-shadow: 2px 6px 2px 2px rgba(0, 0, 0, 0.3);
@@ -127,6 +161,7 @@ const ItemHead = styled.div`
   /* IE6-9 fallback on horizontal gradient */
   border-radius: 25px 25px 0 0;
   overflow: hidden;
+  border: 4px solid black;
 `;
 
 const ItemImage = styled.img`
@@ -141,11 +176,13 @@ const ItemBody = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  background-color: black;
+  border-radius: 0 0 25px 25px;
   width: 100%;
   height: 50%;
-  padding: 25px;
+  padding: 15px;
   overflow: hidden;
-  border-top: 1px solid lightgray;
+  color: white;
 `;
 
 const ItemDescription = styled.div`
