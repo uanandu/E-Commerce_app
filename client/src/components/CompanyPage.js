@@ -59,11 +59,7 @@ export const CompanyPage = () => {
                       </ItemDescription>
                       <ButtonSideDiv>
                         <ItemPrice>{product.price}</ItemPrice>
-                        <AddToCartButton
-                          onClick={(e) => {
-                            addToCart(e, product);
-                          }}
-                        >
+                        <AddToCartButton>
                          <Icon size={25} icon={chevronCircleRight} style={{color: "black"}}/>
                         </AddToCartButton>
                       </ButtonSideDiv>

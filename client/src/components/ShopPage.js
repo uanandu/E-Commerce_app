@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import styled from "styled-components"; // styled-components
+import { useContext } from "react"; // useContext
+import { NavLink } from "react-router-dom"; // for navlinks
 
 //Importing all useContexts
 import { ItemContext } from "../context/Context";
@@ -9,7 +9,10 @@ import { ItemContext } from "../context/Context";
 import { Icon } from "react-icons-kit";
 import {chevronCircleRight} from 'react-icons-kit/fa/chevronCircleRight'
 
+// shop page for all items
 const ShopPage = () => {
+
+  // getting all items from context
   const { Items } = useContext(ItemContext);
 
   return (
@@ -64,6 +67,7 @@ const ShopPage = () => {
   );
 };
 
+// styled components
 const Wrapper = styled.div`
   position: relative;
   left: 10vw;

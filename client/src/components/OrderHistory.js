@@ -1,9 +1,14 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled from "styled-components"; // styled components
+import { useEffect, useState } from "react"; // useEffect, useState
+import axios from "axios"; // axios
 
+// show previous orders of the user
 const OrderHistory = () => {
+
+  // state to capture the orders of the user
   const [history, setHistory] = useState([]);
+
+  // getting the user id from the mongodb
   useEffect(() => {
     axios
       .get("/api/orderHistory")
@@ -14,9 +19,6 @@ const OrderHistory = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  // if(!history){
-  //     <div>Loading</div>
-  // }
   return (
     <>
       <ContentWrapper>

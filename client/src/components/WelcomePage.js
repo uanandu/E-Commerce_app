@@ -1,14 +1,17 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled from "styled-components"; // styled-components
+import { useEffect, useState } from "react"; // for useEffect and useState
+import axios from "axios"; // axios
 
+// Landing page component
 const WelcomePage = () => {
+  // state for joke
   const [joke, setJoke] = useState("");
 
+  // fetch the joke
   useEffect(() => {
     axios
       .get(
-        "https://v2.jokeapi.dev/joke/Programming,Pun?blacklistFlags=racist,sexist&type=single"
+        "https://v2.jokeapi.dev/joke/Any?blacklistFlags=racist,sexist,explicit&type=single"
       )
       .then((res) => {
         setJoke(res.data.joke);
@@ -21,7 +24,7 @@ const WelcomePage = () => {
       <Wrapper>
         <LeftDiv>
           <JokeDiv>
-            <JokeText>"{joke}"</JokeText>
+            <JokeText>{joke}</JokeText>
           </JokeDiv>
           <SvgImage src="https://assets.website-files.com/5e51c674258ffe10d286d30a/5e5362699b55b0dd645865f7_peep-standing-18.png" />
         </LeftDiv>
@@ -47,7 +50,7 @@ const WelcomePage = () => {
 };
 
 const Wrapper = styled.div`
-  position: relative;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   top: 7.79vh;
@@ -55,24 +58,6 @@ const Wrapper = styled.div`
   align-content: center;
   align-items: center;
   justify-content: space-around;
-`;
-
-const SvgImage = styled.img`
-  position: absolute;
-  width: auto;
-  height: 60vh;
-  bottom: 20vh;
-  z-index: 20;
-  animation: fadeIn 2s ease-in-out;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
 `;
 
 const LeftDiv = styled.div`
@@ -129,6 +114,33 @@ const JokeText = styled.blockquote`
     right: -5rem;
     bottom: 1rem;
   }
+`;
+
+const SvgImage = styled.img`
+  position: absolute;
+  width: auto;
+  height: 60vh;
+  bottom: 20vh;
+  z-index: 20;
+  animation: fadeIn 2s ease-in-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
+const RightDiv = styled.div`
+  background-color: black;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: none;
+  top: -5vh;
 `;
 
 const InsideRightDiv = styled.div`
@@ -208,15 +220,6 @@ const TextBottom = styled.div`
       transform: translate3d(0, 0, 0);
     }
   }
-`;
-
-const RightDiv = styled.div`
-  background-color: black;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border: none;
-  top: -5vh;
 `;
 
 export default WelcomePage;

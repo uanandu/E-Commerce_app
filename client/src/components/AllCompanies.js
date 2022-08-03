@@ -1,13 +1,17 @@
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import styled from "styled-components"; // styled-components
+import { NavLink } from "react-router-dom"; // for nav links
+import { useContext } from "react"; // useContext
 
-import { ItemContext } from "../context/Context";
+import { ItemContext } from "../context/Context"; // for item context
 
+// icons are from react-icons-kit
 import Icon from "react-icons-kit";
 import { userTie } from "react-icons-kit/icomoon/userTie";
 
+// show all companies with basic information as a business card
 const AllCompanies = () => {
+
+  // getting all companies from context
   const { companies } = useContext(ItemContext);
 
   return (
@@ -56,6 +60,14 @@ const BackgroundImage = styled.div`
   height: 100%;
 `;
 
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+  background-color: transparent;
+  gap: 100px;
+`;
+
 const Links = styled(NavLink)`
   display: flex;
   text-decoration: none;
@@ -73,13 +85,7 @@ const Links = styled(NavLink)`
   }
 `;
 
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: auto auto auto;
-  padding: 10px;
-  background-color: transparent;
-  gap: 100px;
-`;
+
 
 const CompanyDiv = styled.div`
   display: flex;
