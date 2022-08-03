@@ -4,6 +4,8 @@ import { useEffect, useContext } from "react"; // useEffect, useContext
 import { useParams } from "react-router-dom"; // useParams
 import axios from "axios";
 
+import { ErrorPage } from "./ErrorPage";
+
   // Importing all useContexts
 import { ItemContext } from "../context/Context";
 
@@ -11,7 +13,7 @@ import { ItemContext } from "../context/Context";
 const ItemPage = () => {
 
   // getting all items from context
-  const { singleItem, setSingleItem, company, setCompany, buttonPhrase, addToCart } = useContext(ItemContext);
+  const { singleItem, setSingleItem, company, setCompany, addToCart, error, setError } = useContext(ItemContext);
 
   // getting the item id from the url
   const { itemId } = useParams();
@@ -25,7 +27,7 @@ const ItemPage = () => {
         setSingleItem(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        setError(err);
       });
   }, [itemId]);
 
@@ -38,7 +40,7 @@ const ItemPage = () => {
         setCompany(res.data.companyInfo);
       })
       .catch((err) => {
-        console.log(err);
+        setError(err);
       });
   }, [singleItem.companyId]);
 
@@ -49,7 +51,9 @@ const ItemPage = () => {
       <BackgroundImage>
       {singleItem && company ? (
         <MainWrapper>
-          <LeftDiv>
+          <LeftDiv onClick={(e)=>
+              addToCart(e, singleItem)}>
+          <InstructionImage src="https://media.giphy.com/media/PbnHWUeWBb2QNqFAoA/giphy.gif"/>
             <ItemImage src={singleItem.imageSrc} />
           </LeftDiv>
           <RightDiv>
@@ -63,12 +67,12 @@ const ItemPage = () => {
               {singleItem.category}/{singleItem.body_location}
             </ItemCategory>
             <ItemPrice>{singleItem.price}</ItemPrice>
-            <AddToCart onClick={addToCart}>{buttonPhrase}</AddToCart>
           </RightDiv>
         </MainWrapper>
       ) : (
         <AlternateDiv>Loading.....</AlternateDiv>
       )}
+      {error && <ErrorPage/>}
       </BackgroundImage>
     </Wrapper>
   );
@@ -94,8 +98,21 @@ const BackgroundImage = styled.div`
 const MainWrapper = styled.div`
   height: 30vh;
   display: flex;
-  margin-top: 50px;
+  position: absolute;
+  top: 40vh;
+  left: 30vh;
 `;
+
+const InstructionImage = styled.img`
+position: relative;
+width: 10vw;
+left: -7vw;
+top: -10vh;
+height: auto;
+  padding: 20px;
+  z-index: 5;
+`
+
 const LeftDiv = styled.div`
   width: 300px;
   display: flex;
@@ -107,10 +124,12 @@ const LeftDiv = styled.div`
   border-left: 4px solid black;
   border-top: 4px solid black;
   border-bottom: 4px solid black;
+  cursor: pointer;
 `;
 
 const ItemImage = styled.img`
   width: 200px;
+  position: absolute;
 `;
 
 

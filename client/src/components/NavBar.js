@@ -28,8 +28,11 @@ const NavBar = () => {
         <RightDiv>
           <ImageHere src="https://assets.website-files.com/5e51c674258ffe10d286d30a/5e535eb7550b76782df9e820_peep-sitting-7.svg" />
           <Links to="/checkout">
-            <Icon size={50} icon={shoppingCart} />
-            <NumberDiv>{numberInCart}</NumberDiv>
+            <CartDiv>
+              <CartImageHere src="https://media.giphy.com/media/1fj851fawh14uU0rUM/giphy.gif" />
+              <p>Go to cart</p>
+            </CartDiv>
+            
           </Links>
         </RightDiv>
       </MainDiv>
@@ -107,19 +110,19 @@ left: -20vw;
   object-fit: contain;
 `;
 
-const NumberDiv = styled.div`
-  background: black;
-  color: white;
+const CartDiv = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 10px;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  top: 15px;
-  right: 70px;
+  justify-content: center;
+  margin-bottom: 10px;
+`
+
+const CartImageHere = styled.img`
+margin-top: 10px;
+right: 10vw;
+  width: 75px;
+  height: auto;
+  object-fit: contain;
 `;
 
 export default NavBar;

@@ -7,13 +7,14 @@ import { ItemContext } from "../context/Context";
 
 //importing icons
 import { Icon } from "react-icons-kit";
-import {chevronCircleRight} from 'react-icons-kit/fa/chevronCircleRight'
+import { chevronCircleRight } from "react-icons-kit/fa/chevronCircleRight";
+
+import { ErrorPage } from "./ErrorPage";
 
 // shop page for all items
 const ShopPage = () => {
-
   // getting all items from context
-  const { Items } = useContext(ItemContext);
+  const { Items, error } = useContext(ItemContext);
 
   return (
     <>
@@ -49,7 +50,11 @@ const ShopPage = () => {
                         <ButtonSideDiv>
                           <ItemPrice>{item.price}</ItemPrice>
                           <AddToCartButton>
-                            <Icon size={25} icon={chevronCircleRight} style={{color: "black"}}/>
+                            <Icon
+                              size={25}
+                              icon={chevronCircleRight}
+                              style={{ color: "black" }}
+                            />
                           </AddToCartButton>
                         </ButtonSideDiv>
                       </ItemBody>
@@ -63,6 +68,7 @@ const ShopPage = () => {
       ) : (
         <AlternateDiv>Loading.....</AlternateDiv>
       )}
+      {error && <ErrorPage />}
     </>
   );
 };
@@ -111,10 +117,10 @@ const GridItem = styled(NavLink)`
 
   @keyframes scaleIn {
     from {
-      transform: translateY(200%)
+      transform: translateY(200%);
     }
     to {
-      transform: translateY(0%)
+      transform: translateY(0%);
     }
   }
 
@@ -245,7 +251,6 @@ const ItemPrice = styled.h4`
     transform: scale(1.2);
     cursor: pointer;
   }
-
 `;
 
 const ButtonSideDiv = styled.div`

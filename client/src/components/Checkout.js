@@ -5,10 +5,10 @@ import { useEffect } from "react";
 import { ItemContext } from "../context/Context";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const Checkout = () => {
-  const { cart, setCart, Items} = useContext(ItemContext);
+  const { cart, setCart, Items, error, setError } = useContext(ItemContext);
   const myCart = cart.data;
   console.log(myCart);
   // let quantity;
@@ -16,15 +16,10 @@ const Checkout = () => {
   let total = 0;
   const history = useHistory();
 
-
-  
   useEffect(() => {
     axios
       .get("/api/cart")
       .then((res) => {
-        // console.log(res)
-        //res.data will display all item info in cart collection
-        //we can decide what to display according to frontend design
         setCart(res.data);
       })
       .catch((err) => {
@@ -33,6 +28,8 @@ const Checkout = () => {
   }, []);
 
   const deleteItem = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
     const _id = ev.target.id;
     axios
       .delete(`/api/cart/${_id}`)
@@ -41,28 +38,28 @@ const Checkout = () => {
         document.location.reload(true);
       })
       .catch((err) => {
-        console.log(err);
+        setError(err);
       });
   };
 
- 
-
   //onSubmit, this function first posts everything into orderHistory, and then deletes them
   //all from cart. Then pushes to orderHistory page.
-const handleSubmit = (ev) => {
-  //posts the order with an id to the orderHistory 
-        axios({
-        method: "POST",
-        url: "/api/orderHistory",
-        data: {
-          data: myCart,
-          orderId : uuidv4(),
-        },
-      });
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    //posts the order with an id to the orderHistory
+    axios({
+      method: "POST",
+      url: "/api/orderHistory",
+      data: {
+        data: myCart,
+        orderId: uuidv4(),
+      },
+    });
 
-      //updates items, so that numInStock is reduced by however many of the particular item is in the cart
-      myCart.map((item) => {
-        const _id = item._id;
+    //updates items, so that numInStock is reduced by however many of the particular item is in the cart
+    myCart.map((item) => {
+      const _id = item._id;
       // axios({
       //   method: 'patch',
       //   url: 'get patch endpoint',
@@ -88,11 +85,8 @@ const handleSubmit = (ev) => {
         .catch((err) => {
           console.log(err);
         });
-
-      })
-
-    };
-
+    });
+  };
 
   if (!cart || !myCart) {
     return <div>Loading</div>;
@@ -113,24 +107,24 @@ const handleSubmit = (ev) => {
           </CategoryDiv>
           {myCart.map((item) => {
             let quantity = 1;
-            let disabled = false; 
+            let disabled = false;
             let stock = 0;
 
-            Items.map((item2)=>{
-              if (item2._id === item._id){
+            Items.map((item2) => {
+              if (item2._id === item._id) {
                 stock = item2.numInStock;
-              } 
-            })
+              }
+            });
 
             const increaseHandler = () => {
               quantity = quantity + 1;
               console.log(quantity);
-              if (quantity === stock){
+              if (quantity === stock) {
                 disabled = true;
                 console.log(disabled);
               }
-            }
-            
+            };
+
             //removes $ from each of the prices, turns them into a Number, and pushes to an array.
             const itemPriceNoSymbol = item.price.replace(/\$/g, "");
             const itemPrice = parseInt(itemPriceNoSymbol);
@@ -142,8 +136,6 @@ const handleSubmit = (ev) => {
               //adds tax
               total = (subtotal * 1.15).toFixed(2);
             }
-
-            
 
             return (
               <ItemDiv>
@@ -159,7 +151,9 @@ const handleSubmit = (ev) => {
                 <QuantityDiv>
                   <QuantityButton id={item._id}>-</QuantityButton>
                   <ItemQuantity>{quantity}</ItemQuantity>
-                  <QuantityButton onClick={increaseHandler} disabled = {disabled}>+</QuantityButton>
+                  <QuantityButton onClick={increaseHandler} disabled={disabled}>
+                    +
+                  </QuantityButton>
                 </QuantityDiv>
                 <PriceDiv>
                   <ItemPrice>{item.price}</ItemPrice>
