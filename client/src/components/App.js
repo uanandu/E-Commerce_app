@@ -12,6 +12,7 @@ import ItemPage from "./ItemPage";
 import Checkout from "./Checkout";
 import SideBar from "./SideBar";
 import OrderHistory from "./OrderHistory";
+import Confirmation from "./Confirmation";
 
 const App = () => {
  return (
@@ -45,7 +46,7 @@ const App = () => {
          <Checkout/>
        </Route>
        <Route exact path="/confirmation">
-          confirmation page
+          <Confirmation/>
         </Route>
         <Route exact path="/previous-purchases">
           <OrderHistory/>
