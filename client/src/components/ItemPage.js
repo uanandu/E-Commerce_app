@@ -42,7 +42,6 @@ const ItemPage = () => {
     axios
       .get(`/api/companies/${singleItem.companyId}`)
       .then((res) => {
-        console.log("inside single item", res.data.companyInfo);
         setCompany(res.data.companyInfo);
       })
       .catch((err) => {

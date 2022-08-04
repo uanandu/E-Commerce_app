@@ -9,6 +9,8 @@ import { ErrorPage } from "./ErrorPage";
 const Confirmation = () => {
   const { error, setError } = useContext(ItemContext);
 
+  //gets most recent order in orderHistory, sets confirmation to that state, and uses that
+  //info to show the customer their order confirmation.
   const [confirmation, setConfirmation] = useState(null);
   useEffect(() => {
     axios("/api/orderHistory")

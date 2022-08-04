@@ -27,7 +27,6 @@ const postCart = async (req, res) => {
   const db = client.db("groupProject");
 
   //to define how to get new added item info in cart
-  //eg. console.log(req.body)
   const newInCart = await db.collection("cart").insertOne(req.body);
 
   const updateInventory = await db.collection("all_items").updateOne(

@@ -18,11 +18,12 @@ export const CompanyPage = () => {
   const { setCompanyInfo, companyProducts, setCompanyProducts, error, setError } =
     useContext(ItemContext);
 
+    //fetches specific company's Id, and sets companyInfo and companyProducts
+    //to manipulate and render the data
   useEffect(() => {
     axios
       .get(`/api/companies/${companyId}`)
       .then((res) => {
-        console.log(res);
         setCompanyInfo(res.data.companyInfo);
         setCompanyProducts(res.data.companyProducts);
       })
