@@ -13,6 +13,7 @@ const Confirmation = () => {
   useEffect(() => {
     axios("/api/orderHistory")
       .then((res) => {
+        console.log(res.data.data);
         const newOrder = res.data.data[res.data.data.length - 1];
         setConfirmation(newOrder);
       })
@@ -35,28 +36,37 @@ const Confirmation = () => {
                 The order number is {confirmation.orderId}!
               </MessageText>
               <GiftImage src="https://media.giphy.com/media/3o7WICvWEiTBSP3U8o/giphy.gif" />
+              <MessageText>
+                We will send you an email with the order details and instructions shortly . 
+              </MessageText>
+              <MessageText>
+              Please keep an eye on your Inbox 📥 and Spam folder for any updates.
+              </MessageText>
+              <MessageText>
+                Thank you for shopping with us!
+              </MessageText>
             </Message>
             <ProductContainer>
-              {confirmation.data.map((el) => {
+              {confirmation.data.map((element) => {
                 return (
-                  <ProductDetails>
+                  <ProductDetails key={element._id}>
                     <ItemHead>
-                      <ItemImage src={el.imageSrc} />
+                      <ItemImage src={element.imageSrc} />
                     </ItemHead>
                     <ItemBody>
                       <ItemDescription>
                         <ItemCaption>Product: </ItemCaption>
-                        <ItemName>{el.name}</ItemName>
+                        <ItemName>{element.name}</ItemName>
                       </ItemDescription>
                       <ItemDescription>
                         <ItemCaption>Body Location: </ItemCaption>
-                        <ItemLocation>{el.body_location}</ItemLocation>
+                        <ItemLocation>{element.body_location}</ItemLocation>
                       </ItemDescription>
                       <ItemDescription>
                         <ItemCaption>Category: </ItemCaption>
-                        <ItemCategory>{el.category}</ItemCategory>
+                        <ItemCategory>{element.category}</ItemCategory>
                       </ItemDescription>
-                      <ItemPrice>{el.price}</ItemPrice>
+                      <ItemPrice>{element.price}</ItemPrice>
                     </ItemBody>
                   </ProductDetails>
                 );
@@ -94,12 +104,12 @@ const Message = styled.div`
   position: relative;
   width: 50vw;
   height: 100%;
-  top: 30vh;
+  top: 3vh;
   border: 1px solid black;
   border-radius: 25px;
   background-color: black;
   color: white;
-  margin: 20px;
+  margin: 30px;
   padding: 20px;
   display: flex;
   justify-content: space-around;
@@ -110,6 +120,8 @@ const Message = styled.div`
 
 const MessageText = styled.h1`
   font-family: var(--quaternary-font-family);
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const GiftImage = styled.img``;
@@ -118,6 +130,7 @@ const ProductContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-left: 5vw;
 `;
 
 const BackgroundImage = styled.div`

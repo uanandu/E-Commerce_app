@@ -17,35 +17,51 @@ const OrderHistory = () => {
     axios
       .get("/api/orderHistory")
       .then((res) => {
-        // console.log("orders information",res.data.data)
         setHistory(res.data.data);
       })
       .catch((err) => setError(err));
   }, []);
 
+  console.log("this is the history", history);
+
   return (
     <>
       <ContentWrapper>
         <BackgroundImage>
+          <SiteDescription>
+            <ImageHere src="https://media.giphy.com/media/0mSlp2eTzUiLwRfHv2/giphy.gif"/>
+            <DescriptionText>Your Previous purchases</DescriptionText>
+          </SiteDescription>
           <GridContainer>
-            {history.map((el) => {
+            {history?.map((item, index) => {
               return (
-                <GridItem>
-                  <LeftDiv>
-                    <Image src={el.imageSrc} />
-                  </LeftDiv>
-                  <RightDiv>
-                    <Name>
-                      <p>{el.name}</p>
-                    </Name>
-                    <PriceSection>
-                      <PriceColumn>
-                        <p>{el.price}</p>
-                      </PriceColumn>
-                      <PurchasedSeal src="https://media.giphy.com/media/oS9gvPTg8i9VYfIohK/giphy.gif" />
-                    </PriceSection>
-                  </RightDiv>
-                </GridItem>
+                <>
+                  {item.data?.map((element) => {
+                    return (
+                      <>
+                        <GridItem key={element._id}>
+                          <LeftDiv>
+                            <Image src={element.imageSrc} />
+                          </LeftDiv>
+                          <RightDiv>
+                            <Name>
+                              <p>{element.name}</p>
+                            </Name>
+                            <OrderInfo>
+                              <h4>Order Id: {item._id}</h4>
+                            </OrderInfo>
+                            <PriceSection>
+                              <PriceColumn>
+                                <p>{element.price}</p>
+                              </PriceColumn>
+                              <PurchasedSeal src="https://media.giphy.com/media/oS9gvPTg8i9VYfIohK/giphy.gif" />
+                            </PriceSection>
+                          </RightDiv>
+                        </GridItem>
+                      </>
+                    );
+                  })}
+                </>
               );
             })}
           </GridContainer>
@@ -70,9 +86,29 @@ const BackgroundImage = styled.div`
   background-repeat: repeat;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 1500px;
   width: 2000px;
 `;
+
+const SiteDescription = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 10vh;
+  background-color: black;
+  color: white;`;
+
+const DescriptionText = styled.h1`
+font-size: 3rem;
+  font-family: var(--primary-font-family);
+`
+
+const ImageHere = styled.img`
+  width: 10vw;
+  height: auto;
+  object-fit: contain;
+`
 
 const GridContainer = styled.div`
   width: 90vw;
@@ -80,7 +116,7 @@ const GridContainer = styled.div`
   grid-template-columns: auto auto;
   padding: 10px;
   background-color: transparent;
-  height: 100%;
+  height: 10vh;
 `;
 
 const GridItem = styled.div`
@@ -139,6 +175,14 @@ const PriceSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+const OrderInfo = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
 `;
 
 const PriceColumn = styled.div`
