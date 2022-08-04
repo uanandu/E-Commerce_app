@@ -46,6 +46,8 @@ export const ItemProvider = ({ children }) => {
       });
   }, []);
 
+  console.log("all items in the provider: ", Items);
+
   let temporaryArray = []; // temporary array to store the items in the cart
 
   // for the post method to add the item to the cart in mongodb
