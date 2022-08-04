@@ -9,6 +9,7 @@ import { ItemContext } from "../context/Context";
 import { Icon } from "react-icons-kit";
 import { chevronCircleRight } from "react-icons-kit/fa/chevronCircleRight";
 
+
 // shop page for all items
 const ShopPage = () => {
   // getting all items from context
@@ -25,7 +26,9 @@ const ShopPage = () => {
               {Items.map((item) => {
                 return (
                   <>
-                    <GridItem to={`/shop/items/${item._id}`}>
+                  {
+                    item.numInStock > 0 ? (
+                      <GridItem to={`/shop/items/${item._id}`}>
                       {/* ItemHead is the top half of the item.  */}
                       <ItemHead>
                         <ItemImage src={item.imageSrc} />
@@ -57,6 +60,10 @@ const ShopPage = () => {
                         </ButtonSideDiv>
                       </ItemBody>
                     </GridItem>
+                    ) : (
+                      <></>
+                    )
+                  }
                   </>
                 );
               })}

@@ -67,6 +67,7 @@ const OrderHistory = () => {
     </>
   );
 };
+
 //styled components
 const ContentWrapper = styled.div`
   position: relative;

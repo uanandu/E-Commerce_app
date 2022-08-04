@@ -41,6 +41,9 @@ export const CompanyPage = () => {
             {companyProducts.map((product) => {
               return (
                 <>
+                {
+                  product.numInStock > 0 ? (
+                    <>
                   <GridItem to={`/shop/items/${product._id}`}>
                     <ItemHead>
                       <ItemImage src={product.imageSrc} />
@@ -66,7 +69,14 @@ export const CompanyPage = () => {
                       </ButtonSideDiv>
                     </ItemBody>
                   </GridItem>
+                </> 
+                  ) : (
+                    <></>
+                  )
+                } 
                 </>
+               
+               
               );
             })}
           </GridContainer>
@@ -80,6 +90,7 @@ export const CompanyPage = () => {
   );
 };
 
+// Styled Components
 const Wrapper = styled.div`
   position: relative;
   width: 90vw;
@@ -99,7 +110,7 @@ const BackgroundImage = styled.div`
   position: absolute;
   z-index: -5;
   width: 100%;
-  height: 2000px;
+  height: 3000px;
   top: -5vh;
   /* left: 10vw; */
 `;
