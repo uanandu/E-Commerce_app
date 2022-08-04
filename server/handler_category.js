@@ -6,6 +6,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
+// GET method to get all categories
 const getCategories = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
@@ -32,6 +33,7 @@ const getCategories = async (req, res) => {
   client.close();
 };
 
+// GET method to get category by name
 const getCategory = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();

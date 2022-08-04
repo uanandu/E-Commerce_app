@@ -7,6 +7,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
+// GET method to get all items
 const getItems = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
@@ -22,6 +23,7 @@ const getItems = async (req, res) => {
   client.close();
 };
 
+// GET method to get item by id
 const getItemById = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
