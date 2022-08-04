@@ -13,14 +13,13 @@ const Confirmation = () => {
   useEffect(() => {
     axios("/api/orderHistory")
       .then((res) => {
-        console.log(res.data.data);
         const newOrder = res.data.data[res.data.data.length - 1];
         setConfirmation(newOrder);
       })
       .catch((err) => {
         setError(err);
       });
-  }, []);
+  }, [confirmation]);
 
   return (
     <>

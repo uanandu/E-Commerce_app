@@ -3,11 +3,10 @@ import { useEffect, useState, useContext } from "react"; // useEffect, useState
 import axios from "axios"; // axios
 
 import { ItemContext } from "../context/Context";
-import { ErrorPage } from "./ErrorPage";
 
 // show previous orders of the user
 const OrderHistory = () => {
-  const { error, setError } = useContext(ItemContext);
+  const { setError } = useContext(ItemContext);
 
   // state to capture the orders of the user
   const [history, setHistory] = useState([]);
@@ -21,8 +20,6 @@ const OrderHistory = () => {
       })
       .catch((err) => setError(err));
   }, []);
-
-  console.log("this is the history", history);
 
   return (
     <>
@@ -70,6 +67,7 @@ const OrderHistory = () => {
     </>
   );
 };
+//styled components
 const ContentWrapper = styled.div`
   position: relative;
   width: 70vw;
@@ -86,7 +84,7 @@ const BackgroundImage = styled.div`
   background-repeat: repeat;
   display: flex;
   flex-direction: column;
-  height: 1500px;
+  height: 2000px;
   width: 2000px;
 `;
 
