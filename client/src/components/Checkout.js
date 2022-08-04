@@ -134,7 +134,7 @@ const Checkout = () => {
             };
 
             return (
-              <ItemDiv>
+              <ItemDiv ey={item._id}>
                 <DescriptionDiv>
                   <Img src={item.imageSrc} alt={item.name} />
                   <SubDescripion>
