@@ -25,7 +25,6 @@ const postCart = async (req, res) => {
   const db = client.db("groupProject");
 
   //to define how to get new added item info in cart
-  //eg. console.log(req.body)
   const newInCart = await db.collection("cart").insertOne(req.body);
   newInCart? res.status(200).json({status: 200,data: newInCart,message: "add newInCart success!",})
     : res.status(404).json({ status: 404, message: "add newInCart fail!" });

@@ -1,7 +1,9 @@
 import lauraPic from "../styles/images/IMG_4614.png";
 import ryanPic from "../styles/images/Ryan.png";
 import anandaPic from "../styles/images/anandu.jpeg";
-import jingwenPic from "../styles/images/jingwen.png";
+import jingwenPic from "../styles/images/jingwen.jpeg";
+
+//data about each of us, to be used and displayed via AboutUs.js
 
 export const aboutUs = [
   {

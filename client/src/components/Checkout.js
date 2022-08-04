@@ -33,7 +33,7 @@ const Checkout = () => {
     axios
       .delete(`/api/cart/${_id}`)
       .then((res) => {
-        console.log(res.data);
+        setError(res.data);
         document.location.reload(true);
       })
       .catch((err) => {
@@ -391,13 +391,18 @@ const TextArea = styled.textarea`
   width: 90%;
   resize: none;
   font-family: var(--secondary-font-family);
-  font-size: 17px;
+  font-size:35px;
   margin-bottom: 10px;
   margin-top: 10px;
+  height: 50px;
+  padding-left: 10px;
 
   &::placeholder {
     color: grey;
-    font-size: 1.5rem;
+    font-size: 35px;
+    top: 0;
+    display: flex;
+    align-items: center;
   }
 `;
 

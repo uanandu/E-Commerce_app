@@ -19,7 +19,6 @@ const ShopPage = () => {
       {Items ? (
         <Wrapper>
           <BackgroundImage>
-            {/* <SideBar /> */}
             {/* The grid container houses all the items (GridItem) */}
             <GridContainer>
               {Items.map((item) => {
