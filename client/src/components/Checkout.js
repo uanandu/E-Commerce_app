@@ -8,7 +8,7 @@ import { ItemContext } from "../context/Context"; // importing from ItemContext
 import { v4 as uuidv4 } from "uuid"; // importing from uuid
 
 const Checkout = () => {
-  const { cart, setCart, Items, error, setError } = useContext(ItemContext);
+  const { cart, setCart, Items, setError } = useContext(ItemContext);
   const myCart = cart.data;
   let subtotal = 0;
   let total = 0;
@@ -44,6 +44,7 @@ const Checkout = () => {
   //onSubmit, this function first posts everything into orderHistory, and then deletes them
   //all from cart. Then pushes to orderHistory page.
   const handleSubmit = (ev) => {
+    ev.preventDefault();
     //posts the order with an id to the orderHistory
     axios({
       method: "POST",
@@ -52,17 +53,15 @@ const Checkout = () => {
         data: myCart,
         orderId: uuidv4(),
       },
-    });
+    })
+      .then((res) => {
+        history.push("/confirmation");
+      })
+      .catch((err) => {
+        setError(err);
+      });
 
-    //sends the quantityArray to the server. Server will iterate over each object in the a array,
-    //and modify the numInStock of each item depending on the quantity purchased.
-    axios({
-      method: "patch",
-      url: "/api/shop/items",
-      data: {
-        body: quantityArray,
-      },
-    });
+
 
     //removes each item from the cart, so that when the purchase is made, you can have a fresh cart.
     myCart.map((item) => {
@@ -71,7 +70,6 @@ const Checkout = () => {
       axios
         .delete(`/api/cart/${_id}`)
         .then((res) => {
-          console.log(res.data);
           history.push("/previous-purchases");
         })
         .catch((err) => {
@@ -181,7 +179,7 @@ const Checkout = () => {
             <CheckoutButton>Checkout</CheckoutButton>
           </Form>
           <BelowFormDiv>
-             <ImageHere src="https://media.giphy.com/media/RvK1qAfoRaDHSmFEGp/giphy.gif" alt="cart" />
+             <ImageHere src="https://media.giphy.com/media/wtdVYmaRWJ1PyPcc8e/giphy.gif" alt="cart" />
              <Instructions>
               We love you! 
              </Instructions>
@@ -426,7 +424,7 @@ const CheckoutButton = styled.button`
 `;
 
 const ImageHere = styled.img`
-  width: 500px;
+  width: 300px;
   height: auto;
 `
 
