@@ -1,7 +1,7 @@
-import lauraPic from "../styles/images/IMG_4614.png";
-import ryanPic from "../styles/images/Ryan.png";
-import anandaPic from "../styles/images/anandu.jpeg";
-import jingwenPic from "../styles/images/jingwen.jpeg";
+import lauraPic from "../Styles/images/IMG_4614.png";
+import ryanPic from "../Styles/images/Ryan.png";
+import anandaPic from "../Styles/images/anandu.jpeg";
+import jingwenPic from "../Styles/images/jingwen.jpeg";
 
 //data about each of us, to be used and displayed via AboutUs.js
 
