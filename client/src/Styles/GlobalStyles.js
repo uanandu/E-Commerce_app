@@ -12,7 +12,10 @@ export default createGlobalStyle`
   html, body {
     max-width: 100vw;
   }
-
+   :root{
+    --primary-font-family: 'Josefin Sans', sans-serif;
+    --secondary-font-family: 'Crimson Text', serif;
+   }
 
   /* http://meyerweb.com/eric/tools/css/reset/
     v2.0 | 20110126
@@ -36,6 +39,8 @@ export default createGlobalStyle`
     padding: 0;
     border: 0;
     vertical-align: baseline;
+    font-family: var(--primary-font-family);
+
   }
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure,
@@ -57,8 +62,6 @@ export default createGlobalStyle`
 
   body {
     line-height: 1.25;
-    background: #222;
-    color: white;
   }
 
 `;

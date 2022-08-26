@@ -1,62 +1,68 @@
 //Importing everything from package.json
-import { useContext } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { NavLink, useParams } from "react-router-dom";
+import { useEffect, useContext } from "react";
 
 //Importing all useContexts
 import { ItemContext } from "../context/Context";
-
-//importing other components
-import SideBar from "./SideBar";
 
 //importing icons
 import { Icon } from "react-icons-kit";
 import { shoppingCart } from "react-icons-kit/feather/shoppingCart";
 
-const ShopPage = () => {
-  const { items } = useContext(ItemContext);
+export const CompanyPage = () => {
+  const { companyId } = useParams();
+  const {
+    companyProduct,
+    setCompanyProduct,
+    companyInfo,
+    setCompanyInfo,
+    companyProducts,
+    setCompanyProducts,
+  } = useContext(ItemContext);
 
-  console.log("items here", items);
+  useEffect(() => {
+    axios
+      .get(`/api/companies/${companyId}`)
+      .then((res) => {
+        console.log(res);
+        setCompanyInfo(res.data.companyInfo);
+        setCompanyProducts(res.data.companyProducts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
-    <>
-      {items ? (
-        <Wrapper>
-          <SideBar />
-          {/* The grid container houses all the items (GridItem) */}
-          <GridContainer>
-            {items.map((item) => {
-              return (
-                <>
-                  <GridItem to={`/shop/items/${item._id}`}>
-                    {/* ItemHead is the top half of the item.  */}
-                    <ItemHead>
-                      <ItemImage src={item.imageSrc} />
-                    </ItemHead>
-                    {/* ItemBody contains the Items information */}
-                    <ItemBody>
-                      <ItemName>{item.name}</ItemName>
-                      <ItemLocation>{item.body_location}</ItemLocation>
-                      <ItemCategory>{item.category}</ItemCategory>
-                    </ItemBody>
-                    {/* ButtonSideDiv is where the cart and price are */}
-                    <ButtonSideDiv>
-                      <ItemPrice>{item.price}</ItemPrice>
-                      <AddToCartButton>
-                        +
-                        <Icon size={25} icon={shoppingCart} />
-                      </AddToCartButton>
-                    </ButtonSideDiv>
-                  </GridItem>
-                </>
-              );
-            })}
-          </GridContainer>
-        </Wrapper>
-      ) : (
-        <div>Loading...</div>
-      )}
-    </>
+    <Wrapper>
+      <GridContainer>
+        {companyProducts.map((product) => {
+          return (
+            <>
+              <GridItem to={`/shop/items/${product._id}`}>
+                <ItemHead>
+                  <ItemImage src={product.imageSrc} />
+                </ItemHead>
+                <ItemBody>
+                  <ItemName>{product.name}</ItemName>
+                  <ItemLocation>{product.body_location}</ItemLocation>
+                  <ItemCategory>{product.category}</ItemCategory>
+                </ItemBody>
+                <ButtonSideDiv>
+                  <ItemPrice>{product.price}</ItemPrice>
+                  <AddToCartButton>
+                    +
+                    <Icon size={25} icon={shoppingCart} />
+                  </AddToCartButton>
+                </ButtonSideDiv>
+              </GridItem>
+            </>
+          );
+        })}
+      </GridContainer>
+    </Wrapper>
   );
 };
 
@@ -90,7 +96,7 @@ const GridItem = styled(NavLink)`
     cursor: pointer;
   }
 `;
-/* comment here */
+
 const ItemHead = styled.div`
   display: flex;
   justify-content: center;
@@ -161,5 +167,3 @@ const AddToCartButton = styled.button`
     cursor: copy;
   }
 `;
-
-export default ShopPage;
