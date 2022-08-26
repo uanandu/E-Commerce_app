@@ -1,7 +1,7 @@
 
 import { BrowserRouter, Switch, Route } from "react-router-dom"; // for routes
 
-import GlobalStyles from "../styles/GlobalStyles"; // for global styles
+import GlobalStyles from "../Styles/GlobalStyles"; // for global styles
 
 import NavBar from "./NavBar"; // for navbar
 import SideBar from "./SideBar"; // for side bar
