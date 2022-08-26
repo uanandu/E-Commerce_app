@@ -1,41 +1,60 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import styled from "styled-components"; // styled components
+import { NavLink } from "react-router-dom"; // for nav links
 
+// All icons shown here are from react-icons-kit
 import { Icon } from "react-icons-kit";
 import { home } from "react-icons-kit/icomoon/home";
 import { briefcase } from "react-icons-kit/icomoon/briefcase";
-import {phone} from 'react-icons-kit/icomoon/phone'
-//The sidebar will function a bit like a navbar.
-//it will be on the left side with buttons that link to the home.
+import { phone } from "react-icons-kit/icomoon/phone";
+import { shopping_bag } from "react-icons-kit/ikons/shopping_bag";
 
 const SideBar = () => {
-
   return (
     <MainContainer>
       <SidebarContainer>
-        <SideBarNavLinks to="/">
-          <Icon size={35} icon={home} />
-        </SideBarNavLinks>
-        <SideBarNavLinks to={`/companies`}>
-          <Icon size={35} icon={briefcase} />
-        </SideBarNavLinks>
-        <SideBarNavLinks to={`/about`}>
-          <Icon size={35} icon={phone} />
-        </SideBarNavLinks>
+        <IconHere>
+          <SideBarNavLinks to="/shop">
+            <Icon size={35} icon={home} />
+          </SideBarNavLinks>
+          <h3>Shop</h3>
+        </IconHere>
+        <IconHere>
+          <SideBarNavLinks to={`/companies`}>
+            <Icon size={35} icon={briefcase} />
+          </SideBarNavLinks>
+          <h3>Companies</h3>
+        </IconHere>
+        <IconHere>
+          <SideBarNavLinks to={`/about`}>
+            <Icon size={35} icon={phone} />
+          </SideBarNavLinks>
+          <h3>About</h3>
+        </IconHere>
+        <IconHere>
+          <SideBarNavLinks to={`/previous-purchases`}>
+            <Icon size={35} icon={shopping_bag} />
+          </SideBarNavLinks>
+          <h3>Orders</h3>
+        </IconHere>
+        <ImageHere src="https://assets.website-files.com/5e51c674258ffe10d286d30a/5e535e872b568af61d1d1e65_peep-sitting-5.png" />
       </SidebarContainer>
     </MainContainer>
   );
 };
 
 const MainContainer = styled.div`
+  position: fixed;
+  padding: 0 25px;
   display: flex;
-  flex-direction: row;
-  background: white;
-  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   width: 10vw;
-  align-content: center;
-  justify-content: center;
+  height: 100%;
+  top: 4vh;
+  margin-top: 20px;
+  border-right: 1px solid black;
+  z-index: 1;
 `;
 
 const SidebarContainer = styled.div`
@@ -45,13 +64,28 @@ const SidebarContainer = styled.div`
   justify-content: space-around;
 `;
 
+const IconHere = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: slide-in 1s ease-in-out;
+
+  @keyframes slide-in {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
+`;
+
 const SideBarNavLinks = styled(NavLink)`
-  background-color: gold;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
   color: black;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 4px 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,5 +99,12 @@ const SideBarNavLinks = styled(NavLink)`
     cursor: pointer;
   }
 `;
+
+const ImageHere = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin-top: 15vh;
+`
 
 export default SideBar;

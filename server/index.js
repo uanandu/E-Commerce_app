@@ -3,12 +3,11 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const {getItems,getItemById}=require('./handler_items')
+const {getItems,getItemById,patchStock}=require('./handler_items')
 const {getCategories,getCategory} = require('./handler_category')
 const {getCart, postCart,deleteCart} = require('./handler_cart')
 const {getCompanies,getCompanyById,} = require('./handler_company')
 const {getOrderHistory,postOrderHistory} = require('./handler_history')
-
 const PORT = 4000;
 
 express()
@@ -36,6 +35,8 @@ express()
   .get('/api/shop/items/:itemId',getItemById)
   .get('/api/items/categories',getCategories)
   .get('/api/items/categories/:category',getCategory)
+
+  .patch('/api/shop/items/:itemId',patchStock)
 
   .get('/api/cart',getCart)
   .post('/api/cart',postCart)

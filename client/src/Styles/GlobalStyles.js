@@ -15,6 +15,8 @@ export default createGlobalStyle`
    :root{
     --primary-font-family: 'Josefin Sans', sans-serif;
     --secondary-font-family: 'Crimson Text', serif;
+    --tertiary-font-family: 'Cormorant Garamond', sans-serif;
+    --quaternary-font-family: 'Special Elite', monospace;
    }
 
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -39,7 +41,7 @@ export default createGlobalStyle`
     padding: 0;
     border: 0;
     vertical-align: baseline;
-    font-family: var(--primary-font-family);
+    font-family: var(--secondary-font-family);
 
   }
   /* HTML5 display-role reset for older browsers */
