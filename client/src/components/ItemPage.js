@@ -6,14 +6,21 @@ import axios from "axios";
 
 import { ErrorPage } from "./ErrorPage";
 
-  // Importing all useContexts
+// Importing all useContexts
 import { ItemContext } from "../context/Context";
 
 // Individual item page
 const ItemPage = () => {
-
   // getting all items from context
-  const { singleItem, setSingleItem, company, setCompany, addToCart, error, setError } = useContext(ItemContext);
+  const {
+    singleItem,
+    setSingleItem,
+    company,
+    setCompany,
+    addToCart,
+    error,
+    setError,
+  } = useContext(ItemContext);
 
   // getting the item id from the url
   const { itemId } = useParams();
@@ -23,7 +30,6 @@ const ItemPage = () => {
     axios
       .get(`/api/shop/items/${itemId}`)
       .then((res) => {
-        // console.log("inside single item",res);
         setSingleItem(res.data.data);
       })
       .catch((err) => {
@@ -36,7 +42,6 @@ const ItemPage = () => {
     axios
       .get(`/api/companies/${singleItem.companyId}`)
       .then((res) => {
-        console.log("inside single item", res.data.companyInfo);
         setCompany(res.data.companyInfo);
       })
       .catch((err) => {
@@ -47,34 +52,37 @@ const ItemPage = () => {
   return (
     //1st step fetch the data of the item based on the :param (item id)
     //2nd step is to render it.
-    <Wrapper>
-      <BackgroundImage>
-      {singleItem && company ? (
-        <MainWrapper>
-          <LeftDiv onClick={(e)=>
-              addToCart(e, singleItem)}>
-          <InstructionImage src="https://media.giphy.com/media/PbnHWUeWBb2QNqFAoA/giphy.gif"/>
-            <ItemImage src={singleItem.imageSrc} />
-          </LeftDiv>
-          <RightDiv>
-            <ItemName>{singleItem.name}</ItemName>
-            <CompanyUrl href={company.url} target="_blank">
-              <ItemCompanyName>
-                {company.name}, {company.country}
-              </ItemCompanyName>
-            </CompanyUrl>
-            <ItemCategory>
-              {singleItem.category}/{singleItem.body_location}
-            </ItemCategory>
-            <ItemPrice>{singleItem.price}</ItemPrice>
-          </RightDiv>
-        </MainWrapper>
-      ) : (
-        <AlternateDiv>Loading.....</AlternateDiv>
-      )}
-      {error && <ErrorPage/>}
-      </BackgroundImage>
-    </Wrapper>
+
+    <>
+      <Wrapper>
+        <BackgroundImage>
+          {singleItem && company ? (
+            <MainWrapper>
+              <LeftDiv onClick={(e) => addToCart(e, singleItem)}>
+                <InstructionImage src="https://media.giphy.com/media/PbnHWUeWBb2QNqFAoA/giphy.gif" />
+                <ItemImage src={singleItem.imageSrc} />
+              </LeftDiv>
+              <RightDiv>
+                <ItemName>{singleItem.name}</ItemName>
+                <CompanyUrl href={company.url} target="_blank">
+                  <ItemCompanyName>
+                    {company.name}, {company.country}
+                  </ItemCompanyName>
+                </CompanyUrl>
+                <ItemCategory>
+                  {singleItem.category}/{singleItem.body_location}
+                </ItemCategory>
+                <ItemPrice>{singleItem.price}</ItemPrice>
+              </RightDiv>
+            </MainWrapper>
+          ) : (
+            <AlternateDiv>
+              <ImageHere src="https://media.giphy.com/media/JF70qeolvPS0ph52ZY/giphy.gif" />
+            </AlternateDiv>
+          )}
+        </BackgroundImage>
+      </Wrapper>
+    </>
   );
 };
 
@@ -99,21 +107,21 @@ const MainWrapper = styled.div`
   height: 30vh;
   display: flex;
   position: absolute;
-  top: 40vh;
+  top: 35vh;
   left: 30vh;
 `;
 
 const InstructionImage = styled.img`
-position: relative;
-width: 10vw;
-left: -7vw;
-top: -10vh;
-height: auto;
+  position: relative;
+  width: 10vw;
+  left: -7vw;
+  top: -10vh;
+  height: auto;
   padding: 20px;
   z-index: 5;
-`
+`;
 
-const LeftDiv = styled.div`
+const LeftDiv = styled.button`
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -125,14 +133,22 @@ const LeftDiv = styled.div`
   border-top: 4px solid black;
   border-bottom: 4px solid black;
   cursor: pointer;
+  transition: 0.5s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
 `;
 
 const ItemImage = styled.img`
   width: 200px;
   position: absolute;
 `;
-
-
 
 const RightDiv = styled.div`
   display: flex;
@@ -176,22 +192,19 @@ const ItemCompanyName = styled.p`
   }
 `;
 
-const AddToCart = styled.button`
-  border: none;
-  width: 300px;
-  height: 40px;
-  background: white;
-  font-size: 25px;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-
 const AlternateDiv = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 50px;
-`
+`;
+
+const ImageHere = styled.img`
+  position: relative;
+  margin-top: 40vh;
+  width: 50vw;
+  height: auto;
+`;
 
 export default ItemPage;

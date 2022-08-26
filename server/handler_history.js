@@ -7,6 +7,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
+// GET method to get order history
 const getOrderHistory = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
@@ -20,6 +21,7 @@ const getOrderHistory = async (req, res) => {
   client.close();
 };
 
+// POST method to add item to order history
 const postOrderHistory = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 

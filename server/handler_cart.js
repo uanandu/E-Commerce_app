@@ -7,6 +7,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
+// GET method to get all items in cart
 const getCart = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
@@ -18,6 +19,7 @@ const getCart = async (req, res) => {
   client.close();
 };
 
+// POST method to add item to cart
 const postCart = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
@@ -25,13 +27,19 @@ const postCart = async (req, res) => {
   const db = client.db("groupProject");
 
   //to define how to get new added item info in cart
-  //eg. console.log(req.body)
   const newInCart = await db.collection("cart").insertOne(req.body);
+
+  const updateInventory = await db.collection("all_items").updateOne(
+    { _id: Number(req.body._id) },
+    { $inc: { numInStock: -1 } }
+  );
+
   newInCart? res.status(200).json({status: 200,data: newInCart,message: "add newInCart success!",})
     : res.status(404).json({ status: 404, message: "add newInCart fail!" });
 client.close();
 };
 
+// DELETE method to delete item from cart
 const deleteCart = async (req, res) => {
     const client = new MongoClient(MONGO_URI, options);
     await client.connect();

@@ -9,25 +9,25 @@ import { ItemContext } from "../context/Context";
 import { Icon } from "react-icons-kit";
 import { chevronCircleRight } from "react-icons-kit/fa/chevronCircleRight";
 
-import { ErrorPage } from "./ErrorPage";
 
 // shop page for all items
 const ShopPage = () => {
   // getting all items from context
-  const { Items, error } = useContext(ItemContext);
+  const { Items } = useContext(ItemContext);
 
   return (
     <>
       {Items ? (
         <Wrapper>
           <BackgroundImage>
-            {/* <SideBar /> */}
             {/* The grid container houses all the items (GridItem) */}
             <GridContainer>
               {Items.map((item) => {
                 return (
                   <>
-                    <GridItem to={`/shop/items/${item._id}`}>
+                  {
+                    item.numInStock > 0 ? (
+                      <GridItem to={`/shop/items/${item._id}`}>
                       {/* ItemHead is the top half of the item.  */}
                       <ItemHead>
                         <ItemImage src={item.imageSrc} />
@@ -59,6 +59,10 @@ const ShopPage = () => {
                         </ButtonSideDiv>
                       </ItemBody>
                     </GridItem>
+                    ) : (
+                      <></>
+                    )
+                  }
                   </>
                 );
               })}
@@ -66,9 +70,10 @@ const ShopPage = () => {
           </BackgroundImage>
         </Wrapper>
       ) : (
-        <AlternateDiv>Loading.....</AlternateDiv>
+        <AlternateDiv>
+        <ImageHere src="https://media.giphy.com/media/JF70qeolvPS0ph52ZY/giphy.gif" />
+      </AlternateDiv>
       )}
-      {error && <ErrorPage />}
     </>
   );
 };
@@ -289,7 +294,11 @@ const AlternateDiv = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 50px;
-  z-index: 5;
 `;
+
+const ImageHere = styled.img`
+  width: 50vw;
+  height: auto;
+`
 
 export default ShopPage;

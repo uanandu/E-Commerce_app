@@ -1,63 +1,86 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
-import styled from "styled-components";
+import { useState, useEffect, useContext } from "react"; // importing from react
+import styled from "styled-components"; // importing from styled-components
+import axios from "axios"; // importing from axios
 
+import { ItemContext } from "../context/Context"; // importing from ItemContext
+import { ErrorPage } from "./ErrorPage";
+
+// Confirmation page
 const Confirmation = () => {
+  const { error, setError } = useContext(ItemContext);
+
+  //gets most recent order in orderHistory, sets confirmation to that state, and uses that
+  //info to show the customer their order confirmation.
   const [confirmation, setConfirmation] = useState(null);
   useEffect(() => {
     axios("/api/orderHistory")
       .then((res) => {
         const newOrder = res.data.data[res.data.data.length - 1];
-        console.log(newOrder);
         setConfirmation(newOrder);
       })
       .catch((err) => {
-        console.log(err);
+        setError(err);
       });
-  }, []);
+  }, [confirmation]);
 
   return (
-    <Wrapper>
-      <BackgroundImage></BackgroundImage>
-      {confirmation ? (
-        <ProductWrapper>
-          <Message>
-            <MessageText>Your order has been placed successfully!</MessageText>
-            <MessageText>The order number is {confirmation.orderId}!</MessageText>
-            <GiftImage src="https://media.giphy.com/media/3o7WICvWEiTBSP3U8o/giphy.gif" />
-          </Message>
-          <ProductContainer>
-            {confirmation.data.map((el) => {
-              return (
-                <ProductDetails>
-                  <ItemHead>
-                    <ItemImage src={el.imageSrc} />
-                  </ItemHead>
-                  <ItemBody>
-                    <ItemDescription>
-                      <ItemCaption>Product: </ItemCaption>
-                      <ItemName>{el.name}</ItemName>
-                    </ItemDescription>
-                    <ItemDescription>
-                      <ItemCaption>Body Location: </ItemCaption>
-                      <ItemLocation>{el.body_location}</ItemLocation>
-                    </ItemDescription>
-                    <ItemDescription>
-                      <ItemCaption>Category: </ItemCaption>
-                      <ItemCategory>{el.category}</ItemCategory>
-                    </ItemDescription>
-                    <ItemPrice>{el.price}</ItemPrice>
-                  </ItemBody>
-                </ProductDetails>
-              );
-            })}
-          </ProductContainer>
-        </ProductWrapper>
-      ) : (
-        <div>loading</div>
-      )}
-    </Wrapper>
+    <>
+      <Wrapper>
+        <BackgroundImage></BackgroundImage>
+        {confirmation ? (
+          <ProductWrapper>
+            <Message>
+              <MessageText>
+                Your order has been placed successfully!
+              </MessageText>
+              <MessageText>
+                The order number is {confirmation.orderId}!
+              </MessageText>
+              <GiftImage src="https://media.giphy.com/media/3o7WICvWEiTBSP3U8o/giphy.gif" />
+              <MessageText>
+                We will send you an email with the order details and instructions shortly . 
+              </MessageText>
+              <MessageText>
+              Please keep an eye on your Inbox 📥 and Spam folder for any updates.
+              </MessageText>
+              <MessageText>
+                Thank you for shopping with us!
+              </MessageText>
+            </Message>
+            <ProductContainer>
+              {confirmation.data.map((element) => {
+                return (
+                  <ProductDetails key={element._id}>
+                    <ItemHead>
+                      <ItemImage src={element.imageSrc} />
+                    </ItemHead>
+                    <ItemBody>
+                      <ItemDescription>
+                        <ItemCaption>Product: </ItemCaption>
+                        <ItemName>{element.name}</ItemName>
+                      </ItemDescription>
+                      <ItemDescription>
+                        <ItemCaption>Body Location: </ItemCaption>
+                        <ItemLocation>{element.body_location}</ItemLocation>
+                      </ItemDescription>
+                      <ItemDescription>
+                        <ItemCaption>Category: </ItemCaption>
+                        <ItemCategory>{element.category}</ItemCategory>
+                      </ItemDescription>
+                      <ItemPrice>{element.price}</ItemPrice>
+                    </ItemBody>
+                  </ProductDetails>
+                );
+              })}
+            </ProductContainer>
+          </ProductWrapper>
+        ) : (
+          <AlternateDiv>
+            <ImageHere src="https://media.giphy.com/media/JF70qeolvPS0ph52ZY/giphy.gif" />
+          </AlternateDiv>
+        )}
+      </Wrapper>
+    </>
   );
 };
 
@@ -82,12 +105,12 @@ const Message = styled.div`
   position: relative;
   width: 50vw;
   height: 100%;
-  top: 30vh;
+  top: 3vh;
   border: 1px solid black;
   border-radius: 25px;
   background-color: black;
   color: white;
-  margin: 20px;
+  margin: 30px;
   padding: 20px;
   display: flex;
   justify-content: space-around;
@@ -98,6 +121,8 @@ const Message = styled.div`
 
 const MessageText = styled.h1`
   font-family: var(--quaternary-font-family);
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const GiftImage = styled.img``;
@@ -106,6 +131,7 @@ const ProductContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-left: 5vw;
 `;
 
 const BackgroundImage = styled.div`
@@ -247,6 +273,19 @@ const ItemPrice = styled.h4`
     left: -9px;
     top: 17px;
   }
+`;
+
+const AlternateDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+`;
+
+const ImageHere = styled.img`
+  width: 50vw;
+  height: auto;
 `;
 
 export default Confirmation;

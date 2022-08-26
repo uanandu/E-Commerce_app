@@ -24,11 +24,7 @@ const batchImport = async () => {
 
         const result = await db.collection("companies").insertMany(companies); // insert the companies into the database as a new collection
 
-        console.log("companies result here", result);
-
         const result2 = await db.collection("all_items").insertMany(items); // insert the items into the database as a new collection
-
-        console.log("all items here", result2);
 
         client.close();
 

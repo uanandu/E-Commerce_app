@@ -7,6 +7,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
+// GET method to get all items
 const getItems = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
@@ -22,6 +23,7 @@ const getItems = async (req, res) => {
   client.close();
 };
 
+// GET method to get item by id
 const getItemById = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
@@ -47,11 +49,8 @@ const patchStock = async(req,res)=>{
   await client.connect();
   const db = client.db("groupProject");
   const stockNum = req.body
-  //we need to see how frontend send the data
-  console.log(req.body)
 
   const numInStock = await db.collection("all_items").findOneAndUpdate({_id:_id},{$inc:{numInStock:-{quantity}}},{returnNewDocument:true})
-  console.log(numInStock)
   numInStock>0
     ? res
         .status(200)

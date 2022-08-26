@@ -18,11 +18,12 @@ export const CompanyPage = () => {
   const { setCompanyInfo, companyProducts, setCompanyProducts, error, setError } =
     useContext(ItemContext);
 
+    //fetches specific company's Id, and sets companyInfo and companyProducts
+    //to manipulate and render the data
   useEffect(() => {
     axios
       .get(`/api/companies/${companyId}`)
       .then((res) => {
-        console.log(res);
         setCompanyInfo(res.data.companyInfo);
         setCompanyProducts(res.data.companyProducts);
       })
@@ -41,6 +42,9 @@ export const CompanyPage = () => {
             {companyProducts.map((product) => {
               return (
                 <>
+                {
+                  product.numInStock > 0 ? (
+                    <>
                   <GridItem to={`/shop/items/${product._id}`}>
                     <ItemHead>
                       <ItemImage src={product.imageSrc} />
@@ -66,19 +70,28 @@ export const CompanyPage = () => {
                       </ButtonSideDiv>
                     </ItemBody>
                   </GridItem>
+                </> 
+                  ) : (
+                    <></>
+                  )
+                } 
                 </>
+               
+               
               );
             })}
           </GridContainer>
         </Wrapper>
       ) : (
-        <AlternateDiv>Loading.....</AlternateDiv>
+        <AlternateDiv>
+        <ImageHere src="https://media.giphy.com/media/JF70qeolvPS0ph52ZY/giphy.gif" />
+      </AlternateDiv>
       )}
-      {error && <ErrorPage/>}
     </>
   );
 };
 
+// Styled Components
 const Wrapper = styled.div`
   position: relative;
   width: 90vw;
@@ -98,7 +111,7 @@ const BackgroundImage = styled.div`
   position: absolute;
   z-index: -5;
   width: 100%;
-  height: 2000px;
+  height: 3000px;
   top: -5vh;
   /* left: 10vw; */
 `;
@@ -298,3 +311,8 @@ const AlternateDiv = styled.div`
   font-size: 50px;
   z-index: 2;
 `;
+
+const ImageHere = styled.img`
+  width: 50vw;
+  height: auto;
+`

@@ -27,7 +27,6 @@ const getCompanyById = async (req, res) => {
   const db = client.db("groupProject");
   const companyID = parseInt(req.params.companyId);
 
-  console.log("_id", req.params);
 
   const singleCompany = await db.collection("companies").findOne({ _id:companyID });
   const products = await db.collection("all_items").find({ companyId:companyID }).toArray();
